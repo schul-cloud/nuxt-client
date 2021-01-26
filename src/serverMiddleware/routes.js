@@ -38,6 +38,7 @@ const routes = [
 	`^/wallet/upload/?$`,
 	`^/wallet/new/?$`,
 	`^/wallet/students/?$`,
+	`^/wallet/students/[a-z0-9]+/upload/?$`,
 	// `^/courses/?$`,
 ];
 if (process.env.LERNSTORE_MODE === "EDUSHARING") {

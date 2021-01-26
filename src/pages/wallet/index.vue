@@ -11,11 +11,13 @@
 				label="Manuelles Teilen von Daten"
 			/>
 			<base-input
+        v-model="portfolio"
 				type="checkbox"
 				label="Lernportfolio: Speicher dein Lernportfolio automatisch in deiner Wallet."
 			/>
-			<base-input type="checkbox" label="Zeugnisse und Zertifikate" />
+			<base-input v-model="certificates" type="checkbox" label="Zeugnisse und Zertifikate" />
 			<base-input
+          v-model="analytics"
 				type="checkbox"
 				label="Learning Analytics: Speicher dir Daten über deine Nutzung von Bildungsmedien."
 			/>
@@ -28,16 +30,23 @@
 			><base-icon source="material" icon="add" />Neues Wallet
 			verbinden</base-button
 		>
+    <base-button v-if="$_userHasPermission('STUDENT_LIST')" class="w-100 mt--sm" design="secondary" to="/wallet/students">
+      Schüler-Wallets verwalten
+    </base-button>
 	</div>
 </template>
 
 <script>
-import BaseButton from "@basecomponents/BaseButton";
+import UserHasPermission from "@mixins/UserHasPermission";
+
 export default {
-	components: { BaseButton },
+  mixins: [UserHasPermission],
 	data() {
 		return {
 			manual: true,
+      portfolio: false,
+      certificates: false,
+      analytics: false
 		};
 	},
 	head() {
