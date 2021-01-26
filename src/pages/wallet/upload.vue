@@ -13,9 +13,9 @@
 import FormWalletFileUpload from "@components/organisms/FormWalletFileUpload";
 
 export default {
-  components: {
-    FormWalletFileUpload
-  },
+	components: {
+		FormWalletFileUpload,
+	},
 	head() {
 		return {
 			title: "Datei in Wallet hochladen",
