@@ -1,8 +1,8 @@
 <template>
 	<div>
-    <div>
-      <step-progress :steps="steps" :current-step="currentStep"></step-progress>
-    </div>
+		<div>
+			<step-progress :steps="steps" :current-step="currentStep"></step-progress>
+		</div>
 		<section v-if="!relationshipId" class="section">
 			<h1 class="h3">QR-Code scannen</h1>
 			Scanne diesen QR-Code mit deiner Wallet-App auf deinem Smartphone.
@@ -11,7 +11,7 @@
 			<div>
 				<div class="qrcode">
 					<img v-if="qrcode" :src="qrcode" />
-          <base-spinner v-else class="mb--xl mt--xl"></base-spinner>
+					<base-spinner v-else class="mb--xl mt--xl"></base-spinner>
 				</div>
 				<base-button
 					design="success"
@@ -44,23 +44,23 @@
 <script>
 import StepProgress from "@components/organisms/StepProgress";
 export default {
-  components: { StepProgress },
-  async fetch() {
-    const relationshipTemplate = await this.$store.dispatch("wallet/create");
+	components: { StepProgress },
+	async fetch() {
+		const relationshipTemplate = await this.$store.dispatch("wallet/create");
 
-    console.log(relationshipTemplate.templateID);
+		console.log(relationshipTemplate.templateID);
 
-    this.templateID = relationshipTemplate.templateID; // example data: "RLTsml0Y9aSbTRXar37R"
-    this.qrcode = "data:image/png;base64," + relationshipTemplate.qrcode;
+		this.templateID = relationshipTemplate.templateID; // example data: "RLTsml0Y9aSbTRXar37R"
+		this.qrcode = "data:image/png;base64," + relationshipTemplate.qrcode;
 
-    setTimeout(() => {
-      this.disabled = false;
-    }, 1000 * 10);
-  },
+		setTimeout(() => {
+			this.disabled = false;
+		}, 1000 * 10);
+	},
 	data() {
 		return {
-		  templateID: null,
-      qrcode: null,
+			templateID: null,
+			qrcode: null,
 			relationshipId: null, // example data: "RELD7ODGMtaz8XW1zbEO"
 			message: null,
 			file: null,
@@ -82,24 +82,24 @@ export default {
 					},
 				},
 			],
-      steps: [
-        {
-          name: "Basiseinstellungen treffen"
-        },
-        {
-          name: "QR-Code scannen"
-        },
-        {
-          name: "Verbindung abschließen"
-        }
-      ],
+			steps: [
+				{
+					name: "Basiseinstellungen treffen",
+				},
+				{
+					name: "QR-Code scannen",
+				},
+				{
+					name: "Verbindung abschließen",
+				},
+			],
 		};
 	},
-  computed: {
-    currentStep() {
-      return this.relationshipId ? 2 : 1;
-    }
-  },
+	computed: {
+		currentStep() {
+			return this.relationshipId ? 2 : 1;
+		},
+	},
 	methods: {
 		async acceptRequest() {
 			this.relationshipId = await this.$store.dispatch("wallet/update", [
@@ -145,7 +145,7 @@ export default {
 @import "@styles";
 
 .section {
-  padding-top: var(--space-xl-4);
+	padding-top: var(--space-xl-4);
 }
 
 .qrcode {
