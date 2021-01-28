@@ -26,7 +26,7 @@
 				label="Learning Analytics: Speicher dir Daten über deine Nutzung von Bildungsmedien."
 			/>
 		</div>
-		<base-button class="w-100" design="primary outline" to="/wallet/upload">
+		<base-button v-if="$store.state.auth.user.relationshipId" class="w-100" design="primary outline" to="/wallet/upload">
 			<base-icon source="material" icon="ic_default" />Datei in bestehendes
 			Wallet hochladen
 		</base-button>
@@ -39,7 +39,7 @@
 			class="w-100 mt--sm"
 			design="secondary"
 			to="/wallet/students"
-		>
+		><base-icon source="fa" icon="cog" />
 			Schüler-Wallets verwalten
 		</base-button>
 	</div>

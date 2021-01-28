@@ -1,17 +1,19 @@
 <template>
 	<div>
-		<base-breadcrumb :inputs="breadcrumbs"></base-breadcrumb>
-		<section v-if="!relationshipId">
-			<h2 class="h2">QR-Code scannen</h2>
+    <div>
+      <step-progress :steps="steps" :current-step="currentStep"></step-progress>
+    </div>
+		<section v-if="!relationshipId" class="section">
+			<h1 class="h3">QR-Code scannen</h1>
 			Scanne diesen QR-Code mit deiner Wallet-App auf deinem Smartphone.
 			Schließe dort dann die Verbindungsanfrage ab und wenn du dort bestätigt
 			hast, klicke hier auf "Verbindung abschließen".
 			<div>
-				<div v-if="qrcode" class="qrcode">
-					<img :src="qrcode" />
+				<div class="qrcode">
+					<img v-if="qrcode" :src="qrcode" />
+          <base-spinner v-else class="mb--xl mt--xl"></base-spinner>
 				</div>
 				<base-button
-					v-if="templateID"
 					design="success"
 					class="w-100"
 					:disabled="disabled"
@@ -21,7 +23,7 @@
 				>
 			</div>
 		</section>
-		<section v-else>
+		<section v-else class="section">
 			<h2 class="h2">Verbindung abgeschlossen!</h2>
 			Du hast dein Wallet erfolgreich verbunden. Dokumente kannst du nun
 			problemlos in dieses hochladen und bekommst sie somit automatisch in der
@@ -40,19 +42,25 @@
 </template>
 
 <script>
+import StepProgress from "@components/organisms/StepProgress";
 export default {
-	async asyncData({ store }) {
-		const relationshipTemplate = await store.dispatch("wallet/create");
+  components: { StepProgress },
+  async fetch() {
+    const relationshipTemplate = await this.$store.dispatch("wallet/create");
 
-		console.log(relationshipTemplate.templateID);
+    console.log(relationshipTemplate.templateID);
 
-		return {
-			templateID: relationshipTemplate.templateID, // example data: "RLTsml0Y9aSbTRXar37R"
-			qrcode: "data:image/png;base64," + relationshipTemplate.qrcode,
-		};
-	},
+    this.templateID = relationshipTemplate.templateID; // example data: "RLTsml0Y9aSbTRXar37R"
+    this.qrcode = "data:image/png;base64," + relationshipTemplate.qrcode;
+
+    setTimeout(() => {
+      this.disabled = false;
+    }, 1000 * 10);
+  },
 	data() {
 		return {
+		  templateID: null,
+      qrcode: null,
 			relationshipId: null, // example data: "RELD7ODGMtaz8XW1zbEO"
 			message: null,
 			file: null,
@@ -74,13 +82,24 @@ export default {
 					},
 				},
 			],
+      steps: [
+        {
+          name: "Basiseinstellungen treffen"
+        },
+        {
+          name: "QR-Code scannen"
+        },
+        {
+          name: "Verbindung abschließen"
+        }
+      ],
 		};
 	},
-	mounted() {
-		setTimeout(() => {
-			this.disabled = false;
-		}, 1000 * 10);
-	},
+  computed: {
+    currentStep() {
+      return this.relationshipId ? 2 : 1;
+    }
+  },
 	methods: {
 		async acceptRequest() {
 			this.relationshipId = await this.$store.dispatch("wallet/update", [
@@ -101,14 +120,6 @@ export default {
 
 			if (this.relationshipId) {
 				console.log(this.relationshipId);
-
-				this.breadcrumbs.push({
-					text: "Verbindung abschließen",
-					icon: {
-						source: "material",
-						icon: "check",
-					},
-				});
 			} else {
 				console.log("Relationship has to be requested in the IDAS-app!");
 				this.$toast.error(
@@ -133,9 +144,12 @@ export default {
 <style lang="scss" scoped>
 @import "@styles";
 
+.section {
+  padding-top: var(--space-xl-4);
+}
+
 .qrcode {
 	/* stylelint-disable-next-line sh-waqar/declaration-use-variable */
-	padding-top: 30px;
 	text-align: center;
 }
 </style>
