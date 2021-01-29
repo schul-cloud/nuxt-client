@@ -17,6 +17,7 @@ Allowed Types of change: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `
 ### Changed
 
 - SC-8356 - authenticate docker hub requests
+- SC-8433 - update text in Lern-Store
 
 ## 25.5.1
 
@@ -74,6 +75,7 @@ Allowed Types of change: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `
 
 ## Added
 
+- SC-8514 - QR Code generation fails
 - SC-7020 - added a new course TaskItem component
 
 ### Changed in Unreleased
