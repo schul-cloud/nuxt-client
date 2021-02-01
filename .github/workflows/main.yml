@@ -32,7 +32,7 @@ jobs:
       - name: Environment variables
         run: |
           export SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-8)
-          
+
           # GITHUB_HEAD_REF for Pull-Requests. GITHUB_REF for pushes.
           [[ -z "$GITHUB_HEAD_REF" ]] && GITHUB_BRANCH_NAME=${GITHUB_REF#refs/heads/} || GITHUB_BRANCH_NAME=${GITHUB_HEAD_REF#refs/heads/}
           export NAMESPACE=$(echo ${GITHUB_BRANCH_NAME} | sed -e "s/\//-/g" | tr '[:upper:]' '[:lower:]')
@@ -41,7 +41,7 @@ jobs:
           export CERT_NAME=wildcard-${STAGING_DOMAIN/./-}
           export BUILD_IMAGE=$REGISTRY_HOSTNAME/${{ secrets.GCP_PROJECT_ID }}/$SERVICE_NAME:$SHORT_SHA
           export HOSTNAME=$NAMESPACE.$STAGING_DOMAIN
-          
+
           echo "SHORT_SHA=$SHORT_SHA"
           echo "SERVICE_NAME=$SERVICE_NAME"
           echo "NAMESPACE=$NAMESPACE"
@@ -64,6 +64,7 @@ jobs:
           env | sort
           sudo apt-get install gettext
           cat k8s/deployment.yaml | envsubst
+          export SC_THEME=brb
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -111,5 +112,5 @@ jobs:
           kubectl get secret $CERT_NAME -o json \
           | jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid"])' \
           | kubectl apply -n $NAMESPACE -f -
-          
+
           kubectl rollout status deployment/$SERVICE_NAME -n $NAMESPACE
