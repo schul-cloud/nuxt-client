@@ -24,7 +24,7 @@ data:
   #MATRIX_MESSENGER__STUDENT_ROOM_CREATION: false
   #MATRIX_MESSENGER__URI: https://matrix.staging.messenger.schule
   NODE_ENV: production
-  #SC_THEME: n21
+  SC_THEME: brb
   #SENTRY_DSN=https://6254905471a54f6196b11b7db7aec193@sentry.hpi-schul-cloud.org/4
   #SENTRY_SAMPLE_RATE=1.0
   TZ: Europe/Berlin
