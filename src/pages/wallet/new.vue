@@ -64,8 +64,6 @@ export default {
 			templateID: null,
 			qrcode: null,
 			relationshipId: null, // example data: "RELD7ODGMtaz8XW1zbEO"
-			message: null,
-			file: null,
 			disabled: true,
 			breadcrumbs: [
 				{
@@ -103,14 +101,12 @@ export default {
 				},
 			]);
 
-			const user = await this.$store.dispatch("users/patch", [
+			await this.$store.dispatch("users/patch", [
 				this.$user._id,
 				{
 					relationshipId: this.relationshipId,
 				},
 			]);
-
-			console.log(user);
 
 			if (this.relationshipId) {
 				console.log(this.relationshipId);
@@ -120,11 +116,6 @@ export default {
 					"Du musst erst in der App die Kontaktanfrage abschließen!"
 				);
 			}
-		},
-
-		saveFile(event) {
-			this.file = event.target.files[0];
-			console.log(this.file);
 		},
 	},
 	head() {

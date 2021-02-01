@@ -68,15 +68,21 @@ export default {
 				file: this.file,
 			});
 
-			this.$toast.success(
-				"Das Dokument wurde erfolgreich in dein Wallet hochgeladen!"
-			);
+      console.log(this.message);
 
-			console.log(this.message);
+			if (this.message.id) {
+        this.$toast.success(
+            "Das Dokument wurde erfolgreich in dein Wallet hochgeladen!"
+        );
 
-			await this.$router.push({
-				path: "/wallet",
-			});
+        await this.$router.push({
+          path: "/wallet",
+        });
+      } else {
+        this.$toast.error(
+            "Es gab einen Fehler beim File-Upload!"
+        );
+      }
 		},
 	},
 };
