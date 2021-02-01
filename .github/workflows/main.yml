@@ -41,6 +41,7 @@ jobs:
           export CERT_NAME=wildcard-${STAGING_DOMAIN/./-}
           export BUILD_IMAGE=$REGISTRY_HOSTNAME/${{ secrets.GCP_PROJECT_ID }}/$SERVICE_NAME:$SHORT_SHA
           export HOSTNAME=$NAMESPACE.$STAGING_DOMAIN
+          export SC_THEME=brb
 
           echo "SHORT_SHA=$SHORT_SHA"
           echo "SERVICE_NAME=$SERVICE_NAME"
@@ -64,7 +65,6 @@ jobs:
           env | sort
           sudo apt-get install gettext
           cat k8s/deployment.yaml | envsubst
-          export SC_THEME=brb
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
