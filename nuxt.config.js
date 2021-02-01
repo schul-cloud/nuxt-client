@@ -4,7 +4,7 @@ const webpack = require("webpack");
 
 const sentryConfig = require("./sentry.config.js");
 
-const themeName = process.env.SC_THEME || "default";
+const themeName = 'brb';
 const DEFAULT_PORT = 4000;
 const DEFAULT_HOST =
 	process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost";
@@ -42,7 +42,7 @@ module.exports = {
 		JWT_SHOW_TIMEOUT_WARNING_SECONDS:
 			process.env.JWT_SHOW_TIMEOUT_WARNING_SECONDS,
 		JWT_TIMEOUT_SECONDS: process.env.JWT_TIMEOUT_SECONDS,
-		SC_THEME: process.env.SC_THEME,
+		SC_THEME: 'brb',
 		LERNSTORE_MODE: process.env.LERNSTORE_MODE,
 		FEATURE_ES_COLLECTIONS_ENABLED:
 			process.env.FEATURE_ES_COLLECTIONS_ENABLED || false,

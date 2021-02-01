@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const prettier = require("prettier");
-const themeName = process.env.SC_THEME || "default";
+const themeName = 'brb';
 
 const variation = require("./variation")(themeName);
 
