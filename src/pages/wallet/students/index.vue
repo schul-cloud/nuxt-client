@@ -1,6 +1,8 @@
 <template>
-	<div>
-		<h1 class="mb--md h3">Schüler:innen</h1>
+	<section>
+    <base-breadcrumb :inputs="breadcrumbs"/>
+
+    <h1 class="mb--md h3">Schüler:innen</h1>
 		Du kannst hier die Wallets aller Schüler:innen verwalten. Dafür musst du
 		einfach nur den entsprechenden Schüler auswählen und kannst dann ein
 		Dokument deiner Wahl in das Wallet hochladen.
@@ -29,16 +31,17 @@
 				</base-button>
 			</template>
 		</backend-data-table>
-	</div>
+	</section>
 </template>
 
 <script>
 import UserHasPermission from "@mixins/UserHasPermission";
 import { mapGetters, mapState } from "vuex";
 import BackendDataTable from "@components/organisms/DataTable/BackendDataTable";
+import BaseBreadcrumb from "@basecomponents/BaseBreadcrumb";
 
 export default {
-	components: { BackendDataTable },
+	components: { BaseBreadcrumb, BackendDataTable },
 	mixins: [UserHasPermission],
 	meta: {
 		requiredPermissions: ["STUDENT_LIST"],
@@ -68,6 +71,15 @@ export default {
 				},
 			],
 			actions: [],
+      breadcrumbs: [
+        {
+          text: "Digitales Wallet",
+          to: "/wallet"
+        },
+        {
+			    text: "Schüler-Wallets"
+        }
+      ]
 		};
 	},
 	computed: {

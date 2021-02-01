@@ -1,5 +1,6 @@
 <template>
-	<div>
+	<section>
+    <base-breadcrumb :inputs="breadcrumbs" class="mb--md"/>
 		<div>
 			<step-progress :steps="steps" :current-step="currentStep"></step-progress>
 		</div>
@@ -38,13 +39,14 @@
 				Übersicht</base-button
 			>
 		</section>
-	</div>
+	</section>
 </template>
 
 <script>
 import StepProgress from "@components/organisms/StepProgress";
+import BaseBreadcrumb from "@basecomponents/BaseBreadcrumb";
 export default {
-	components: { StepProgress },
+	components: { BaseBreadcrumb, StepProgress },
 	async fetch() {
 		const relationshipTemplate = await this.$store.dispatch("wallet/create");
 
@@ -67,19 +69,11 @@ export default {
 			disabled: true,
 			breadcrumbs: [
 				{
-					text: "Neues Wallet verbinden",
-					to: "/wallet",
-					icon: {
-						source: "material",
-						icon: "uid",
-					},
+					text: "Digitales Wallet",
+					to: "/wallet"
 				},
 				{
-					text: "QR-Code scannen",
-					icon: {
-						source: "fa",
-						icon: "qrcode",
-					},
+					text: "Neues Wallet verbinden"
 				},
 			],
 			steps: [
@@ -149,7 +143,6 @@ export default {
 }
 
 .qrcode {
-	/* stylelint-disable-next-line sh-waqar/declaration-use-variable */
 	text-align: center;
 }
 </style>

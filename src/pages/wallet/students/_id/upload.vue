@@ -1,5 +1,7 @@
 <template>
-	<div>
+	<section>
+    <base-breadcrumb :inputs="breadcrumbs"/>
+
 		<h1 class="mb--md h3">Datei in Wallet von {{ name }} hochladen</h1>
 		Hier kannst du eine Datei auswählen, welche Datei du in das Wallet von
 		{{ name }}
@@ -8,14 +10,16 @@
 		Kurzbeschreibung soll hierbei wichtige Zusatzinformationen geben.
 
 		<form-wallet-file-upload></form-wallet-file-upload>
-	</div>
+	</section>
 </template>
 
 <script>
 import FormWalletFileUpload from "@components/organisms/FormWalletFileUpload";
+import BaseBreadcrumb from "@basecomponents/BaseBreadcrumb";
 
 export default {
 	components: {
+    BaseBreadcrumb,
 		FormWalletFileUpload,
 	},
 	async asyncData({ store, params }) {
@@ -29,6 +33,23 @@ export default {
 			).data[0],
 		};
 	},
+  data() {
+	  return {
+      breadcrumbs: [
+        {
+          text: "Digitales Wallet",
+          to: "/wallet"
+        },
+        {
+          text: "Schüler-Wallets",
+          to: "/wallet/students"
+        },
+        {
+          text: "File-Upload"
+        }
+      ]
+    }
+  },
 	computed: {
 		name() {
 			return this.user.firstName + " " + this.user.lastName;
