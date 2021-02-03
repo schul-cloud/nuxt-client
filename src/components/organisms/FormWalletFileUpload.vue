@@ -49,6 +49,13 @@
 
 <script>
 export default {
+  props: {
+    userId: {
+      type: String,
+      required: false,
+      default: null
+    }
+  },
 	data() {
 		return {
 			file: null,
@@ -63,6 +70,7 @@ export default {
 		},
 		async uploadDocument() {
 			this.message = await this.$store.dispatch("wallet/sendFile", {
+			  userId: this.userId,
 				title: this.title,
 				description: this.description,
 				file: this.file,

@@ -27,7 +27,7 @@
 					size="small"
 					:to="`/wallet/students/${data}/upload`"
 				>
-					<base-icon source="material" icon="ic_default" />
+					<base-icon source="fa" icon="upload" />
 				</base-button>
 			</template>
 		</backend-data-table>

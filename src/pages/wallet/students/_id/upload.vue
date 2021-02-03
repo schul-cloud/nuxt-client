@@ -9,7 +9,7 @@
 		unter welchem die Datei auch in dem Wallet erscheinen wird. Die
 		Kurzbeschreibung soll hierbei wichtige Zusatzinformationen geben.
 
-		<form-wallet-file-upload></form-wallet-file-upload>
+		<form-wallet-file-upload :user-id="$route.params.id"></form-wallet-file-upload>
 	</section>
 </template>
 

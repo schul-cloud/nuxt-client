@@ -9,6 +9,10 @@ const module = mergeDeep(base, {
 
 			const form = new FormData();
 
+			if (payload.userId) {
+				form.append("userId", payload.userId);
+			}
+
 			form.append("title", payload.title);
 			form.append("description", payload.description);
 			form.append("file", payload.file);
