@@ -113,6 +113,11 @@ export default [
 		],
 	},
 	{
+		title: "Wallet",
+		href: "/wallet/",
+		icon: "upload"
+	},
+	{
 		title: "global.sidebar.helpDesk",
 		href: "/helpdesk/",
 		icon: "ticket",
