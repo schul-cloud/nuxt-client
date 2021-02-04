@@ -32,7 +32,7 @@
 			design="primary outline"
 			to="/wallet/upload"
 		>
-			<base-icon source="material" icon="ic_default" />Datei in bestehendes
+			<base-icon source="fa" icon="upload" />Datei in bestehendes
 			Wallet hochladen
 		</base-button>
 		<base-button class="w-100 mt--sm" design="primary" to="/wallet/new"

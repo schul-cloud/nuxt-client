@@ -16,8 +16,28 @@
 			:actions="actions"
 			:total="pagination.total"
 		>
+      <template v-slot:datacolumn-relationshipId="{ data }">
+        <div class="text-content" style="text-align: center">
+          <base-icon
+            v-if="data"
+            source="fa"
+            icon="check"
+            style="color: var(--color-success)"
+           >
+          </base-icon>
+
+          <base-icon
+              v-else
+              source="fa"
+              icon="times"
+              style="color: var(--color-danger)"
+          >
+          </base-icon>
+        </div>
+      </template>
 			<template v-slot:datacolumn-_id="{ data, selected, highlighted }">
 				<base-button
+          :disabled="!hasWallet(data)"
 					:class="{
 						'action-button': true,
 						'row-selected': selected,
@@ -25,7 +45,7 @@
 					}"
 					design="text icon"
 					size="small"
-					:to="`/wallet/students/${data}/upload`"
+					:to="hasWallet(data) ? `/wallet/students/${data}/upload` : null"
 				>
 					<base-icon source="fa" icon="upload" />
 				</base-button>
@@ -39,9 +59,10 @@ import UserHasPermission from "@mixins/UserHasPermission";
 import { mapGetters, mapState } from "vuex";
 import BackendDataTable from "@components/organisms/DataTable/BackendDataTable";
 import BaseBreadcrumb from "@basecomponents/BaseBreadcrumb";
+import BaseIcon from "@basecomponents/BaseIcon";
 
 export default {
-	components: { BaseBreadcrumb, BackendDataTable },
+	components: { BaseIcon, BaseBreadcrumb, BackendDataTable },
 	mixins: [UserHasPermission],
 	meta: {
 		requiredPermissions: ["STUDENT_LIST"],
@@ -65,6 +86,10 @@ export default {
 					label: this.$t("common.labels.lastName"),
 					sortable: true,
 				},
+        {
+          field: "relationshipId",
+          label: "Wallet eingerichtet?"
+        },
 				{
 					field: "_id",
 					label: "",
@@ -82,15 +107,29 @@ export default {
       ]
 		};
 	},
-	computed: {
-		...mapGetters("users", {
-			students: "list",
-		}),
-		...mapState("users", {
-			pagination: (state) =>
-				state.pagination.default || { limit: 10, total: 0 },
-		}),
-	},
+  computed: {
+    ...mapGetters("users", {
+      students: "list",
+    }),
+    ...mapState("users", {
+      pagination: (state) =>
+          state.pagination.default || { limit: 10, total: 0 },
+    }),
+  },
+  watch: {
+    students (value) {
+      console.log(value)
+    }
+  },
+  methods: {
+	  hasWallet(id) {
+	    console.log('ID: ' + id);
+	    const student = this.students.find(user => user._id === id);
+	    console.log(student);
+	    console.log(student.relationshipId);
+      return !!student.relationshipId;
+    }
+  },
 	head() {
 		return {
 			title: "Schüler-Wallets",
