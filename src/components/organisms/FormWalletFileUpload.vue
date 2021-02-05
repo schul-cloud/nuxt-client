@@ -29,7 +29,7 @@
 		<input type="file" @change="saveFile" />
 
 		<base-button
-			:disabled="!file"
+			:disabled="!file || uploading"
 			type="submit"
 			class="w-100 mt--md"
 			design="primary"
@@ -61,6 +61,7 @@ export default {
 			file: null,
 			title: "Sprachzertifikat",
 			description: "B1-Zertifikat",
+      uploading: false
 		};
 	},
 	methods: {
@@ -69,6 +70,8 @@ export default {
 			console.log(this.file);
 		},
 		async uploadDocument() {
+		  this.uploading = true;
+
 			this.message = await this.$store.dispatch("wallet/sendFile", {
 			  userId: this.userId,
 				title: this.title,
@@ -80,7 +83,7 @@ export default {
 
 			if (this.message.id) {
         this.$toast.success(
-            "Das Dokument wurde erfolgreich in dein Wallet hochgeladen!"
+            this.userId ? "Das Dokument wurde erfolgreich in das Wallet hochgeladen!" : "Das Dokument wurde erfolgreich in dein Wallet hochgeladen!"
         );
 
         await this.$router.push({
@@ -91,6 +94,8 @@ export default {
             "Es gab einen Fehler beim File-Upload!"
         );
       }
+
+			this.uploading = false;
 		},
 	},
 };
