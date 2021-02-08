@@ -22,7 +22,7 @@
 			required="true"
 		>
 			<template v-slot:icon>
-				<base-icon source="material" icon="ic_default" />
+				<base-icon source="fa" icon="file-text" />
 			</template>
 		</base-input>
 
@@ -33,7 +33,7 @@
 			type="submit"
 			class="w-100 mt--md"
 			design="primary"
-			><base-icon source="material" icon="ic_default" />Dokument
+			><base-icon source="fa" icon="upload" class="mr--xs" />Dokument
 			hochladen</base-button
 		>
 

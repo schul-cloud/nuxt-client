@@ -31,11 +31,11 @@
 			entsprechenden App angezeigt.
 			<br /><br />
 			<base-button class="w-100" design="primary outline" to="/wallet/upload">
-				<base-icon source="material" icon="ic_default" />Erstes Dokument in
+				<base-icon source="fa" icon="upload" class="mr--xs" />Erstes Dokument in
 				Wallet hochladen
 			</base-button>
 			<base-button design="success" to="/wallet" class="w-100 mt--sm"
-				><base-icon source="material" icon="check" />Zurück zur
+				><base-icon source="fa" icon="check" class="mr--xs" />Zurück zur
 				Übersicht</base-button
 			>
 		</section>

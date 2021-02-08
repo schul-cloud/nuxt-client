@@ -32,11 +32,11 @@
 			design="primary outline"
 			to="/wallet/upload"
 		>
-			<base-icon source="fa" icon="upload" />Datei in bestehendes
+			<base-icon source="fa" icon="upload" class="mr--xs" />Datei in bestehendes
 			Wallet hochladen
 		</base-button>
 		<base-button class="w-100 mt--sm" design="primary" to="/wallet/new"
-			><base-icon source="material" icon="add" />Neues Wallet
+			><base-icon source="material" icon="add" class="mr--xs" />Neues Wallet
 			verbinden</base-button
 		>
 		<base-button
@@ -44,7 +44,7 @@
 			class="w-100 mt--sm"
 			design="secondary"
 			to="/wallet/students"
-			><base-icon source="fa" icon="cog" />
+			><base-icon source="fa" icon="cog" class="mr--xs" />
 			Schüler-Wallets verwalten
 		</base-button>
 	</div>
