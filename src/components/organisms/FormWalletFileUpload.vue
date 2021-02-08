@@ -37,6 +37,8 @@
 			hochladen</base-button
 		>
 
+    <loading-modal title="Dokument wird hochgeladen..." description="Dies kann je nach Dateigröße einige Zeit dauern. Wir bitten um etwas Geduld..." :btn-text="$t('common.labels.close')" :active.sync="uploading"></loading-modal>
+
 		<base-button
 			class="w-100 mt--sm"
 			design="outline"
@@ -48,7 +50,9 @@
 </template>
 
 <script>
+import LoadingModal from "@components/molecules/LoadingModal";
 export default {
+  components: { LoadingModal },
   props: {
     userId: {
       type: String,
