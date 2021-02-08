@@ -70,8 +70,16 @@ export default {
 	},
 	methods: {
 		saveFile(event) {
-			this.file = event.target.files[0];
-			console.log(this.file);
+      console.log(event.target.files[0])
+
+      if (event.target.files[0].size > 2000000) {
+			  event.target.files = null;
+        this.$toast.error(
+            "Die Datei ist zu groß, sie darf maximal 2 MB groß sein!"
+        );
+      } else {
+        this.file = event.target.files[0];
+      }
 		},
 		async uploadDocument() {
 		  this.uploading = true;
