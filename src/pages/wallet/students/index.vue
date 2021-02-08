@@ -116,17 +116,9 @@ export default {
           state.pagination.default || { limit: 10, total: 0 },
     }),
   },
-  watch: {
-    students (value) {
-      console.log(value)
-    }
-  },
   methods: {
 	  hasWallet(id) {
-	    console.log('ID: ' + id);
 	    const student = this.students.find(user => user._id === id);
-	    console.log(student);
-	    console.log(student.relationshipId);
       return !!student.relationshipId;
     }
   },

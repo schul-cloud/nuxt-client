@@ -111,7 +111,6 @@ export default {
 			if (this.relationshipId) {
 				console.log(this.relationshipId);
 			} else {
-				console.log("Relationship has to be requested in the IDAS-app!");
 				this.$toast.error(
 					"Du musst erst in der App die Kontaktanfrage abschließen!"
 				);
