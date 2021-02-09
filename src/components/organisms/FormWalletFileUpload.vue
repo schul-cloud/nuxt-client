@@ -70,15 +70,17 @@ export default {
 	},
 	methods: {
 		saveFile(event) {
-      console.log(event.target.files[0])
+      if (event.target.files && event.target.files.length > 0) {
+        console.log(event.target.files[0])
 
-      if (event.target.files[0].size > 2000000) {
-			  event.target.files = null;
-        this.$toast.error(
-            "Die Datei ist zu groß, sie darf maximal 2 MB groß sein!"
-        );
-      } else {
-        this.file = event.target.files[0];
+        if (event.target.files[0].size > 2000000) {
+          event.target.files = null;
+          this.$toast.error(
+              "Die Datei ist zu groß, sie darf maximal 2 MB groß sein!"
+          );
+        } else {
+          this.file = event.target.files[0];
+        }
       }
 		},
 		async uploadDocument() {
