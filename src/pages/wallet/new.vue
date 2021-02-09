@@ -101,13 +101,6 @@ export default {
 				},
 			]);
 
-			await this.$store.dispatch("users/patch", [
-				this.$user._id,
-				{
-					relationshipId: this.relationshipId,
-				},
-			]);
-
 			if (this.relationshipId) {
 				console.log(this.relationshipId);
 			} else {
