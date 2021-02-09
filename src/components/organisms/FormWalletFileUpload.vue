@@ -37,7 +37,7 @@
 			hochladen</base-button
 		>
 
-    <loading-modal title="Dokument wird hochgeladen..." description="Dies kann je nach Dateigröße einige Zeit dauern. Wir bitten um etwas Geduld..." :btn-text="$t('common.labels.close')" :active.sync="uploading"></loading-modal>
+    <loading-modal title="Dokument wird hochgeladen..." description="Dies kann je nach Dateigröße einige Zeit dauern. Wir bitten um etwas Geduld..." :btn-text="$t('common.labels.close')" :active.sync="loadingModal"></loading-modal>
 
 		<base-button
 			class="w-100 mt--sm"
@@ -65,7 +65,8 @@ export default {
 			file: null,
 			title: "Sprachzertifikat",
 			description: "B1-Zertifikat",
-      uploading: false
+      uploading: false,
+      loadingModal: false
 		};
 	},
 	methods: {
@@ -85,6 +86,7 @@ export default {
 		},
 		async uploadDocument() {
 		  this.uploading = true;
+		  this.loadingModal = true;
 
 			this.message = await this.$store.dispatch("wallet/sendFile", {
 			  userId: this.userId,
@@ -109,6 +111,7 @@ export default {
         );
       }
 
+			this.loadingModal = false;
 			this.uploading = false;
 		},
 	},
