@@ -63,6 +63,24 @@ const formatClientData = (data) => {
 	};
 };
 
+const handleError = (error) => {
+	if (
+		error.response.data.type === "LDAP_CONNECTION_ERROR" &&
+		error.response.data.validation_errors &&
+		error.response.data.validation_errors[0]
+	) {
+		const validationErrors = [];
+		for (const validationError in error.response.data.validation_errors) {
+			validationErrors.push(
+				error.response.data.validation_errors[validationError]
+			);
+		}
+		return validationErrors;
+	} else {
+		return { type: "UNEXPECTED_ERROR" };
+	}
+};
+
 export const actions = {
 	async getData({ commit }, id) {
 		try {
@@ -83,8 +101,7 @@ export const actions = {
 			commit("setTemp", payload);
 			commit("setVerified", verification);
 		} catch (error) {
-			console.log(error);
-			this.$toast.error(error);
+			commit("setVerifiedError", handleError(error));
 		}
 	},
 	async verifyExisting({ commit }, { systemId, systemData }) {
@@ -100,8 +117,7 @@ export const actions = {
 			commit("setTemp", systemData);
 			commit("setVerified", verification);
 		} catch (error) {
-			console.log(error);
-			this.$toast.error(error);
+			commit("setVerifiedError", handleError(error));
 		}
 	},
 	async submitData({ commit }, payload) {
@@ -149,6 +165,12 @@ export const mutations = {
 		state.temp = {
 			...payload,
 		};
+	},
+	setVerifiedError(state, errors) {
+		state.verified = { ...state.verified, ok: false, errors };
+	},
+	setSubmitted(state, errors) {
+		state.submitted = { ...state.submitted, ok: false, errors };
 	},
 	clearData(state) {
 		state.temp = state.data;

@@ -20,6 +20,7 @@ export const ldapErrorHandler = (error = [], ctx) => {
 				);
 				break;
 			default:
+				errorMessages.push("Unexpected Error");
 				return;
 		}
 	});
