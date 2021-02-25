@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-commented-out-tests */
 import BackendDataTable from "./BackendDataTable";
 import { tableData, tableColumns } from "./DataTable.data-factory.js";
 
@@ -270,27 +269,25 @@ describe("@components/organisms/DataTable/BackendDataTable", () => {
 			]);
 		});
 
-		// disabled until its implementation is completed
-
-		// it("can select all values from all page", async () => {
-		// 	const rowsPerPage = testData.length;
-		// 	const wrapper = getWrapper({
-		// 		data: testData,
-		// 		paginated: true,
-		// 		rowsPerPage,
-		// 		rowsSelectable: true,
-		// 		total,
-		// 	});
-		// 	expect(await getVisibleSelections(wrapper)).toHaveLength(0);
-		// 	wrapper.find("thead tr input[type=checkbox]").trigger("click");
-		// 	await wrapper.vm.$nextTick();
-		// 	wrapper.find("button.select-all-rows").trigger("click");
-		// 	await wrapper.vm.$nextTick();
-		// 	expect(wrapper.emitted("update:selection")[1]).toStrictEqual([
-		// 		[],
-		// 		"exclusive",
-		// 	]);
-		// });
+		it("can select all values from all page", async () => {
+			const rowsPerPage = testData.length;
+			const wrapper = getWrapper({
+				data: testData,
+				paginated: true,
+				rowsPerPage,
+				rowsSelectable: true,
+				total,
+			});
+			expect(await getVisibleSelections(wrapper)).toHaveLength(0);
+			wrapper.find("thead tr input[type=checkbox]").trigger("click");
+			await wrapper.vm.$nextTick();
+			wrapper.find("button.select-all-rows").trigger("click");
+			await wrapper.vm.$nextTick();
+			expect(wrapper.emitted("update:selection")[1]).toStrictEqual([
+				[],
+				"exclusive",
+			]);
+		});
 
 		it("can preselect values", async () => {
 			const totalSelections = testData.length;
