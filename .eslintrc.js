@@ -1,6 +1,6 @@
 module.exports = {
 	root: true,
-	extends: ["@schul-cloud/eslint-config/javascriptVue"],
+	extends: ["@schul-cloud/eslint-config/javascriptVue", "@nuxtjs/eslint-config-typescript"],
 	rules: {
 		"vue/require-direct-export": "off",
 	},

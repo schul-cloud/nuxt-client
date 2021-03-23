@@ -1,23 +1,23 @@
 <template>
-	<div class="actions-container">
-		<div class="primary-container">
-			<!-- @slot @mobile at the top, @tablet & @desktop at the right. First Item is placed on the most right position -->
-			<slot name="primary"></slot>
-		</div>
-		<div class="secondary-container">
-			<!-- @slot @mobile at the bottom, @tablet & @desktop at the left -->
-			<slot name="secondary"></slot>
-		</div>
-	</div>
+  <div class="actions-container">
+    <div class="primary-container">
+      <!-- @slot @mobile at the top, @tablet & @desktop at the right. First Item is placed on the most right position -->
+      <slot name="primary" />
+    </div>
+    <div class="secondary-container">
+      <!-- @slot @mobile at the bottom, @tablet & @desktop at the left -->
+      <slot name="secondary" />
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>
