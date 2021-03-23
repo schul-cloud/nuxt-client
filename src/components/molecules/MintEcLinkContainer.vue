@@ -1,67 +1,65 @@
 <template>
-	<base-link class="flex" :href="href">
-		<div
-			class="image-container"
-			:style="{
-				'background-image': `url(${image} )`,
-			}"
-		></div>
-		<div class="container-base">
-			<div class="container">
-				<div class="container-icon">
-					<base-icon
-						source="fa"
-						:icon="ic"
-						:style="{
-							'font-size': `var(--space-lg)`,
-							'margin-bottom': 0,
-							color: `var(--color-secondary)`,
-						}"
-					>
-					</base-icon>
-				</div>
-				<p class="heading">
-					{{ heading }}
-					<base-icon
-						source="fa"
-						icon="chevron-right"
-						:style="{
-							'font-size': `var(--space-md)`,
-							color: `var(--color-white)`,
-						}"
-					>
-					</base-icon>
-				</p>
-			</div>
-		</div>
-	</base-link>
+  <base-link class="flex" :href="href">
+    <div
+      class="image-container"
+      :style="{
+        'background-image': `url(${image} )`,
+      }"
+    />
+    <div class="container-base">
+      <div class="container">
+        <div class="container-icon">
+          <base-icon
+            source="fa"
+            :icon="ic"
+            :style="{
+              'font-size': `var(--space-lg)`,
+              'margin-bottom': 0,
+              color: `var(--color-secondary)`,
+            }"
+          />
+        </div>
+        <p class="heading">
+          {{ heading }}
+          <base-icon
+            source="fa"
+            icon="chevron-right"
+            :style="{
+              'font-size': `var(--space-md)`,
+              color: `var(--color-white)`,
+            }"
+          />
+        </p>
+      </div>
+    </div>
+  </base-link>
 </template>
 
 <script>
 export default {
-	props: {
-		heading: {
-			type: String,
-			default: "",
-		},
-		href: {
-			type: String,
-			default: undefined,
-		},
-		image: {
-			type: String,
-			default: "",
-		},
-		ic: {
-			type: String,
-			default: "",
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    heading: {
+      type: String,
+      default: ''
+    },
+    href: {
+      type: String,
+      default: undefined
+    },
+    image: {
+      type: String,
+      default: ''
+    },
+    ic: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

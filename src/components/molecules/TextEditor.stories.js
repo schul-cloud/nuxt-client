@@ -1,23 +1,23 @@
-import { storiesOf } from "@storybook/vue";
-import { text } from "@storybook/addon-knobs";
+import { storiesOf } from '@storybook/vue'
+import { text } from '@storybook/addon-knobs'
 
-import TextEditor from "./TextEditor";
+import TextEditor from './TextEditor'
 
-storiesOf("5 Molecules/TextEditor", module).add(
-	"TextEditor",
-	() => ({
-		components: { TextEditor },
-		data: () => ({
-			text: text("Text", "<h1>Hi there,</h1>"),
-		}),
-		template: `<div>
+storiesOf('5 Molecules/TextEditor', module).add(
+  'TextEditor',
+  () => ({
+    components: { TextEditor },
+    data: () => ({
+      text: text('Text', '<h1>Hi there,</h1>')
+    }),
+    template: `<div>
 		<TextEditor v-model="text"/>
 		<pre>{{text}}</pre>
-	</div>`,
-	}),
-	{
-		knobs: {
-			escapeHTML: false,
-		},
-	}
-);
+	</div>`
+  }),
+  {
+    knobs: {
+      escapeHTML: false
+    }
+  }
+)

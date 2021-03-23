@@ -1,171 +1,170 @@
-import Messenger from "./MatrixMessenger";
-import { extractRoomTypeAndIdFromPath } from "./MatrixMessenger";
+import Messenger, { extractRoomTypeAndIdFromPath } from './MatrixMessenger'
 
 const session = {
-	homeserverUrl: "https://matrix.domain",
-	userId: "@user:matrix.domain",
-	accessToken: "aaabbbccc",
-	deviceId: "AAABBBCCC",
-};
+  homeserverUrl: 'https://matrix.domain',
+  userId: '@user:matrix.domain',
+  accessToken: 'aaabbbccc',
+  deviceId: 'AAABBBCCC'
+}
 const mockStores = {
-	messenger: {
-		actions: {
-			loadMessengerToken() {
-				return;
-			},
-		},
-		state: () => ({
-			matrixFeatureFlag: true,
-			matrixAssetDomain: "https://matrix.domain",
-			session,
-			serverName: "dummy-server-name",
-		}),
-	},
-	auth: {
-		state: () => ({
-			school: { features: ["messenger"] },
-		}),
-	},
-};
+  messenger: {
+    actions: {
+      loadMessengerToken () {
 
-describe("@components/organism/Messenger", () => {
-	beforeEach(() => {
-		window.localStorage.clear();
-		window.Matrix = undefined;
-	});
-	afterEach(() => {
-		window.localStorage.clear();
-		window.Matrix = undefined;
-	});
+      }
+    },
+    state: () => ({
+      matrixFeatureFlag: true,
+      matrixAssetDomain: 'https://matrix.domain',
+      session,
+      serverName: 'dummy-server-name'
+    })
+  },
+  auth: {
+    state: () => ({
+      school: { features: ['messenger'] }
+    })
+  }
+}
 
-	it(...isValidComponent(Messenger));
+describe('@components/organism/Messenger', () => {
+  beforeEach(() => {
+    window.localStorage.clear()
+    window.Matrix = undefined
+  })
+  afterEach(() => {
+    window.localStorage.clear()
+    window.Matrix = undefined
+  })
 
-	it("do not initialize if feature is not set", async () => {
-		const mockStoresTestSpecific = { ...mockStores };
-		mockStoresTestSpecific.messenger = {
-			state: () => ({}),
-		};
+  it(...isValidComponent(Messenger))
 
-		mount(Messenger, {
-			...createComponentMocks({ i18n: true, store: mockStoresTestSpecific }),
-		});
+  it('do not initialize if feature is not set', async () => {
+    const mockStoresTestSpecific = { ...mockStores }
+    mockStoresTestSpecific.messenger = {
+      state: () => ({})
+    }
 
-		expect(window.Matrix).toBeUndefined();
-	});
+    mount(Messenger, {
+      ...createComponentMocks({ i18n: true, store: mockStoresTestSpecific })
+    })
 
-	it("do not initialize if feature is not enabled for instance", async () => {
-		const mockStoresTestSpecific = { ...mockStores };
-		mockStoresTestSpecific.messenger = {
-			state: () => ({
-				matrixFeatureFlag: false,
-			}),
-		};
+    expect(window.Matrix).toBeUndefined()
+  })
 
-		mount(Messenger, {
-			...createComponentMocks({ i18n: true, store: mockStoresTestSpecific }),
-		});
+  it('do not initialize if feature is not enabled for instance', async () => {
+    const mockStoresTestSpecific = { ...mockStores }
+    mockStoresTestSpecific.messenger = {
+      state: () => ({
+        matrixFeatureFlag: false
+      })
+    }
 
-		expect(window.Matrix).toBeUndefined();
-	});
+    mount(Messenger, {
+      ...createComponentMocks({ i18n: true, store: mockStoresTestSpecific })
+    })
 
-	it("do not initialize if feature is not enabled for school", async () => {
-		const mockStoresTestSpecific = { ...mockStores };
-		mockStoresTestSpecific.auth = {
-			state: () => ({
-				school: { features: [] },
-			}),
-		};
+    expect(window.Matrix).toBeUndefined()
+  })
 
-		mount(Messenger, {
-			...createComponentMocks({
-				i18n: true,
-				store: mockStoresTestSpecific,
-			}),
-		});
-		expect(window.Matrix).toBeUndefined();
-	});
+  it('do not initialize if feature is not enabled for school', async () => {
+    const mockStoresTestSpecific = { ...mockStores }
+    mockStoresTestSpecific.auth = {
+      state: () => ({
+        school: { features: [] }
+      })
+    }
 
-	it("init messenger from localStorage", async () => {
-		window.localStorage.setItem("mx_hs_url", "domain");
-		window.localStorage.setItem("mx_access_token", "token");
-		window.localStorage.setItem("mx_user_id", "user_id");
+    mount(Messenger, {
+      ...createComponentMocks({
+        i18n: true,
+        store: mockStoresTestSpecific
+      })
+    })
+    expect(window.Matrix).toBeUndefined()
+  })
 
-		const mockStoresTestSpecific = { ...mockStores };
-		mockStoresTestSpecific.messenger = {
-			actions: {
-				loadMessengerToken() {
-					return;
-				},
-			},
-			state: () => ({
-				session,
-				matrixFeatureFlag: true,
-				matrixAssetDomain: "https://matrix.domain",
-				serverName: "dummy-server-name",
-				sessionFromLocalStorage: "true",
-			}),
-		};
-		mount(Messenger, {
-			...createComponentMocks({
-				i18n: true,
-				store: mockStoresTestSpecific,
-			}),
-		});
+  it('init messenger from localStorage', async () => {
+    window.localStorage.setItem('mx_hs_url', 'domain')
+    window.localStorage.setItem('mx_access_token', 'token')
+    window.localStorage.setItem('mx_user_id', 'user_id')
 
-		expect(window.Matrix).toBeDefined();
-		expect(window.Matrix).toHaveLength(1);
+    const mockStoresTestSpecific = { ...mockStores }
+    mockStoresTestSpecific.messenger = {
+      actions: {
+        loadMessengerToken () {
 
-		window.localStorage.removeItem("mx_hs_url");
-		window.localStorage.removeItem("mx_access_token");
-		window.localStorage.removeItem("mx_user_id");
-	});
+        }
+      },
+      state: () => ({
+        session,
+        matrixFeatureFlag: true,
+        matrixAssetDomain: 'https://matrix.domain',
+        serverName: 'dummy-server-name',
+        sessionFromLocalStorage: 'true'
+      })
+    }
+    mount(Messenger, {
+      ...createComponentMocks({
+        i18n: true,
+        store: mockStoresTestSpecific
+      })
+    })
 
-	it("init messenger from api", async () => {
-		mount(Messenger, {
-			...createComponentMocks({ i18n: true, store: mockStores }),
-		});
+    expect(window.Matrix).toBeDefined()
+    expect(window.Matrix).toHaveLength(1)
 
-		expect(window.Matrix).toBeDefined();
-		expect(window.Matrix).toHaveLength(1);
-	});
+    window.localStorage.removeItem('mx_hs_url')
+    window.localStorage.removeItem('mx_access_token')
+    window.localStorage.removeItem('mx_user_id')
+  })
 
-	it("extract current room from url", async () => {
-		window.location.pathname = "/teams/aaaabbbbccccddddeeeeffff";
-		mount(Messenger, {
-			...createComponentMocks({ i18n: true, store: mockStores }),
-		});
+  it('init messenger from api', async () => {
+    mount(Messenger, {
+      ...createComponentMocks({ i18n: true, store: mockStores })
+    })
 
-		expect(window.Matrix).toBeDefined();
-		expect(window.Matrix).toHaveLength(1);
-		expect(window.Matrix[0][1].roomId).toBe(
-			"#team_aaaabbbbccccddddeeeeffff:dummy-server-name"
-		);
-	});
-});
+    expect(window.Matrix).toBeDefined()
+    expect(window.Matrix).toHaveLength(1)
+  })
 
-describe("extractRoomTypeAndIdFromPath", () => {
-	it("returns correct room for course", () => {
-		const { roomType, roomId } = extractRoomTypeAndIdFromPath(
-			"/courses/1234567890abcdef01234567"
-		);
+  it('extract current room from url', async () => {
+    window.location.pathname = '/teams/aaaabbbbccccddddeeeeffff'
+    mount(Messenger, {
+      ...createComponentMocks({ i18n: true, store: mockStores })
+    })
 
-		expect(roomType).toBe("course");
-		expect(roomId).toBe("1234567890abcdef01234567");
-	});
-	it("returns correct room for team", () => {
-		const { roomType, roomId } = extractRoomTypeAndIdFromPath(
-			"/teams/abcdef012345678123456789"
-		);
+    expect(window.Matrix).toBeDefined()
+    expect(window.Matrix).toHaveLength(1)
+    expect(window.Matrix[0][1].roomId).toBe(
+      '#team_aaaabbbbccccddddeeeeffff:dummy-server-name'
+    )
+  })
+})
 
-		expect(roomType).toBe("team");
-		expect(roomId).toBe("abcdef012345678123456789");
-	});
-	it("returns null for invalid paths", () => {
-		const { roomType, roomId } = extractRoomTypeAndIdFromPath(
-			"/admin/user/abcdefghijklmn1234567890"
-		);
+describe('extractRoomTypeAndIdFromPath', () => {
+  it('returns correct room for course', () => {
+    const { roomType, roomId } = extractRoomTypeAndIdFromPath(
+      '/courses/1234567890abcdef01234567'
+    )
 
-		expect(roomType).toBeNull();
-		expect(roomId).toBeNull();
-	});
-});
+    expect(roomType).toBe('course')
+    expect(roomId).toBe('1234567890abcdef01234567')
+  })
+  it('returns correct room for team', () => {
+    const { roomType, roomId } = extractRoomTypeAndIdFromPath(
+      '/teams/abcdef012345678123456789'
+    )
+
+    expect(roomType).toBe('team')
+    expect(roomId).toBe('abcdef012345678123456789')
+  })
+  it('returns null for invalid paths', () => {
+    const { roomType, roomId } = extractRoomTypeAndIdFromPath(
+      '/admin/user/abcdefghijklmn1234567890'
+    )
+
+    expect(roomType).toBeNull()
+    expect(roomId).toBeNull()
+  })
+})

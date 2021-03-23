@@ -1,36 +1,42 @@
 <template>
-	<div>
-		<div>
-			<h5 v-if="title">{{ title }}</h5>
-			<p v-if="variable">Variable: {{ variable }}</p>
-			<p v-if="styling">Style: {{ styling }}</p>
-			<div
-				class="state-value"
-				:style="{
-					'box-shadow': `var(${variable})`,
-				}"
-			></div>
-		</div>
-	</div>
+  <div>
+    <div>
+      <h5 v-if="title">
+        {{ title }}
+      </h5>
+      <p v-if="variable">
+        Variable: {{ variable }}
+      </p>
+      <p v-if="styling">
+        Style: {{ styling }}
+      </p>
+      <div
+        class="state-value"
+        :style="{
+          'box-shadow': `var(${variable})`,
+        }"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		variable: {
-			type: String,
-			default: "",
-		},
-		title: {
-			type: String,
-			default: "",
-		},
-		styling: {
-			type: String,
-			default: "",
-		},
-	},
-};
+  props: {
+    variable: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    styling: {
+      type: String,
+      default: ''
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

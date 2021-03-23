@@ -1,24 +1,24 @@
-import { storiesOf } from "@storybook/vue";
-import { boolean, array, text } from "@storybook/addon-knobs";
-import notes from "@docs/storybook/base.md";
+import { storiesOf } from '@storybook/vue'
+import { boolean, array, text } from '@storybook/addon-knobs'
+import notes from '@docs/storybook/base.md'
 
-import BaseInput from "./BaseInput";
+import BaseInput from './BaseInput'
 
-storiesOf("4 Base UI Components/Inputs/Checkbox", module)
-	.addParameters({
-		notes,
-	})
-	.add("Boolean", () => ({
-		components: { BaseInput },
-		data: () => ({
-			checked: true,
-			unchecked: false,
-			interminate: undefined,
-			label: text("label", "Checkbox"),
-			labelHidden: boolean("labelHidden", false),
-		}),
+storiesOf('4 Base UI Components/Inputs/Checkbox', module)
+  .addParameters({
+    notes
+  })
+  .add('Boolean', () => ({
+    components: { BaseInput },
+    data: () => ({
+      checked: true,
+      unchecked: false,
+      interminate: undefined,
+      label: text('label', 'Checkbox'),
+      labelHidden: boolean('labelHidden', false)
+    }),
 
-		template: `
+    template: `
 			<div>
 				<base-input
 					type="checkbox"
@@ -43,17 +43,17 @@ storiesOf("4 Base UI Components/Inputs/Checkbox", module)
 					:labelHidden="labelHidden"
 				/>
 			</div>
-		`,
-	}))
-	.add("Array", () => ({
-		components: { BaseInput },
-		data: () => ({
-			vmodel: array("vmodel", ["a"], ", "),
-			values: array("values", ["a", "b"], ", "),
-			labels: array("labels", ["Checkbox a", "Checkbox b"], ", "),
-			labelHidden: boolean("labelHidden", false),
-		}),
-		template: `
+		`
+  }))
+  .add('Array', () => ({
+    components: { BaseInput },
+    data: () => ({
+      vmodel: array('vmodel', ['a'], ', '),
+      values: array('values', ['a', 'b'], ', '),
+      labels: array('labels', ['Checkbox a', 'Checkbox b'], ', '),
+      labelHidden: boolean('labelHidden', false)
+    }),
+    template: `
 			<div role="group" aria-label="checkboxes">
 				<base-input
 					v-for="(value, i) in values"
@@ -67,21 +67,21 @@ storiesOf("4 Base UI Components/Inputs/Checkbox", module)
 				/>
 				<p> {{ vmodel.join(", ")}} </p>
 			</div>
-		`,
-	}));
+		`
+  }))
 
-storiesOf("4 Base UI Components/Inputs/Switch", module)
-	.addParameters({
-		notes,
-	})
-	.add("Boolean", () => ({
-		components: { BaseInput },
-		data: () => ({
-			checked: true,
-			unchecked: false,
-			labelHidden: boolean("labelHidden", false),
-		}),
-		template: `
+storiesOf('4 Base UI Components/Inputs/Switch', module)
+  .addParameters({
+    notes
+  })
+  .add('Boolean', () => ({
+    components: { BaseInput },
+    data: () => ({
+      checked: true,
+      unchecked: false,
+      labelHidden: boolean('labelHidden', false)
+    }),
+    template: `
 		<div>
 		<base-input
 			type="switch"
@@ -98,17 +98,17 @@ storiesOf("4 Base UI Components/Inputs/Switch", module)
 			:labelHidden="labelHidden"
 		/>
 	</div>
-		`,
-	}))
-	.add("Array", () => ({
-		components: { BaseInput },
-		data: () => ({
-			vmodel: array("vmodel", ["a"], ", "),
-			values: array("values", ["a", "b"], ", "),
-			labels: array("labels", ["Checkbox a", "Checkbox b"], ", "),
-			labelHidden: boolean("labelHidden", false),
-		}),
-		template: `
+		`
+  }))
+  .add('Array', () => ({
+    components: { BaseInput },
+    data: () => ({
+      vmodel: array('vmodel', ['a'], ', '),
+      values: array('values', ['a', 'b'], ', '),
+      labels: array('labels', ['Checkbox a', 'Checkbox b'], ', '),
+      labelHidden: boolean('labelHidden', false)
+    }),
+    template: `
 			<div role="group" aria-label="checkboxes">
 				<base-input
 					v-for="(value, i) in values"
@@ -122,5 +122,5 @@ storiesOf("4 Base UI Components/Inputs/Switch", module)
 				/>
 				<p> {{ vmodel.join(", ")}} </p>
 			</div>
-		`,
-	}));
+		`
+  }))

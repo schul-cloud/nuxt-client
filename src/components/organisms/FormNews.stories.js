@@ -1,13 +1,13 @@
-import { storiesOf } from "@storybook/vue";
-import { action } from "@storybook/addon-actions";
+import { storiesOf } from '@storybook/vue'
+import { action } from '@storybook/addon-actions'
 
-import FormNews from "./FormNews";
-import FormActions from "@components/molecules/FormActions";
+import FormActions from '@components/molecules/FormActions'
+import FormNews from './FormNews'
 
-storiesOf("6 Organisms/FormNews", module)
-	.add("/new", () => ({
-		components: { FormNews, FormActions },
-		template: `
+storiesOf('6 Organisms/FormNews', module)
+  .add('/new', () => ({
+    components: { FormNews, FormActions },
+    template: `
 	<form-news #actions="{ create, cancel }" action="create" @update:news="onNewsChange">
 		<form-actions>
 			<template #primary>
@@ -20,13 +20,13 @@ storiesOf("6 Organisms/FormNews", module)
 			</template>
 		</form-actions>
 	</form-news>`,
-		methods: {
-			onNewsChange: action("@update:news"),
-		},
-	}))
-	.add("/edit", () => ({
-		components: { FormNews, FormActions },
-		template: `
+    methods: {
+      onNewsChange: action('@update:news')
+    }
+  }))
+  .add('/edit', () => ({
+    components: { FormNews, FormActions },
+    template: `
 	<form-news #actions="{ remove, cancel }" action="patch" @update:news="onNewsChange">
 	<form-actions>
 	<template v-slot:secondary>
@@ -48,7 +48,7 @@ storiesOf("6 Organisms/FormNews", module)
 	</template>
 </form-actions>
 	</form-news>`,
-		methods: {
-			onNewsChange: action("@update:news"),
-		},
-	}));
+    methods: {
+      onNewsChange: action('@update:news')
+    }
+  }))

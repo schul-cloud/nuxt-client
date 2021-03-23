@@ -1,26 +1,26 @@
 <template>
-	<div class="footer-button" :class="isError ? 'error' : ''">
-		<button class="btn-confirm" v-on="$listeners">
-			{{ text }}
-		</button>
-	</div>
+  <div class="footer-button" :class="isError ? 'error' : ''">
+    <button class="btn-confirm" v-on="$listeners">
+      {{ text }}
+    </button>
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		isError: {
-			type: Boolean,
-		},
-		text: {
-			type: String,
-			default: "Ok",
-		},
-	},
-	data() {
-		return {};
-	},
-};
+  props: {
+    isError: {
+      type: Boolean
+    },
+    text: {
+      type: String,
+      default: 'Ok'
+    }
+  },
+  data () {
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

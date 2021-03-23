@@ -1,82 +1,82 @@
 <template>
-	<div class="login-container">
-		<h1 class="h6" :class="{ margin: isMobile }">
-			{{ $t("pages.loginInstances.login") }}
-		</h1>
-		<h2 class="h1" :class="{ margin: isMobile }">
-			{{ $t("pages.loginInstances.bundesland") }}
-		</h2>
-		<div
-			class="box-container"
-			:class="{
-				'box-container-mobile': isMobile,
-				'box-container-tablet': isTablet,
-			}"
-		>
-			<div class="boxes" :class="{ mobile: isMobile }">
-				<div v-for="(tile, index) in tiles" :key="index">
-					<instance-tile :tile="tile"></instance-tile>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="login-container">
+    <h1 class="h6" :class="{ margin: isMobile }">
+      {{ $t("pages.loginInstances.login") }}
+    </h1>
+    <h2 class="h1" :class="{ margin: isMobile }">
+      {{ $t("pages.loginInstances.bundesland") }}
+    </h2>
+    <div
+      class="box-container"
+      :class="{
+        'box-container-mobile': isMobile,
+        'box-container-tablet': isTablet,
+      }"
+    >
+      <div class="boxes" :class="{ mobile: isMobile }">
+        <div v-for="(tile, index) in tiles" :key="index">
+          <instance-tile :tile="tile" />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import InstanceTile from "@/components/molecules/InstanceTile";
+import InstanceTile from '@/components/molecules/InstanceTile'
 
 export default {
-	components: {
-		InstanceTile,
-	},
-	layout: "loggedoutFullLayout",
-	meta: {
-		isPublic: true,
-	},
-	data: function () {
-		return {
-			tiles: [
-				{
-					icon: "brb",
-					url: this.$t("pages.loginInstances.brb_link"),
-				},
-				{
-					icon: "n21",
-					url: this.$t("pages.loginInstances.n21_link"),
-				},
-				{
-					icon: "thr",
-					url: this.$t("pages.loginInstances.thr_link"),
-				},
-				{
-					icon: "mint-ec",
-					url: this.$t("pages.loginInstances.mintec_link"),
-				},
-				{
-					icon: "hpi",
-					url: this.$t("pages.loginInstances.hpi_link"),
-				},
-				{
-					icon: "open_HPI",
-					url: this.$t("pages.loginInstances.open_hpi_link"),
-				},
-			],
-		};
-	},
-	computed: {
-		isMobile() {
-			return this.$mq === "mobile";
-		},
-		isTablet() {
-			return this.$mq === "tablet";
-		},
-	},
-	head() {
-		return {
-			title: "HPI Schul-Cloud",
-		};
-	},
-};
+  components: {
+    InstanceTile
+  },
+  layout: 'loggedoutFullLayout',
+  meta: {
+    isPublic: true
+  },
+  data () {
+    return {
+      tiles: [
+        {
+          icon: 'brb',
+          url: this.$t('pages.loginInstances.brb_link')
+        },
+        {
+          icon: 'n21',
+          url: this.$t('pages.loginInstances.n21_link')
+        },
+        {
+          icon: 'thr',
+          url: this.$t('pages.loginInstances.thr_link')
+        },
+        {
+          icon: 'mint-ec',
+          url: this.$t('pages.loginInstances.mintec_link')
+        },
+        {
+          icon: 'hpi',
+          url: this.$t('pages.loginInstances.hpi_link')
+        },
+        {
+          icon: 'open_HPI',
+          url: this.$t('pages.loginInstances.open_hpi_link')
+        }
+      ]
+    }
+  },
+  computed: {
+    isMobile () {
+      return this.$mq === 'mobile'
+    },
+    isTablet () {
+      return this.$mq === 'tablet'
+    }
+  },
+  head () {
+    return {
+      title: 'HPI Schul-Cloud'
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

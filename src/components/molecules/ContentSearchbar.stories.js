@@ -1,23 +1,23 @@
-import { storiesOf } from "@storybook/vue";
-import { text, boolean } from "@storybook/addon-knobs";
-import { action } from "@storybook/addon-actions";
+import { storiesOf } from '@storybook/vue'
+import { text, boolean } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
 
-import ContentSearchbar from "@components/molecules/ContentSearchbar";
+import ContentSearchbar from '@components/molecules/ContentSearchbar'
 
-storiesOf("5 Molecules/Content/ContentSearchbar", module).add(
-	"ContentSearchbar",
-	() => ({
-		components: { ContentSearchbar },
-		data: () => ({
-			searchQuery: text("searchQuery", ""),
-			placeholder: text("placeholder", "Lernstore durchsuchen"),
-			activateTransition: boolean("activateTransition", false),
-			loading: boolean("loading", false),
-		}),
-		methods: {
-			transitionHandler: action("transitionHandler"),
-		},
-		template: `
+storiesOf('5 Molecules/Content/ContentSearchbar', module).add(
+  'ContentSearchbar',
+  () => ({
+    components: { ContentSearchbar },
+    data: () => ({
+      searchQuery: text('searchQuery', ''),
+      placeholder: text('placeholder', 'Lernstore durchsuchen'),
+      activateTransition: boolean('activateTransition', false),
+      loading: boolean('loading', false)
+    }),
+    methods: {
+      transitionHandler: action('transitionHandler')
+    },
+    template: `
 			<content-searchbar
 				v-model.lazy="searchQuery"
 				:class="
@@ -27,6 +27,6 @@ storiesOf("5 Molecules/Content/ContentSearchbar", module).add(
 				:loading="loading"
 				@keyup:enter="transitionHandler"
 			/>
-		`,
-	})
-);
+		`
+  })
+)

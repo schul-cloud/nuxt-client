@@ -1,111 +1,109 @@
 <template>
-	<div v-if="numberOfSelectedItems > 0" class="row-selection-info">
-		<div class="d-flex align-items-center content-wrapper">
-			<div v-if="allRowsOfAllPagesSelected">
-				{{ $t("pages.administration.all") }}
-				{{ totalNumberOfItems }}
-				{{ $t("pages.administration.selected") }}
-			</div>
-			<div v-else>
-				<span
-					>{{ numberOfSelectedItems }}
-					{{ $t("pages.administration.selected") }}</span
-				>
-				<span v-if="numberOfSelectedItems < totalNumberOfItems">
-					({{ $t("pages.administration.or") }}
-					<base-button
-						design="none"
-						class="select-all-rows"
-						@click="$emit('update:allRowsOfAllPagesSelected', true)"
-					>
-						{{ $t("pages.administration.all") }} {{ totalNumberOfItems }}
-						{{ $t("pages.administration.select") }}
-					</base-button>
-					)
-				</span>
-				-->
-			</div>
-			<div
-				v-if="actions && actions.length"
-				class="actions"
-				style="position: relative"
-			>
-				<base-button size="small" @click="actionsMenuOpen = true">
-					{{ $t("pages.administration.actions") }}
-				</base-button>
-				<context-menu
-					:show.sync="actionsMenuOpen"
-					anchor="top-right"
-					:actions="contextActions"
-					@action="fireAction"
-				/>
-			</div>
-		</div>
-		<base-button design="icon" class="close" @click="closeBanner">
-			<base-icon icon="close" source="material" />
-		</base-button>
-	</div>
+  <div v-if="numberOfSelectedItems > 0" class="row-selection-info">
+    <div class="d-flex align-items-center content-wrapper">
+      <div v-if="allRowsOfAllPagesSelected">
+        {{ $t("pages.administration.all") }}
+        {{ totalNumberOfItems }}
+        {{ $t("pages.administration.selected") }}
+      </div>
+      <div v-else>
+        <span>{{ numberOfSelectedItems }}
+          {{ $t("pages.administration.selected") }}</span>
+        <span v-if="numberOfSelectedItems < totalNumberOfItems">
+          ({{ $t("pages.administration.or") }}
+          <base-button
+            design="none"
+            class="select-all-rows"
+            @click="$emit('update:allRowsOfAllPagesSelected', true)"
+          >
+            {{ $t("pages.administration.all") }} {{ totalNumberOfItems }}
+            {{ $t("pages.administration.select") }}
+          </base-button>
+          )
+        </span>
+        -->
+      </div>
+      <div
+        v-if="actions && actions.length"
+        class="actions"
+        style="position: relative"
+      >
+        <base-button size="small" @click="actionsMenuOpen = true">
+          {{ $t("pages.administration.actions") }}
+        </base-button>
+        <context-menu
+          :show.sync="actionsMenuOpen"
+          anchor="top-right"
+          :actions="contextActions"
+          @action="fireAction"
+        />
+      </div>
+    </div>
+    <base-button design="icon" class="close" @click="closeBanner">
+      <base-icon icon="close" source="material" />
+    </base-button>
+  </div>
 </template>
 
 <script>
-import ContextMenu from "@components/molecules/ContextMenu";
+import ContextMenu from '@components/molecules/ContextMenu'
 
 export default {
-	components: {
-		ContextMenu,
-	},
-	props: {
-		actions: {
-			type: Array,
-			default: () => [],
-		},
-		totalNumberOfItems: {
-			type: Number,
-			default: 0,
-		},
-		numberOfSelectedItems: {
-			type: Number,
-			required: true,
-		},
-		allRowsOfAllPagesSelected: {
-			type: Boolean,
-		},
-	},
-	data() {
-		return {
-			actionsMenuOpen: false,
-		};
-	},
-	computed: {
-		contextActions() {
-			return this.actions.map((actionCtx, index) => ({
-				text: actionCtx.label,
-				icon: actionCtx.icon,
-				"icon-source": actionCtx["icon-source"],
-				event: "action",
-				arguments: index,
-			}));
-		},
-	},
-	watch: {
-		numberOfSelectedItems(to) {
-			if (to === 0) {
-				this.actionsMenuOpen = false;
-			}
-		},
-	},
-	beforeDestroy() {
-		this.actionsMenuOpen = false;
-	},
-	methods: {
-		closeBanner() {
-			this.$emit("update:allRowsOfAllPagesSelected", false);
-		},
-		fireAction(index) {
-			this.$emit("fire-action", this.actions[index]);
-		},
-	},
-};
+  components: {
+    ContextMenu
+  },
+  props: {
+    actions: {
+      type: Array,
+      default: () => []
+    },
+    totalNumberOfItems: {
+      type: Number,
+      default: 0
+    },
+    numberOfSelectedItems: {
+      type: Number,
+      required: true
+    },
+    allRowsOfAllPagesSelected: {
+      type: Boolean
+    }
+  },
+  data () {
+    return {
+      actionsMenuOpen: false
+    }
+  },
+  computed: {
+    contextActions () {
+      return this.actions.map((actionCtx, index) => ({
+        text: actionCtx.label,
+        icon: actionCtx.icon,
+        'icon-source': actionCtx['icon-source'],
+        event: 'action',
+        arguments: index
+      }))
+    }
+  },
+  watch: {
+    numberOfSelectedItems (to) {
+      if (to === 0) {
+        this.actionsMenuOpen = false
+      }
+    }
+  },
+  beforeDestroy () {
+    this.actionsMenuOpen = false
+  },
+  methods: {
+    closeBanner () {
+      this.$emit('update:allRowsOfAllPagesSelected', false)
+    },
+    fireAction (index) {
+      this.$emit('fire-action', this.actions[index])
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

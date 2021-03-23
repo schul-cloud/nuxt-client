@@ -1,5 +1,5 @@
-import PulsatingDot from "./PulsatingDot";
+import PulsatingDot from './PulsatingDot'
 
-describe("@components/atoms/PulsatingDot", () => {
-	it(...isValidComponent(PulsatingDot));
-});
+describe('@components/atoms/PulsatingDot', () => {
+  it(...isValidComponent(PulsatingDot))
+})

@@ -1,37 +1,39 @@
 <template>
-	<div v-if="active" class="wrapper">
-		<div class="content">
-			<h4>
-				<slot name="header" />
-			</h4>
-			<p class="body">
-				<slot name="body" />
-			</p>
-			<div class="actions">
-				<slot name="actions" />
-				<base-button design="info" @click.self="close">Schließen</base-button>
-			</div>
-		</div>
-	</div>
+  <div v-if="active" class="wrapper">
+    <div class="content">
+      <h4>
+        <slot name="header" />
+      </h4>
+      <p class="body">
+        <slot name="body" />
+      </p>
+      <div class="actions">
+        <slot name="actions" />
+        <base-button design="info" @click.self="close">
+          Schließen
+        </base-button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		active: {
-			type: Boolean,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	methods: {
-		close() {
-			this.$emit("update:active", false);
-		},
-	},
-};
+  props: {
+    active: {
+      type: Boolean
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  methods: {
+    close () {
+      this.$emit('update:active', false)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

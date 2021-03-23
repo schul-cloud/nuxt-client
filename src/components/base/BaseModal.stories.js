@@ -1,37 +1,37 @@
-import { storiesOf } from "@storybook/vue";
-import { text, color, select, boolean, number } from "@storybook/addon-knobs";
-import notes from "@docs/storybook/base.md";
+import { storiesOf } from '@storybook/vue'
+import { text, color, select, boolean, number } from '@storybook/addon-knobs'
+import notes from '@docs/storybook/base.md'
 
-import BaseButton from "@basecomponents/BaseButton";
-import BaseIcon from "@basecomponents/BaseIcon";
+import BaseButton from '@basecomponents/BaseButton'
+import BaseIcon from '@basecomponents/BaseIcon'
 
-import BaseModal from "@basecomponents/BaseModal";
-import ModalBodyInfo from "@components/molecules/ModalBodyInfo";
-import ModalFooterActions from "@components/molecules/ModalFooterActions";
-import ModalFooterConfirm from "@components/molecules/ModalFooterConfirm";
-import ModalFooterBorder from "@components/molecules/ModalFooterBorder";
-import ModalFooter from "@components/molecules/ModalFooter";
-import LoadingModal from "@components/molecules/LoadingModal";
-import AutoLogoutWarning from "@components/organisms/AutoLogoutWarning";
+import BaseModal from '@basecomponents/BaseModal'
+import ModalBodyInfo from '@components/molecules/ModalBodyInfo'
+import ModalFooterActions from '@components/molecules/ModalFooterActions'
+import ModalFooterConfirm from '@components/molecules/ModalFooterConfirm'
+import ModalFooterBorder from '@components/molecules/ModalFooterBorder'
+import ModalFooter from '@components/molecules/ModalFooter'
+import LoadingModal from '@components/molecules/LoadingModal'
+import AutoLogoutWarning from '@components/organisms/AutoLogoutWarning'
 
-storiesOf("4 Base UI Components/Modals", module)
-	.addParameters({
-		notes,
-	})
-	.add("Default", () => ({
-		components: { BaseModal, BaseButton, ModalFooter, ModalFooterBorder },
-		data: () => ({
-			active: true,
-			header: text("header", "Modal Inhalt Scrollt"),
-			body: text(
-				"body",
-				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-			),
-			footer: text("footer", "This is a footer"),
-			size: select("Size", { medium: "medium", large: "large" }, "medium"),
-			design: select("Design", { default: "", white: "white" }, ""),
-		}),
-		template: `
+storiesOf('4 Base UI Components/Modals', module)
+  .addParameters({
+    notes
+  })
+  .add('Default', () => ({
+    components: { BaseModal, BaseButton, ModalFooter, ModalFooterBorder },
+    data: () => ({
+      active: true,
+      header: text('header', 'Modal Inhalt Scrollt'),
+      body: text(
+        'body',
+        'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'
+      ),
+      footer: text('footer', 'This is a footer'),
+      size: select('Size', { medium: 'medium', large: 'large' }, 'medium'),
+      design: select('Design', { default: '', white: 'white' }, '')
+    }),
+    template: `
 		<div>
 		<base-button @click="active = true">
 				Open Modal
@@ -52,23 +52,23 @@ storiesOf("4 Base UI Components/Modals", module)
 				</modal-footer-border>
 		</template>
 		</base-modal>
-		</div>`,
-	}))
-	.add("Action", () => ({
-		components: { BaseModal, BaseButton, BaseIcon, ModalFooterActions },
-		data: () => ({
-			active: true,
-			header: text("header", "Plugin Einstellungen"),
-			body: text("body"),
-			color: color("color", "var(--color-white)"),
-			inputs: {
-				a: [],
-				b: [],
-				c: [],
-				d: [],
-			},
-		}),
-		template: `<div>
+		</div>`
+  }))
+  .add('Action', () => ({
+    components: { BaseModal, BaseButton, BaseIcon, ModalFooterActions },
+    data: () => ({
+      active: true,
+      header: text('header', 'Plugin Einstellungen'),
+      body: text('body'),
+      color: color('color', 'var(--color-white)'),
+      inputs: {
+        a: [],
+        b: [],
+        c: [],
+        d: []
+      }
+    }),
+    template: `<div>
 			<base-button @click="active = true">
 					Open Modal
 			</base-button>
@@ -117,20 +117,20 @@ storiesOf("4 Base UI Components/Modals", module)
 					</modal-footer-actions>
 				</template>
 			</base-modal>
-		</div>`,
-	}))
-	.add("Info", () => ({
-		components: {
-			BaseModal,
-			BaseButton,
-			BaseIcon,
-			ModalBodyInfo,
-			ModalFooterConfirm,
-		},
-		data: () => ({
-			active: true,
-		}),
-		template: `<div>
+		</div>`
+  }))
+  .add('Info', () => ({
+    components: {
+      BaseModal,
+      BaseButton,
+      BaseIcon,
+      ModalBodyInfo,
+      ModalFooterConfirm
+    },
+    data: () => ({
+      active: true
+    }),
+    template: `<div>
 		<base-button @click="active = true">
 			Open Modal
 		</base-button>
@@ -149,14 +149,14 @@ storiesOf("4 Base UI Components/Modals", module)
 				<ModalFooterConfirm backgroundcolor="var(--color-success)" text="Ok" @click="active = false"/>
 			</template>
 		</base-modal>
-		</div>`,
-	}))
-	.add("Dialog", () => ({
-		components: { BaseModal, BaseButton, BaseIcon, ModalBodyInfo, ModalFooter },
-		data: () => ({
-			active: true,
-		}),
-		template: `<div>
+		</div>`
+  }))
+  .add('Dialog', () => ({
+    components: { BaseModal, BaseButton, BaseIcon, ModalBodyInfo, ModalFooter },
+    data: () => ({
+      active: true
+    }),
+    template: `<div>
 		<base-button @click="active = true">
 				Open Modal
 		</base-button>
@@ -180,27 +180,27 @@ storiesOf("4 Base UI Components/Modals", module)
 				</base-button>
 			</template>
 		</base-modal>
-		</div>`,
-	}))
-	.add("Loading", () => ({
-		components: { LoadingModal },
-		template: `<div>
+		</div>`
+  }))
+  .add('Loading', () => ({
+    components: { LoadingModal },
+    template: `<div>
 		<base-button @click="active = true">Open Modal</base-button>
 			<LoadingModal :title="title" :description="description" :btnText="btnText" :active.sync="active"/>
 		</div>`,
-		data: () => ({
-			active: true,
-			title: text("title", "Daten werden geladen…"),
-			description: text(
-				"description",
-				"Dies kann bis zu einer Minute dauern. Wir bitten um etwas Geduld…"
-			),
-			btnText: text("ButtonText", "Schließen"),
-		}),
-	}))
-	.add("Autologout Warning", () => ({
-		components: { AutoLogoutWarning },
-		template: `<div :class="$store.state.autoLogout" id="test">
+    data: () => ({
+      active: true,
+      title: text('title', 'Daten werden geladen…'),
+      description: text(
+        'description',
+        'Dies kann bis zu einer Minute dauern. Wir bitten um etwas Geduld…'
+      ),
+      btnText: text('ButtonText', 'Schließen')
+    })
+  }))
+  .add('Autologout Warning', () => ({
+    components: { AutoLogoutWarning },
+    template: `<div :class="$store.state.autoLogout" id="test">
 		<base-button @click="
 						$store.commit('autoLogout/setActive', {active: true, error });
 						$store.commit('autoLogout/setRemainingTimeInSeconds', remainingTimeInSeconds);
@@ -210,9 +210,9 @@ storiesOf("4 Base UI Components/Modals", module)
 			(When using knobs, click "Open Modal" to apply changes)
 			<AutoLogoutWarning />
 		</div>`,
-		data: () => ({
-			active: true,
-			error: boolean("error", false),
-			remainingTimeInSeconds: number("Remaining time in seconds", 7200),
-		}),
-	}));
+    data: () => ({
+      active: true,
+      error: boolean('error', false),
+      remainingTimeInSeconds: number('Remaining time in seconds', 7200)
+    })
+  }))

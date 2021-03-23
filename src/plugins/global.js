@@ -1,34 +1,34 @@
-import Vue from "vue";
+import Vue from 'vue'
 
 // BaseComponents
-import "@/components/base/_globals";
+import '@/components/base/_globals'
 
-import VueMq from "vue-mq";
-Vue.use(VueMq, {
-	breakpoints: {
-		mobile: 750,
-		tabletPortrait: 770,
-		tablet: 991,
-		desktop: 1200,
-		large: Infinity,
-	},
-	defaultBreakpoint: "mobile",
-});
+import VueMq from 'vue-mq'
 
-import "./directives";
-import "./filter";
+import './directives'
+import './filter'
 
 // Theme
-import Theme from "@theme/config";
-Vue.prototype.$theme = Theme;
+import Theme from '@theme/config'
 
 // Dialog
-import BaseDialog from "@/components/base/BaseDialog/BaseDialogProgrammatic";
-Vue.use(BaseDialog);
+import BaseDialog from '@/components/base/BaseDialog/BaseDialogProgrammatic'
 
 // EventBus
-import "./eventBus";
+import './eventBus'
 
 // uiState
-import uiState from "./uiState";
-Vue.use(uiState);
+import uiState from './uiState'
+Vue.use(VueMq, {
+  breakpoints: {
+    mobile: 750,
+    tabletPortrait: 770,
+    tablet: 991,
+    desktop: 1200,
+    large: Infinity
+  },
+  defaultBreakpoint: 'mobile'
+})
+Vue.prototype.$theme = Theme
+Vue.use(BaseDialog)
+Vue.use(uiState)

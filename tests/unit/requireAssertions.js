@@ -1,3 +1,3 @@
 beforeEach(() => {
-	expect.hasAssertions();
-});
+  expect.hasAssertions()
+})

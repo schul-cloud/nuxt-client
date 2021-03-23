@@ -1,57 +1,57 @@
 <template>
-	<div v-click-outside="removePopup" class="popup">
-		<base-button class="icon-button" design="text icon" @click="popup">
-			<base-icon :source="source" :icon="icon" :fill="fill" />
-		</base-button>
+  <div v-click-outside="removePopup" class="popup">
+    <base-button class="icon-button" design="text icon" @click="popup">
+      <base-icon :source="source" :icon="icon" :fill="fill" />
+    </base-button>
 
-		<div
-			ref="popupContent"
-			class="popup-content"
-			:class="{ visible, 'expand-to-left': shouldExpandToLeft }"
-		>
-			<slot></slot>
-		</div>
-	</div>
+    <div
+      ref="popupContent"
+      class="popup-content"
+      :class="{ visible, 'expand-to-left': shouldExpandToLeft }"
+    >
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		source: {
-			type: String,
-			required: true,
-		},
-		icon: {
-			type: String,
-			required: true,
-		},
-		fill: {
-			type: String,
-			default: "var(--color-tertiary-dark)",
-		},
-		shouldExpandToLeft: {
-			type: Boolean,
-		},
-	},
-	data() {
-		return {
-			visible: false,
-		};
-	},
-	mounted() {
-		this.shouldExpandToLeft =
+  props: {
+    source: {
+      type: String,
+      required: true
+    },
+    icon: {
+      type: String,
+      required: true
+    },
+    fill: {
+      type: String,
+      default: 'var(--color-tertiary-dark)'
+    },
+    shouldExpandToLeft: {
+      type: Boolean
+    }
+  },
+  data () {
+    return {
+      visible: false
+    }
+  },
+  mounted () {
+    this.shouldExpandToLeft =
 			this.$refs.popupContent.getBoundingClientRect().right >
-			window.innerWidth + 10;
-	},
-	methods: {
-		popup() {
-			this.visible = !this.visible;
-		},
-		removePopup() {
-			this.visible = false;
-		},
-	},
-};
+			window.innerWidth + 10
+  },
+  methods: {
+    popup () {
+      this.visible = !this.visible
+    },
+    removePopup () {
+      this.visible = false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

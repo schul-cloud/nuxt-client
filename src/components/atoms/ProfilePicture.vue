@@ -1,25 +1,25 @@
 <template>
-	<div class="profilePicture">
-		<img v-if="image" :src="image" class="borderradius" :class="size" />
-	</div>
+  <div class="profilePicture">
+    <img v-if="image" :src="image" class="borderradius" :class="size">
+  </div>
 </template>
 <script>
 export default {
-	props: {
-		image: {
-			type: String,
-			required: true,
-		},
-		size: {
-			type: String,
-			default: "small",
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    image: {
+      type: String,
+      required: true
+    },
+    size: {
+      type: String,
+      default: 'small'
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

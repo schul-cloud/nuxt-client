@@ -1,33 +1,33 @@
 <template>
-	<div ref="qrcode" class="qrcode" />
+  <div ref="qrcode" class="qrcode" />
 </template>
 
 <script>
-import kjua from "kjua";
+import kjua from 'kjua'
 
 export default {
-	props: {
-		url: {
-			type: String,
-			default: window.location.href,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	mounted: function () {
-		this.createQrCode();
-	},
-	methods: {
-		createQrCode: function () {
-			const image = kjua({ text: this.url, render: "image" });
-			image.alt = this.url;
-			const qrbox = this.$refs.qrcode;
-			qrbox.append(image);
-		},
-	},
-};
+  props: {
+    url: {
+      type: String,
+      default: window.location.href
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  mounted () {
+    this.createQrCode()
+  },
+  methods: {
+    createQrCode () {
+      const image = kjua({ text: this.url, render: 'image' })
+      image.alt = this.url
+      const qrbox = this.$refs.qrcode
+      qrbox.append(image)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

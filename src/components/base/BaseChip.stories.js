@@ -1,25 +1,25 @@
-import { storiesOf } from "@storybook/vue";
+import { storiesOf } from '@storybook/vue'
 
-import BaseChip from "./BaseChip";
+import BaseChip from './BaseChip'
 
-storiesOf("4 Base UI Components/BaseChip", module).add("default", () => ({
-	components: { BaseChip },
-	data() {
-		return {
-			sizes: ["small", "medium", "large"],
-			selections: ["medium"],
-		};
-	},
-	methods: {
-		toggle(name) {
-			if (this.selections.includes(name)) {
-				this.selections.splice(this.selections.indexOf(name), 1);
-			} else {
-				this.selections.push(name);
-			}
-		},
-	},
-	template: `
+storiesOf('4 Base UI Components/BaseChip', module).add('default', () => ({
+  components: { BaseChip },
+  data () {
+    return {
+      sizes: ['small', 'medium', 'large'],
+      selections: ['medium']
+    }
+  },
+  methods: {
+    toggle (name) {
+      if (this.selections.includes(name)) {
+        this.selections.splice(this.selections.indexOf(name), 1)
+      } else {
+        this.selections.push(name)
+      }
+    }
+  },
+  template: `
 	<div>
 		<base-chip
 			v-for="size in sizes" :key="size"
@@ -30,5 +30,5 @@ storiesOf("4 Base UI Components/BaseChip", module).add("default", () => ({
 		>
 				{{size}} chip
 		</base-chip>
-	</div>`,
-}));
+	</div>`
+}))

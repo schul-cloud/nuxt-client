@@ -1,17 +1,17 @@
-import { storiesOf } from "@storybook/vue";
-import { text, select } from "@storybook/addon-knobs";
+import { storiesOf } from '@storybook/vue'
+import { text, select } from '@storybook/addon-knobs'
 
-import AccountCard from "./AccountCard";
-import BaseIcon from "@basecomponents/BaseIcon";
+import BaseIcon from '@basecomponents/BaseIcon'
+import AccountCard from './AccountCard'
 
-storiesOf("5 Molecules/AccountCard", module).add("default", () => ({
-	components: { AccountCard, BaseIcon },
-	data: () => ({
-		heading: text("Heading", "Aktuelle Nutzerdaten"),
-		readOnly: select("Read-only", [true, false], false),
-		data: text("data", "Vorname Nachname"),
-	}),
-	template: `
+storiesOf('5 Molecules/AccountCard', module).add('default', () => ({
+  components: { AccountCard, BaseIcon },
+  data: () => ({
+    heading: text('Heading', 'Aktuelle Nutzerdaten'),
+    readOnly: select('Read-only', [true, false], false),
+    data: text('data', 'Vorname Nachname')
+  }),
+  template: `
 	<div>
 		<AccountCard :heading="heading" :readonly="readOnly" :data="data" style="max-width: 60ch"/>
 		<AccountCard heading="Aktuelles Passwort" :readonly="readOnly" style="max-width: 60ch">
@@ -29,5 +29,5 @@ storiesOf("5 Molecules/AccountCard", module).add("default", () => ({
 			</template>
 		</AccountCard>
 	</div>
-	`,
-}));
+	`
+}))

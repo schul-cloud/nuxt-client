@@ -1,19 +1,19 @@
 <template>
-	<legacy-logged-in>
-		<base-content-container id="main-content" tag="main" class="content">
-			<Nuxt />
-		</base-content-container>
-	</legacy-logged-in>
+  <legacy-logged-in>
+    <base-content-container id="main-content" tag="main" class="content">
+      <Nuxt />
+    </base-content-container>
+  </legacy-logged-in>
 </template>
 
 <script>
-import LegacyLoggedIn from "@layouts/legacyLoggedIn";
+import LegacyLoggedIn from '@layouts/legacyLoggedIn'
 
 export default {
-	components: {
-		LegacyLoggedIn,
-	},
-};
+  components: {
+    LegacyLoggedIn
+  }
+}
 </script>
 
 <style lang="scss" scoped>

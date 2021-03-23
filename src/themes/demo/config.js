@@ -1,4 +1,4 @@
 export default {
-	name: "HPI Demo Schul-Cloud",
-	short_name: "Demo Schul-Cloud",
-};
+  name: 'HPI Demo Schul-Cloud',
+  short_name: 'Demo Schul-Cloud'
+}

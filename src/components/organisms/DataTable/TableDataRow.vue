@@ -1,88 +1,88 @@
 <template>
-	<tr
-		:class="{
-			row: true,
-			selected,
-			highlight: isHighlighted,
-		}"
-	>
-		<td v-if="selectable">
-			<div class="text-content selection-column">
-				<base-input
-					v-model="selectionStatus"
-					type="checkbox"
-					:label="`Zeile ${rowindex + 1} auswählen`"
-					:label-hidden="true"
-					class="select"
-					:color="selected ? 'currentColor' : undefined"
-				/>
-			</div>
-		</td>
-		<td v-for="(fieldData, index) in rowData" :key="index">
-			<slot
-				:name="`datacolumn-${columnKeys[index].replace(/\./g, '-')}`"
-				:data="fieldData"
-				:selected="selected"
-				:highlighted="isHighlighted"
-				:rowindex="rowindex"
-			>
-				<div class="text-content">
-					{{ fieldData }}
-				</div>
-			</slot>
-		</td>
-	</tr>
+  <tr
+    :class="{
+      row: true,
+      selected,
+      highlight: isHighlighted,
+    }"
+  >
+    <td v-if="selectable">
+      <div class="text-content selection-column">
+        <base-input
+          v-model="selectionStatus"
+          type="checkbox"
+          :label="`Zeile ${rowindex + 1} auswählen`"
+          :label-hidden="true"
+          class="select"
+          :color="selected ? 'currentColor' : undefined"
+        />
+      </div>
+    </td>
+    <td v-for="(fieldData, index) in rowData" :key="index">
+      <slot
+        :name="`datacolumn-${columnKeys[index].replace(/\./g, '-')}`"
+        :data="fieldData"
+        :selected="selected"
+        :highlighted="isHighlighted"
+        :rowindex="rowindex"
+      >
+        <div class="text-content">
+          {{ fieldData }}
+        </div>
+      </slot>
+    </td>
+  </tr>
 </template>
 
 <script>
-import { getValueByPath } from "@utils/helpers";
+import { getValueByPath } from '@utils/helpers'
 
 export default {
-	props: {
-		rowindex: {
-			type: Number,
-			required: true,
-		},
-		selectable: Boolean,
-		selected: Boolean,
-		columnKeys: {
-			type: Array,
-			default: () => [],
-		},
-		data: {
-			type: [Array, Object],
-			required: true,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	computed: {
-		rowData() {
-			if (this.data === Array) {
-				return this.data;
-			}
-			if (this.columnKeys.length === 0) {
-				throw new Error(
-					"the prop columnKeys is required if the passed in data is an object."
-				);
-			}
-			return this.columnKeys.map((key) => getValueByPath(this.data, key));
-		},
-		selectionStatus: {
-			get() {
-				return this.selected;
-			},
-			set(state) {
-				this.$emit("update:selected", state);
-			},
-		},
-		isHighlighted() {
-			return Boolean((this.rowindex + 1) % 2);
-		},
-	},
-};
+  props: {
+    rowindex: {
+      type: Number,
+      required: true
+    },
+    selectable: Boolean,
+    selected: Boolean,
+    columnKeys: {
+      type: Array,
+      default: () => []
+    },
+    data: {
+      type: [Array, Object],
+      required: true
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  computed: {
+    rowData () {
+      if (this.data === Array) {
+        return this.data
+      }
+      if (this.columnKeys.length === 0) {
+        throw new Error(
+          'the prop columnKeys is required if the passed in data is an object.'
+        )
+      }
+      return this.columnKeys.map(key => getValueByPath(this.data, key))
+    },
+    selectionStatus: {
+      get () {
+        return this.selected
+      },
+      set (state) {
+        this.$emit('update:selected', state)
+      }
+    },
+    isHighlighted () {
+      return Boolean((this.rowindex + 1) % 2)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

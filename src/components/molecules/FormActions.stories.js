@@ -1,11 +1,11 @@
-import { storiesOf } from "@storybook/vue";
+import { storiesOf } from '@storybook/vue'
 
-import FormActions from "./FormActions";
-import BaseButton from "@basecomponents/BaseButton";
+import BaseButton from '@basecomponents/BaseButton'
+import FormActions from './FormActions'
 
-storiesOf("5 Molecules/FormActions", module).add("default", () => ({
-	components: { FormActions, BaseButton },
-	template: `
+storiesOf('5 Molecules/FormActions', module).add('default', () => ({
+  components: { FormActions, BaseButton },
+  template: `
 		<FormActions>
 			<template v-slot:primary>
 				<base-button design="primary">Speichern</base-button>
@@ -14,5 +14,5 @@ storiesOf("5 Molecules/FormActions", module).add("default", () => ({
 			<template v-slot:secondary>
 				<base-button design="danger text">Löschen</base-button>
 			</template>
-		</FormActions>`,
-}));
+		</FormActions>`
+}))

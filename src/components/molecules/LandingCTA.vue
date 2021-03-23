@@ -1,28 +1,32 @@
 <template>
-	<div class="landing">
-		<img class="landing-image" src="" />
-		<h2 class="center medium-emphasis title">{{ title }}</h2>
-		<h3 class="h4 center medium-emphasis subtitle">{{ subtitle }}</h3>
-		<div class="center">
-			<base-button design="hero-cta" size="large">
-				{{ ctaText }}
-			</base-button>
-		</div>
-	</div>
+  <div class="landing">
+    <img class="landing-image" src="">
+    <h2 class="center medium-emphasis title">
+      {{ title }}
+    </h2>
+    <h3 class="h4 center medium-emphasis subtitle">
+      {{ subtitle }}
+    </h3>
+    <div class="center">
+      <base-button design="hero-cta" size="large">
+        {{ ctaText }}
+      </base-button>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		subtitle: { type: String, required: true },
-		title: { type: String, required: true },
-		ctaText: { type: String, required: true },
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    subtitle: { type: String, required: true },
+    title: { type: String, required: true },
+    ctaText: { type: String, required: true }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style scoped>

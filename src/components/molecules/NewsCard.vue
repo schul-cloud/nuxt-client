@@ -1,43 +1,45 @@
 <template>
-	<base-card class="mt--md news-card">
-		<template v-slot:header>
-			<div :style="{ backgroundColor: article.color }">
-				<div class="news-card__heading">
-					<h4 style="margin: 0">{{ article.title }}</h4>
-				</div>
-			</div>
-		</template>
-		<template v-slot:default>
-			<div class="news-card__content">
-				<span>{{ fromNow(article.createdAt) }}</span>
-				<div class="mt--md">
-					<BaseLink :to="{ name: 'news-id', params: { id: article._id } }">
-						Weiterlesen
-					</BaseLink>
-				</div>
-			</div>
-		</template>
-	</base-card>
+  <base-card class="mt--md news-card">
+    <template v-slot:header>
+      <div :style="{ backgroundColor: article.color }">
+        <div class="news-card__heading">
+          <h4 style="margin: 0">
+            {{ article.title }}
+          </h4>
+        </div>
+      </div>
+    </template>
+    <template v-slot:default>
+      <div class="news-card__content">
+        <span>{{ fromNow(article.createdAt) }}</span>
+        <div class="mt--md">
+          <BaseLink :to="{ name: 'news-id', params: { id: article._id } }">
+            Weiterlesen
+          </BaseLink>
+        </div>
+      </div>
+    </template>
+  </base-card>
 </template>
 
 <script>
-import { fromNow } from "@plugins/datetime";
+import { fromNow } from '@plugins/datetime'
 
 export default {
-	props: {
-		article: {
-			type: Object,
-			default() {
-				return {};
-			},
-		},
-	},
-	data() {
-		return {
-			fromNow,
-		};
-	},
-};
+  props: {
+    article: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
+  },
+  data () {
+    return {
+      fromNow
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

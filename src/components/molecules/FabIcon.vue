@@ -1,161 +1,161 @@
 <template>
-	<div class="fab-wrapper">
-		<base-button
-			class="fab primary"
-			design="none"
-			:class="{
-				expanded: isOpen,
-			}"
-			type="button"
-			:aria-label="primaryActionWithDefaults.label"
-			:style="{ 'background-color': color, color: primaryTextColor }"
-			:to="primaryActionWithDefaults.to"
-			:href="primaryActionWithDefaults.href"
-			@click="handlePrimaryAction"
-		>
-			<transition name="morph" mode="out-in">
-				<!-- key attributes are required for transition -->
-				<BaseIcon
-					v-if="!isOpen"
-					key="closedLogo"
-					class="icon"
-					:icon="primaryActionWithDefaults.icon"
-					:source="primaryActionWithDefaults['icon-source']"
-				/>
-				<BaseIcon
-					v-else
-					key="expandedIcon"
-					class="icon"
-					icon="close"
-					source="material"
-				/>
-			</transition>
-		</base-button>
+  <div class="fab-wrapper">
+    <base-button
+      class="fab primary"
+      design="none"
+      :class="{
+        expanded: isOpen,
+      }"
+      type="button"
+      :aria-label="primaryActionWithDefaults.label"
+      :style="{ 'background-color': color, color: primaryTextColor }"
+      :to="primaryActionWithDefaults.to"
+      :href="primaryActionWithDefaults.href"
+      @click="handlePrimaryAction"
+    >
+      <transition name="morph" mode="out-in">
+        <!-- key attributes are required for transition -->
+        <BaseIcon
+          v-if="!isOpen"
+          key="closedLogo"
+          class="icon"
+          :icon="primaryActionWithDefaults.icon"
+          :source="primaryActionWithDefaults['icon-source']"
+        />
+        <BaseIcon
+          v-else
+          key="expandedIcon"
+          class="icon"
+          icon="close"
+          source="material"
+        />
+      </transition>
+    </base-button>
 
-		<div
-			class="inner-fabs"
-			:class="{
-				expanded: isOpen,
-				'expand-top': expandDirection === 'top',
-				'expand-bottom': expandDirection === 'bottom',
-			}"
-		>
-			<base-button
-				v-for="action in actions"
-				:key="action.icon + action.label"
-				design="none"
-				type="button"
-				class="fab small"
-				:disabled="!isOpen"
-				:tabindex="isOpen ? 0 : -1"
-				:aria-hidden="(!isOpen).toString()"
-				:class="{
-					labeled: action.label && showLabel,
-					'label-left': labelPosition === 'left',
-					'label-right': labelPosition === 'right',
-				}"
-				:data-tooltip="action.label"
-				:aria-label="action.label"
-				:to="action.to"
-				:href="action.href"
-				:data-testid="action.dataTestid"
-				@click="triggerAction(action)"
-			>
-				<BaseIcon :icon="action.icon" :source="action['icon-source']" />
-			</base-button>
-		</div>
-		<transition name="fade">
-			<div v-if="isOpen" class="overlay" />
-		</transition>
-	</div>
+    <div
+      class="inner-fabs"
+      :class="{
+        expanded: isOpen,
+        'expand-top': expandDirection === 'top',
+        'expand-bottom': expandDirection === 'bottom',
+      }"
+    >
+      <base-button
+        v-for="action in actions"
+        :key="action.icon + action.label"
+        design="none"
+        type="button"
+        class="fab small"
+        :disabled="!isOpen"
+        :tabindex="isOpen ? 0 : -1"
+        :aria-hidden="(!isOpen).toString()"
+        :class="{
+          labeled: action.label && showLabel,
+          'label-left': labelPosition === 'left',
+          'label-right': labelPosition === 'right',
+        }"
+        :data-tooltip="action.label"
+        :aria-label="action.label"
+        :to="action.to"
+        :href="action.href"
+        :data-testid="action.dataTestid"
+        @click="triggerAction(action)"
+      >
+        <BaseIcon :icon="action.icon" :source="action['icon-source']" />
+      </base-button>
+    </div>
+    <transition name="fade">
+      <div v-if="isOpen" class="overlay" />
+    </transition>
+  </div>
 </template>
 <script>
 const primaryActionDefault = {
-	icon: "add",
-	"icon-source": "material",
-	event: "click",
-	label: "toggle action button visiblity",
-};
+  icon: 'add',
+  'icon-source': 'material',
+  event: 'click',
+  label: 'toggle action button visiblity'
+}
 
-const isActionValid = (action) =>
-	action.icon &&
-	action["icon-source"] &&
+const isActionValid = action =>
+  action.icon &&
+	action['icon-source'] &&
 	(action.event || action.to || action.href) &&
-	action.label;
+	action.label
 
 export default {
-	props: {
-		actions: {
-			type: Array,
-			default: () => [],
-			validator: (actions) => actions.every(isActionValid),
-		},
-		color: {
-			type: String,
-			default: "var(--color-primary)",
-			validator: (value) =>
-				value.startsWith("var(--color") && value.endsWith(")"),
-		},
-		expandDirection: {
-			type: String,
-			default: "top",
-			validator: (position) => ["top", "bottom"].includes(position),
-		},
-		labelPosition: {
-			type: String,
-			default: "left",
-			validator: (position) => ["left", "right"].includes(position),
-		},
-		noAutoClose: {
-			type: Boolean,
-		},
-		primaryAction: {
-			type: Object,
-			default: () => ({}),
-			validator: (value) =>
-				isActionValid({ ...primaryActionDefault, ...value }),
-		},
-		showLabel: {
-			type: Boolean,
-		},
-	},
-	data() {
-		return {
-			isOpen: false,
-		};
-	},
-	computed: {
-		primaryTextColor() {
-			return this.color.replace("--color-", "--color-on-");
-		},
-		primaryActionWithDefaults() {
-			return {
-				...primaryActionDefault,
-				...this.primaryAction,
-			};
-		},
-		hasSubActions() {
-			return Boolean(this.actions.length);
-		},
-	},
-	methods: {
-		handlePrimaryAction() {
-			if (this.hasSubActions) {
-				this.isOpen = !this.isOpen;
-			} else {
-				this.triggerAction(this.primaryActionWithDefaults);
-			}
-		},
-		triggerAction(action) {
-			if (!this.noAutoClose) {
-				this.isOpen = false;
-			}
-			if (action.event) {
-				this.$emit(action.event, action.arguments);
-			}
-		},
-	},
-};
+  props: {
+    actions: {
+      type: Array,
+      default: () => [],
+      validator: actions => actions.every(isActionValid)
+    },
+    color: {
+      type: String,
+      default: 'var(--color-primary)',
+      validator: value =>
+        value.startsWith('var(--color') && value.endsWith(')')
+    },
+    expandDirection: {
+      type: String,
+      default: 'top',
+      validator: position => ['top', 'bottom'].includes(position)
+    },
+    labelPosition: {
+      type: String,
+      default: 'left',
+      validator: position => ['left', 'right'].includes(position)
+    },
+    noAutoClose: {
+      type: Boolean
+    },
+    primaryAction: {
+      type: Object,
+      default: () => ({}),
+      validator: value =>
+        isActionValid({ ...primaryActionDefault, ...value })
+    },
+    showLabel: {
+      type: Boolean
+    }
+  },
+  data () {
+    return {
+      isOpen: false
+    }
+  },
+  computed: {
+    primaryTextColor () {
+      return this.color.replace('--color-', '--color-on-')
+    },
+    primaryActionWithDefaults () {
+      return {
+        ...primaryActionDefault,
+        ...this.primaryAction
+      }
+    },
+    hasSubActions () {
+      return Boolean(this.actions.length)
+    }
+  },
+  methods: {
+    handlePrimaryAction () {
+      if (this.hasSubActions) {
+        this.isOpen = !this.isOpen
+      } else {
+        this.triggerAction(this.primaryActionWithDefaults)
+      }
+    },
+    triggerAction (action) {
+      if (!this.noAutoClose) {
+        this.isOpen = false
+      }
+      if (action.event) {
+        this.$emit(action.event, action.arguments)
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

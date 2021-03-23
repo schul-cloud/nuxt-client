@@ -1,81 +1,81 @@
 <template>
-	<div>
-		<p class="current-language">
-			{{ $t("pages.account.language.user.currentLanguage") }}
-		</p>
-		<div
-			class="dropdown"
-			tabindex="0"
-			:aria-expanded="open"
-			aria-controls="dropdown-content"
-			@click="handleClick"
-			@blur="open = false"
-		>
-			<div
-				class="button"
-				:class="{ 'border-top': border }"
-				@click="border = true"
-			>
-				<div class="langPlaceholder">
-					<base-icon
-						source="custom"
-						:icon="'flag_' + value"
-						class="flag-icon"
-					/>
-					{{ value }}
-				</div>
-				<base-icon source="custom" icon="sort-down" />
-			</div>
-			<div id="`dropdown-content`" class="content" :class="{ open }">
-				<p
-					v-for="lang in languages"
-					:key="lang.longName"
-					:value="lang.longName"
-					:label="lang.longName"
-					@click="changeLanguage(lang)"
-				>
-					<base-icon
-						source="custom"
-						:icon="'flag_' + lang.longName"
-						class="flag-icon"
-					/>
-					{{ lang.longName }}
-				</p>
-			</div>
-		</div>
-	</div>
+  <div>
+    <p class="current-language">
+      {{ $t("pages.account.language.user.currentLanguage") }}
+    </p>
+    <div
+      class="dropdown"
+      tabindex="0"
+      :aria-expanded="open"
+      aria-controls="dropdown-content"
+      @click="handleClick"
+      @blur="open = false"
+    >
+      <div
+        class="button"
+        :class="{ 'border-top': border }"
+        @click="border = true"
+      >
+        <div class="langPlaceholder">
+          <base-icon
+            source="custom"
+            :icon="'flag_' + value"
+            class="flag-icon"
+          />
+          {{ value }}
+        </div>
+        <base-icon source="custom" icon="sort-down" />
+      </div>
+      <div id="`dropdown-content`" class="content" :class="{ open }">
+        <p
+          v-for="lang in languages"
+          :key="lang.longName"
+          :value="lang.longName"
+          :label="lang.longName"
+          @click="changeLanguage(lang)"
+        >
+          <base-icon
+            source="custom"
+            :icon="'flag_' + lang.longName"
+            class="flag-icon"
+          />
+          {{ lang.longName }}
+        </p>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-	props: {
-		language: {
-			type: String,
-			default: "de",
-		},
-	},
-	data() {
-		return {
-			languages: [
-				{ name: "de", longName: "Deutsch" },
-				{ name: "en", longName: "English" },
-			],
-			open: false,
-			border: false,
-			value: this.$t(
+  props: {
+    language: {
+      type: String,
+      default: 'de'
+    }
+  },
+  data () {
+    return {
+      languages: [
+        { name: 'de', longName: 'Deutsch' },
+        { name: 'en', longName: 'English' }
+      ],
+      open: false,
+      border: false,
+      value: this.$t(
 				`pages.account.index.user.locale.longName.${this.language}`
-			),
-		};
-	},
-	methods: {
-		handleClick() {
-			this.open = !this.open;
-		},
-		changeLanguage: function (lang) {
-			this.value = lang.longName;
-			this.$store.commit("auth/setLocale", lang.name);
-		},
-	},
-};
+      )
+    }
+  },
+  methods: {
+    handleClick () {
+      this.open = !this.open
+    },
+    changeLanguage (lang) {
+      this.value = lang.longName
+      this.$store.commit('auth/setLocale', lang.name)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

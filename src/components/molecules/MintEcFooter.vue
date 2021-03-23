@@ -1,68 +1,70 @@
 <template>
-	<div class="section">
-		<div class="footer-container">
-			<base-grid :column-width="colWidth" :style="{ justifyItems: `center` }">
-				<div class="link-container">
-					<h2 class="h4">
-						{{ $t("components.molecules.MintEcFooter.chapters") }}
-					</h2>
-					<base-link
-						v-for="route in chapters"
-						:key="route.title"
-						class="link-style"
-						:to="route.to"
-						:href="route.href"
-						:no-styles="true"
-					>
-						{{ route.title }}
-					</base-link>
-				</div>
+  <div class="section">
+    <div class="footer-container">
+      <base-grid :column-width="colWidth" :style="{ justifyItems: `center` }">
+        <div class="link-container">
+          <h2 class="h4">
+            {{ $t("components.molecules.MintEcFooter.chapters") }}
+          </h2>
+          <base-link
+            v-for="route in chapters"
+            :key="route.title"
+            class="link-style"
+            :to="route.to"
+            :href="route.href"
+            :no-styles="true"
+          >
+            {{ route.title }}
+          </base-link>
+        </div>
 
-				<div class="social-container">
-					<h2 class="h4">Social Links</h2>
-					<base-link class="link-style" href="mailto:cloud@mint-ec.de">
-						cloud@mint-ec.de
-					</base-link>
-					<base-link href="https://creativecommons.org/licenses/by-sa/4.0/">
-						<img
-							class="img-cc"
-							src="@assets/img/mint-ec-ghost/by-sa.svg"
-							alt="Creative Commons Lizenzvertrag"
-						/>
-					</base-link>
-					<base-link href="https://twitter.com/mint_ec">
-						<base-icon class="icon-style" source="fa" icon="twitter" />
-					</base-link>
-					<base-link href="https://instagram.com/mint_ec_netzwerk">
-						<base-icon class="icon-style" source="fa" icon="instagram" />
-					</base-link>
-				</div>
-			</base-grid>
-		</div>
-	</div>
+        <div class="social-container">
+          <h2 class="h4">
+            Social Links
+          </h2>
+          <base-link class="link-style" href="mailto:cloud@mint-ec.de">
+            cloud@mint-ec.de
+          </base-link>
+          <base-link href="https://creativecommons.org/licenses/by-sa/4.0/">
+            <img
+              class="img-cc"
+              src="@assets/img/mint-ec-ghost/by-sa.svg"
+              alt="Creative Commons Lizenzvertrag"
+            >
+          </base-link>
+          <base-link href="https://twitter.com/mint_ec">
+            <base-icon class="icon-style" source="fa" icon="twitter" />
+          </base-link>
+          <base-link href="https://instagram.com/mint_ec_netzwerk">
+            <base-icon class="icon-style" source="fa" icon="instagram" />
+          </base-link>
+        </div>
+      </base-grid>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-	props: {
-		chapters: {
-			type: Array,
-			reqired: true,
-			default: () => {},
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	computed: {
-		colWidth() {
-			if (window.innerWidth <= 750) {
-				return "20rem";
-			}
-			return "33rem";
-		},
-	},
-};
+  props: {
+    chapters: {
+      type: Array,
+      reqired: true,
+      default: () => {}
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  computed: {
+    colWidth () {
+      if (window.innerWidth <= 750) {
+        return '20rem'
+      }
+      return '33rem'
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

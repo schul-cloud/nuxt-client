@@ -1,100 +1,100 @@
 <template>
-	<transition name="modal">
-		<div
-			v-if="active"
-			:class="['modal-mask', design]"
-			role="dialog"
-			:aria-modal="active"
-			:aria-labelledby="`modal-${$uid}-title`"
-			:aria-describedby="`modal-${$uid}-body`"
-		>
-			<div class="base-modal-wrapper" @click.self="handleBackgroundClick">
-				<div
-					:class="[
-						'modal-container',
-						design,
-						{ 'modal-container--large': size === 'large' },
-					]"
-				>
-					<slot>
-						<h2
-							v-if="$slots.header"
-							:id="`modal-${$uid}-title`"
-							class="h4 modal-header"
-						>
-							<slot name="header" />
-						</h2>
-						<div :id="`modal-${$uid}-body`" class="modal-body">
-							<slot name="body" />
-						</div>
+  <transition name="modal">
+    <div
+      v-if="active"
+      :class="['modal-mask', design]"
+      role="dialog"
+      :aria-modal="active"
+      :aria-labelledby="`modal-${$uid}-title`"
+      :aria-describedby="`modal-${$uid}-body`"
+    >
+      <div class="base-modal-wrapper" @click.self="handleBackgroundClick">
+        <div
+          :class="[
+            'modal-container',
+            design,
+            { 'modal-container--large': size === 'large' },
+          ]"
+        >
+          <slot>
+            <h2
+              v-if="$slots.header"
+              :id="`modal-${$uid}-title`"
+              class="h4 modal-header"
+            >
+              <slot name="header" />
+            </h2>
+            <div :id="`modal-${$uid}-body`" class="modal-body">
+              <slot name="body" />
+            </div>
 
-						<slot name="footer">
-							<modal-footer>
-								<template v-slot:left>
-									<slot name="footer-left"></slot>
-								</template>
-								<template v-slot:right>
-									<slot name="footerRight"></slot>
-								</template>
-							</modal-footer>
-						</slot>
-					</slot>
-				</div>
-			</div>
-		</div>
-	</transition>
+            <slot name="footer">
+              <modal-footer>
+                <template v-slot:left>
+                  <slot name="footer-left" />
+                </template>
+                <template v-slot:right>
+                  <slot name="footerRight" />
+                </template>
+              </modal-footer>
+            </slot>
+          </slot>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
-import uidMixin from "@mixins/uid";
-import ModalFooter from "@components/molecules/ModalFooter";
+import uidMixin from '@mixins/uid'
+import ModalFooter from '@components/molecules/ModalFooter'
 export default {
-	components: {
-		ModalFooter,
-	},
-	mixins: [uidMixin],
-	props: {
-		active: {
-			type: Boolean,
-		},
-		size: {
-			type: String,
-			default: "medium",
-		},
-		design: {
-			type: String,
-			enum: ["", "white"],
-			default: "",
-		},
-		backgroundClickDisabled: {
-			type: Boolean,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	watch: {
-		active() {
-			if (this.active) {
-				document.body.classList.add("is-noscroll");
-			} else {
-				document.body.classList.remove("is-noscroll");
-			}
-		},
-	},
-	methods: {
-		handleBackgroundClick() {
-			if (!this.backgroundClickDisabled) {
-				this.$emit("onBackdropClick");
-				this.close();
-			}
-		},
-		close() {
-			this.$emit("update:active", false);
-		},
-	},
-};
+  components: {
+    ModalFooter
+  },
+  mixins: [uidMixin],
+  props: {
+    active: {
+      type: Boolean
+    },
+    size: {
+      type: String,
+      default: 'medium'
+    },
+    design: {
+      type: String,
+      enum: ['', 'white'],
+      default: ''
+    },
+    backgroundClickDisabled: {
+      type: Boolean
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  watch: {
+    active () {
+      if (this.active) {
+        document.body.classList.add('is-noscroll')
+      } else {
+        document.body.classList.remove('is-noscroll')
+      }
+    }
+  },
+  methods: {
+    handleBackgroundClick () {
+      if (!this.backgroundClickDisabled) {
+        this.$emit('onBackdropClick')
+        this.close()
+      }
+    },
+    close () {
+      this.$emit('update:active', false)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

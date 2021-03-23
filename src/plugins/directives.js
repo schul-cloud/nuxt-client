@@ -1,26 +1,26 @@
-import Vue from "vue";
+import Vue from 'vue'
 
-import Ripple from "vue-ripple-directive";
-Vue.directive("ripple", Ripple);
+import Ripple from 'vue-ripple-directive'
+Vue.directive('ripple', Ripple)
 
-Vue.directive("focus-on-mount", {
-	inserted: function (el, binding) {
-		if (binding.value) el.focus();
-	},
-});
+Vue.directive('focus-on-mount', {
+  inserted (el, binding) {
+    if (binding.value) { el.focus() }
+  }
+})
 
-Vue.directive("click-outside", {
-	bind: function (el, binding, vnode) {
-		el.clickOutsideEvent = function (event) {
-			// here I check that click was outside the el and his childrens
-			if (!(el == event.target || el.contains(event.target))) {
-				// and if it did, call method provided in attribute value
-				vnode.context[binding.expression](event);
-			}
-		};
-		document.body.addEventListener("click", el.clickOutsideEvent);
-	},
-	unbind: function (el) {
-		document.body.removeEventListener("click", el.clickOutsideEvent);
-	},
-});
+Vue.directive('click-outside', {
+  bind (el, binding, vnode) {
+    el.clickOutsideEvent = function (event) {
+      // here I check that click was outside the el and his childrens
+      if (!(el == event.target || el.contains(event.target))) {
+        // and if it did, call method provided in attribute value
+        vnode.context[binding.expression](event)
+      }
+    }
+    document.body.addEventListener('click', el.clickOutsideEvent)
+  },
+  unbind (el) {
+    document.body.removeEventListener('click', el.clickOutsideEvent)
+  }
+})

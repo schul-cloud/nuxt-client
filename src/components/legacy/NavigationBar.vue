@@ -1,78 +1,78 @@
 <template>
-	<div class="header">
-		<div class="nav-container">
-			<div class="logo-container">
-				<base-link :href="logoLink">
-					<img class="logo logo-full" :src="img" alt="Schulcloud Logo" />
-				</base-link>
-			</div>
-			<div class="link-container">
-				<base-link
-					v-for="(route, idx) in links"
-					:key="route.href"
-					:class="{ li: true, active: activeLink === route.href }"
-					:to="route.to"
-					:href="route.href"
-					:target="route.target"
-					:no-styles="true"
-					@click="setActive(idx)"
-				>
-					{{ route.title }}
-				</base-link>
-				<div v-if="buttons" class="buttons-container">
-					<base-link href="/loginRedirect">
-						<base-button design="secondary outline">
-							<base-icon source="fa" icon="sign-in" class="icon" />
-							{{ $t("common.labels.login") }}
-						</base-button>
-					</base-link>
-					<base-link href="/community">
-						<base-button design="secondary">
-							{{ $t("common.labels.register") }}
-						</base-button>
-					</base-link>
-				</div>
-				<slot name="actions"></slot>
-			</div>
-		</div>
-	</div>
+  <div class="header">
+    <div class="nav-container">
+      <div class="logo-container">
+        <base-link :href="logoLink">
+          <img class="logo logo-full" :src="img" alt="Schulcloud Logo">
+        </base-link>
+      </div>
+      <div class="link-container">
+        <base-link
+          v-for="(route, idx) in links"
+          :key="route.href"
+          :class="{ li: true, active: activeLink === route.href }"
+          :to="route.to"
+          :href="route.href"
+          :target="route.target"
+          :no-styles="true"
+          @click="setActive(idx)"
+        >
+          {{ route.title }}
+        </base-link>
+        <div v-if="buttons" class="buttons-container">
+          <base-link href="/loginRedirect">
+            <base-button design="secondary outline">
+              <base-icon source="fa" icon="sign-in" class="icon" />
+              {{ $t("common.labels.login") }}
+            </base-button>
+          </base-link>
+          <base-link href="/community">
+            <base-button design="secondary">
+              {{ $t("common.labels.register") }}
+            </base-button>
+          </base-link>
+        </div>
+        <slot name="actions" />
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-import BaseButton from "../base/BaseButton";
-import BaseLink from "../base/BaseLink";
+import BaseButton from '../base/BaseButton'
+import BaseLink from '../base/BaseLink'
 export default {
-	components: { BaseLink, BaseButton },
-	props: {
-		logoLink: {
-			type: String,
-			default: "/",
-			required: false,
-		},
-		img: {
-			type: String,
-			required: true,
-		},
-		links: {
-			type: Array,
-			default: () => {},
-			required: false,
-		},
-		buttons: {
-			type: Boolean,
-			required: false,
-		},
-	},
-	data() {
-		return {
-			activeLink: window.location.pathname,
-		};
-	},
-	methods: {
-		setActive(idx) {
-			this.activeLink = idx;
-		},
-	},
-};
+  components: { BaseLink, BaseButton },
+  props: {
+    logoLink: {
+      type: String,
+      default: '/',
+      required: false
+    },
+    img: {
+      type: String,
+      required: true
+    },
+    links: {
+      type: Array,
+      default: () => {},
+      required: false
+    },
+    buttons: {
+      type: Boolean,
+      required: false
+    }
+  },
+  data () {
+    return {
+      activeLink: window.location.pathname
+    }
+  },
+  methods: {
+    setActive (idx) {
+      this.activeLink = idx
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

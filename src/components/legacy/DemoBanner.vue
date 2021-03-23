@@ -1,22 +1,22 @@
 <template>
-	<div class="banner-container">
-		<p class="banner-message">
-			<span class="main">Dies ist ein Demoaccount.</span>
-			<span>
-				Sämtliche Aktionen, die Daten anlegen oder ändern, sind deaktiviert und
-				nicht sichtbar.
-			</span>
-		</p>
-	</div>
+  <div class="banner-container">
+    <p class="banner-message">
+      <span class="main">Dies ist ein Demoaccount.</span>
+      <span>
+        Sämtliche Aktionen, die Daten anlegen oder ändern, sind deaktiviert und
+        nicht sichtbar.
+      </span>
+    </p>
+  </div>
 </template>
 
 <script>
 export default {
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

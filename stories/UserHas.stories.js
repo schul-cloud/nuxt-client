@@ -1,20 +1,20 @@
-import { storiesOf } from "@storybook/vue";
-import { boolean } from "@storybook/addon-knobs";
+import { storiesOf } from '@storybook/vue'
+import { boolean } from '@storybook/addon-knobs'
 
-import notes from "@docs/storybook/UserHas.md";
-import UserHasPermission from "@components/helpers/UserHasPermission";
-import UserHasRole from "@components/helpers/UserHasRole";
+import notes from '@docs/storybook/UserHas.md'
+import UserHasPermission from '@components/helpers/UserHasPermission'
+import UserHasRole from '@components/helpers/UserHasRole'
 
-storiesOf("8 Helpers/UserHas", module)
-	.addParameters({
-		notes,
-	})
-	.add("UserHasPermission", () => ({
-		components: { UserHasPermission },
-		data: () => ({
-			hasPermission: boolean("hasPermission", true),
-		}),
-		template: `<div>
+storiesOf('8 Helpers/UserHas', module)
+  .addParameters({
+    notes
+  })
+  .add('UserHasPermission', () => ({
+    components: { UserHasPermission },
+    data: () => ({
+      hasPermission: boolean('hasPermission', true)
+    }),
+    template: `<div>
 			<UserHasPermission permission="USER_CREATE">
 				CREATE
 			</UserHasPermission>
@@ -28,14 +28,14 @@ storiesOf("8 Helpers/UserHas", module)
 				You can also specify a validation function
 			</UserHasPermission>
 		</div>`,
-		methods: {},
-	}))
-	.add("UserHasRole", () => ({
-		components: { UserHasRole },
-		data: () => ({
-			hasRole: boolean("hasRole", true),
-		}),
-		template: `<div>
+    methods: {}
+  }))
+  .add('UserHasRole', () => ({
+    components: { UserHasRole },
+    data: () => ({
+      hasRole: boolean('hasRole', true)
+    }),
+    template: `<div>
 			<UserHasRole role="ADMIN">
 				CREATE
 			</UserHasRole>
@@ -49,5 +49,5 @@ storiesOf("8 Helpers/UserHas", module)
 				You can also specify a validation function
 			</UserHasRole>
 		</div>`,
-		methods: {},
-	}));
+    methods: {}
+  }))

@@ -1,36 +1,36 @@
 <template>
-	<button
-		type="button"
-		:class="['chip', size, selected, classes]"
-		:style="{ padding: size }"
-		v-on="$listeners"
-	>
-		<slot />
-	</button>
+  <button
+    type="button"
+    :class="['chip', size, selected, classes]"
+    :style="{ padding: size }"
+    v-on="$listeners"
+  >
+    <slot />
+  </button>
 </template>
 
 <script>
 export default {
-	props: {
-		size: {
-			type: String,
-			default: "medium",
-			validator: (size) => ["small", "medium", "large"].includes(size),
-		},
-		selected: {
-			type: Boolean,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	computed: {
-		classes() {
-			return this.selected ? "selected" : "default";
-		},
-	},
-};
+  props: {
+    size: {
+      type: String,
+      default: 'medium',
+      validator: size => ['small', 'medium', 'large'].includes(size)
+    },
+    selected: {
+      type: Boolean
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  computed: {
+    classes () {
+      return this.selected ? 'selected' : 'default'
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

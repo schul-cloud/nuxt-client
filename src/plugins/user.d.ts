@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue'
 
 interface User {
 	_id: number;
@@ -6,7 +6,7 @@ interface User {
 	schoolId: string;
 }
 
-declare module "vue/types/vue" {
+declare module 'vue/types/vue' {
 	interface Vue {
 		$user: User;
 	}

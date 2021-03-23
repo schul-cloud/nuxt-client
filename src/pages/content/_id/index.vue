@@ -1,42 +1,42 @@
 <template>
-	<lernstore-collection-detail-view v-if="isCollection" :resource="resource" />
-	<lernstore-detail-view v-else :resource="resource" />
+  <lernstore-collection-detail-view v-if="isCollection" :resource="resource" />
+  <lernstore-detail-view v-else :resource="resource" />
 </template>
 
 <script>
-import LernstoreDetailView from "@components/organisms/LernstoreDetailView";
-import LernstoreCollectionDetailView from "@components/organisms/LernstoreCollectionDetailView";
-import { isCollectionHelper } from "@utils/helpers";
+import LernstoreDetailView from '@components/organisms/LernstoreDetailView'
+import LernstoreCollectionDetailView from '@components/organisms/LernstoreCollectionDetailView'
+import { isCollectionHelper } from '@utils/helpers'
 
 export default {
-	meta: {
-		requiredPermissions: ["LERNSTORE_VIEW"],
-	},
-	components: {
-		LernstoreDetailView,
-		LernstoreCollectionDetailView,
-	},
-	layout({ store, query }) {
-		return String(query.isCollection) === "true" &&
+  meta: {
+    requiredPermissions: ['LERNSTORE_VIEW']
+  },
+  components: {
+    LernstoreDetailView,
+    LernstoreCollectionDetailView
+  },
+  layout ({ store, query }) {
+    return String(query.isCollection) === 'true' &&
 			store.state.content.collectionsFeatureFlag === true
-			? "loggedInFull"
-			: "plain";
-	},
-	async asyncData({ store, params }) {
-		const resource = await store.dispatch(
-			"content/getResourceMetadata",
-			params.id
-		);
+      ? 'loggedInFull'
+      : 'plain'
+  },
+  async asyncData ({ store, params }) {
+    const resource = await store.dispatch(
+      'content/getResourceMetadata',
+      params.id
+    )
 
-		const isCollection =
+    const isCollection =
 			store.state.content.collectionsFeatureFlag === true &&
-			isCollectionHelper(resource.properties);
+			isCollectionHelper(resource.properties)
 
-		return {
-			isCollection,
-			id: params.id,
-			resource,
-		};
-	},
-};
+    return {
+      isCollection,
+      id: params.id,
+      resource
+    }
+  }
+}
 </script>

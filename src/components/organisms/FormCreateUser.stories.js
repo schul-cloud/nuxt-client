@@ -1,11 +1,11 @@
-import { storiesOf } from "@storybook/vue";
-import { action } from "@storybook/addon-actions";
+import { storiesOf } from '@storybook/vue'
+import { action } from '@storybook/addon-actions'
 
-import FormCreateUser from "./FormCreateUser";
+import FormCreateUser from './FormCreateUser'
 
-storiesOf("6 Organisms", module).add("FormCreateUser", () => ({
-	components: { FormCreateUser },
-	template: `<FormCreateUser @create-user="createUser">
+storiesOf('6 Organisms', module).add('FormCreateUser', () => ({
+  components: { FormCreateUser },
+  template: `<FormCreateUser @create-user="createUser">
                    <template v-slot:inputs>
                        <base-input
                            v-model="birthday"
@@ -18,10 +18,10 @@ storiesOf("6 Organisms", module).add("FormCreateUser", () => ({
                        </base-input>
                    </template>
                />`,
-	data: () => ({
-		birthday: null,
-	}),
-	methods: {
-		createUser: action("create-user"),
-	},
-}));
+  data: () => ({
+    birthday: null
+  }),
+  methods: {
+    createUser: action('create-user')
+  }
+}))

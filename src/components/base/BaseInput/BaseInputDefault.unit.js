@@ -1,191 +1,191 @@
-import BaseInput from "./BaseInput";
-import BaseInputDefault, { supportedTypes } from "./BaseInputDefault";
+import BaseInput from './BaseInput'
+import BaseInputDefault, { supportedTypes } from './BaseInputDefault'
 
-function getMock(type, attributes) {
-	return mount({
-		data: () => ({ content: "" }),
-		template: `<base-input v-model="content" label="test" type="${type}" name="test" ${attributes}/>`,
-		components: { BaseInput },
-	});
+function getMock (type, attributes) {
+  return mount({
+    data: () => ({ content: '' }),
+    template: `<base-input v-model="content" label="test" type="${type}" name="test" ${attributes}/>`,
+    components: { BaseInput }
+  })
 }
 
 const mockInput = (type) => {
-	switch (type) {
-		case "number":
-			return 5;
-		case "time":
-			return "08:12";
-		case "date":
-			return "2020-01-01";
-		default:
-			return "test string";
-	}
-};
+  switch (type) {
+    case 'number':
+      return 5
+    case 'time':
+      return '08:12'
+    case 'date':
+      return '2020-01-01'
+    default:
+      return 'test string'
+  }
+}
 
-describe("@components/base/BaseInputDefault", () => {
-	it("input has correct type", () => {
-		supportedTypes.forEach((type) => {
-			const wrapper = getMock(type);
-			const textInput = wrapper.find(`input[type="${type}"]`);
-			expect(textInput.exists()).toBe(true);
-		});
-	});
+describe('@components/base/BaseInputDefault', () => {
+  it('input has correct type', () => {
+    supportedTypes.forEach((type) => {
+      const wrapper = getMock(type)
+      const textInput = wrapper.find(`input[type="${type}"]`)
+      expect(textInput.exists()).toBe(true)
+    })
+  })
 
-	it("changing the element's value, updates the v-model", () => {
-		supportedTypes.forEach((type) => {
-			const testInput = mockInput(type);
-			const wrapper = getMock(type);
-			const input = wrapper.find(`input[type="${type}"]`);
-			input.setValue(testInput);
-			expect(wrapper.vm.content).toBe(testInput);
-		});
-	});
+  it("changing the element's value, updates the v-model", () => {
+    supportedTypes.forEach((type) => {
+      const testInput = mockInput(type)
+      const wrapper = getMock(type)
+      const input = wrapper.find(`input[type="${type}"]`)
+      input.setValue(testInput)
+      expect(wrapper.vm.content).toBe(testInput)
+    })
+  })
 
-	it("changing the v-model, updates the element's value", async () => {
-		await Promise.all(
-			supportedTypes.map(async (type) => {
-				const testInput = mockInput(type);
-				const wrapper = getMock(type);
-				wrapper.setData({ content: testInput });
-				await wrapper.vm.$nextTick();
-				const input = wrapper.find(`input[type="${type}"]`);
-				expect(input.element.value.toString()).toBe(testInput.toString());
-			})
-		);
-	});
+  it("changing the v-model, updates the element's value", async () => {
+    await Promise.all(
+      supportedTypes.map(async (type) => {
+        const testInput = mockInput(type)
+        const wrapper = getMock(type)
+        wrapper.setData({ content: testInput })
+        await wrapper.vm.$nextTick()
+        const input = wrapper.find(`input[type="${type}"]`)
+        expect(input.element.value.toString()).toBe(testInput.toString())
+      })
+    )
+  })
 
-	it("rejects input if it is disabled", () => {
-		supportedTypes.forEach((type) => {
-			const testInput = mockInput(type);
+  it('rejects input if it is disabled', () => {
+    supportedTypes.forEach((type) => {
+      const testInput = mockInput(type)
 
-			const disabledWrapper = getMock(type, "disabled");
-			const disabledInput = disabledWrapper.find(`input[type="${type}"]`);
-			disabledInput.setValue(testInput);
-			expect(disabledWrapper.vm.content).not.toBe(testInput);
+      const disabledWrapper = getMock(type, 'disabled')
+      const disabledInput = disabledWrapper.find(`input[type="${type}"]`)
+      disabledInput.setValue(testInput)
+      expect(disabledWrapper.vm.content).not.toBe(testInput)
 
-			const enabledWrapper = getMock(type);
-			const enabledInput = enabledWrapper.find(`input[type="${type}"]`);
-			enabledInput.setValue(testInput);
-			expect(enabledWrapper.vm.content).toBe(testInput);
-		});
-	});
+      const enabledWrapper = getMock(type)
+      const enabledInput = enabledWrapper.find(`input[type="${type}"]`)
+      enabledInput.setValue(testInput)
+      expect(enabledWrapper.vm.content).toBe(testInput)
+    })
+  })
 
-	it("shows its info", () => {
-		supportedTypes.forEach((type) => {
-			const wrapper = getMock(type, "info='info'");
-			expect(wrapper.find(".help").text()).toBe("info");
-		});
-	});
+  it('shows its info', () => {
+    supportedTypes.forEach((type) => {
+      const wrapper = getMock(type, "info='info'")
+      expect(wrapper.find('.help').text()).toBe('info')
+    })
+  })
 
-	it("shows its label when no placeholder is provided", () => {
-		supportedTypes.forEach((type) => {
-			const wrapperWithoutPlaceholder = getMock(type);
-			const baseInputDefaultWithoutPlaceholder = wrapperWithoutPlaceholder.findComponent(
-				BaseInputDefault
-			);
-			expect(baseInputDefaultWithoutPlaceholder.vm.showLabel).toBe(true);
-			expect(wrapperWithoutPlaceholder.find(".label").exists()).toBe(true);
-		});
-	});
+  it('shows its label when no placeholder is provided', () => {
+    supportedTypes.forEach((type) => {
+      const wrapperWithoutPlaceholder = getMock(type)
+      const baseInputDefaultWithoutPlaceholder = wrapperWithoutPlaceholder.findComponent(
+        BaseInputDefault
+      )
+      expect(baseInputDefaultWithoutPlaceholder.vm.showLabel).toBe(true)
+      expect(wrapperWithoutPlaceholder.find('.label').exists()).toBe(true)
+    })
+  })
 
-	it("shows its label when it contains a value", async () => {
-		await Promise.all(
-			supportedTypes.map(async (type) => {
-				const testInput = mockInput(type);
-				const wrapperWithPlaceHolder = getMock(
-					type,
-					"placeholder='placeholder'"
-				);
-				const baseInputDefaultWithPlaceholder = wrapperWithPlaceHolder.findComponent(
-					BaseInputDefault
-				);
-				const input = wrapperWithPlaceHolder.find(`input[type="${type}"]`);
+  it('shows its label when it contains a value', async () => {
+    await Promise.all(
+      supportedTypes.map(async (type) => {
+        const testInput = mockInput(type)
+        const wrapperWithPlaceHolder = getMock(
+          type,
+          "placeholder='placeholder'"
+        )
+        const baseInputDefaultWithPlaceholder = wrapperWithPlaceHolder.findComponent(
+          BaseInputDefault
+        )
+        const input = wrapperWithPlaceHolder.find(`input[type="${type}"]`)
 
-				expect(baseInputDefaultWithPlaceholder.vm.showLabel).toBe(false);
-				expect(
-					wrapperWithPlaceHolder.find(".label").element.style.display
-				).toBe("none");
+        expect(baseInputDefaultWithPlaceholder.vm.showLabel).toBe(false)
+        expect(
+          wrapperWithPlaceHolder.find('.label').element.style.display
+        ).toBe('none')
 
-				input.setValue(testInput);
-				await wrapperWithPlaceHolder.vm.$nextTick();
+        input.setValue(testInput)
+        await wrapperWithPlaceHolder.vm.$nextTick()
 
-				expect(
-					wrapperWithPlaceHolder.find(".label").element.style.display
-				).toBe("");
-				expect(baseInputDefaultWithPlaceholder.vm.showLabel).toBe(true);
-			})
-		);
-	});
+        expect(
+          wrapperWithPlaceHolder.find('.label').element.style.display
+        ).toBe('')
+        expect(baseInputDefaultWithPlaceholder.vm.showLabel).toBe(true)
+      })
+    )
+  })
 
-	it("shows its hint", () => {
-		supportedTypes.forEach((type) => {
-			const wrapper = getMock(type, "hint='hint'");
-			expect(wrapper.find(".hint").text()).toBe("hint");
-		});
-	});
+  it('shows its hint', () => {
+    supportedTypes.forEach((type) => {
+      const wrapper = getMock(type, "hint='hint'")
+      expect(wrapper.find('.hint').text()).toBe('hint')
+    })
+  })
 
-	it("can show error icon and error message", () => {
-		supportedTypes.forEach((type) => {
-			const wrapper = mount(BaseInput, {
-				propsData: {
-					vmodel: "",
-					type,
-					label: "test",
-					error: "error",
-				},
-				stubs: ["base-icon"],
-			});
-			const baseInputDefault = wrapper.findComponent(BaseInputDefault);
-			expect(baseInputDefault.vm.hasError).toBe(true);
+  it('can show error icon and error message', () => {
+    supportedTypes.forEach((type) => {
+      const wrapper = mount(BaseInput, {
+        propsData: {
+          vmodel: '',
+          type,
+          label: 'test',
+          error: 'error'
+        },
+        stubs: ['base-icon']
+      })
+      const baseInputDefault = wrapper.findComponent(BaseInputDefault)
+      expect(baseInputDefault.vm.hasError).toBe(true)
 
-			expect(wrapper.find(".icon-behind").exists()).toBe(true);
-			expect(wrapper.find(".error").exists()).toBe(true);
-			expect(wrapper.findAll(".error").at(1).text()).toBe("error");
-		});
-	});
+      expect(wrapper.find('.icon-behind').exists()).toBe(true)
+      expect(wrapper.find('.error').exists()).toBe(true)
+      expect(wrapper.findAll('.error').at(1).text()).toBe('error')
+    })
+  })
 
-	it("can show success icon", () => {
-		supportedTypes.forEach((type) => {
-			const wrapper = mount(BaseInput, {
-				propsData: {
-					vmodel: "",
-					type,
-					label: "test",
-					success: true,
-				},
-				stubs: ["base-icon"],
-			});
-			expect(wrapper.find(".icon-behind").exists()).toBe(true);
-		});
-	});
+  it('can show success icon', () => {
+    supportedTypes.forEach((type) => {
+      const wrapper = mount(BaseInput, {
+        propsData: {
+          vmodel: '',
+          type,
+          label: 'test',
+          success: true
+        },
+        stubs: ['base-icon']
+      })
+      expect(wrapper.find('.icon-behind').exists()).toBe(true)
+    })
+  })
 
-	it("can toggle pwd visibility", async () => {
-		const wrapper = mount(BaseInput, {
-			propsData: {
-				vmodel: "",
-				type: "password",
-				label: "test",
-			},
-		});
-		const inputField = wrapper.find("input");
-		const pwdToggle = wrapper.find(`[data-testid="pwd-visibility-toggle"]`);
-		expect(inputField.attributes("type")).toBe("password");
-		pwdToggle.trigger("click");
-		await wrapper.vm.$nextTick();
-		expect(inputField.attributes("type")).toBe("text");
-	});
+  it('can toggle pwd visibility', async () => {
+    const wrapper = mount(BaseInput, {
+      propsData: {
+        vmodel: '',
+        type: 'password',
+        label: 'test'
+      }
+    })
+    const inputField = wrapper.find('input')
+    const pwdToggle = wrapper.find('[data-testid="pwd-visibility-toggle"]')
+    expect(inputField.attributes('type')).toBe('password')
+    pwdToggle.trigger('click')
+    await wrapper.vm.$nextTick()
+    expect(inputField.attributes('type')).toBe('text')
+  })
 
-	it("should have an aria label if the label is hidden", () => {
-		supportedTypes.forEach((type) => {
-			const wrapper = mount(BaseInput, {
-				propsData: {
-					vmodel: "",
-					type,
-					label: "test",
-					labelHidden: true,
-				},
-			});
-			expect(wrapper.find(`[aria-label="test"]`).exists()).toBe(true);
-		});
-	});
-});
+  it('should have an aria label if the label is hidden', () => {
+    supportedTypes.forEach((type) => {
+      const wrapper = mount(BaseInput, {
+        propsData: {
+          vmodel: '',
+          type,
+          label: 'test',
+          labelHidden: true
+        }
+      })
+      expect(wrapper.find('[aria-label="test"]').exists()).toBe(true)
+    })
+  })
+})

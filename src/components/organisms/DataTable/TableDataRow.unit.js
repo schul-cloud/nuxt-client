@@ -1,5 +1,5 @@
-import TableDataRow from "./TableDataRow";
+import TableDataRow from './TableDataRow'
 
-describe("@components/organisms/DataTable/TableDataRow", () => {
-	it(...isValidComponent(TableDataRow));
-});
+describe('@components/organisms/DataTable/TableDataRow', () => {
+  it(...isValidComponent(TableDataRow))
+})

@@ -1,13 +1,13 @@
-import { storiesOf } from "@storybook/vue";
-import notes from "@docs/storybook/typography.md";
+import { storiesOf } from '@storybook/vue'
+import notes from '@docs/storybook/typography.md'
 
-storiesOf("1 Design Tokens/Typography", module)
-	.addParameters({
-		notes,
-	})
-	.add("Headlines & Text", () => ({
-		components: {},
-		template: `
+storiesOf('1 Design Tokens/Typography', module)
+  .addParameters({
+    notes
+  })
+  .add('Headlines & Text', () => ({
+    components: {},
+    template: `
 			<div>
 				<h1 class="h1">H1 / PT Sans Narrow</h1>
 				<h2 class= "h2">H2 / PT Sans Narrow</h2>
@@ -21,11 +21,11 @@ storiesOf("1 Design Tokens/Typography", module)
 				<p class="text-xs">text-xs / PT Sans regular</p>
 			</div>
 			`,
-		methods: {},
-	}))
-	.add("Line-Heights", () => ({
-		components: {},
-		template: `
+    methods: {}
+  }))
+  .add('Line-Heights', () => ({
+    components: {},
+    template: `
 			<div>
 				<p style="line-height: var(--line-height-xl); border-top: solid 1px gray; border-bottom: solid 1px gray;">line-height-xl 2</p>
 				<p style="line-height: var(--line-height-lg); border-top: solid 1px gray; border-bottom: solid 1px gray;">line-height-lg 1.4</p>
@@ -33,5 +33,5 @@ storiesOf("1 Design Tokens/Typography", module)
 				<p style="line-height: var(--line-height-sm); border-top: solid 1px gray; border-bottom: solid 1px gray;">line-height-sm 1.05</p>
 			</div>
 			`,
-		methods: {},
-	}));
+    methods: {}
+  }))

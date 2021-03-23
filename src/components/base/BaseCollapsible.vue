@@ -1,33 +1,33 @@
 <template>
-	<div>
-		<button
-			:aria-expanded="!collapsed"
-			class="collapsible"
-			@click="collapsed = !collapsed"
-		>
-			{{ label }}
-		</button>
-		<transition name="fade">
-			<div v-if="!collapsed" class="content" :aria-hidden="collapsed">
-				<slot />
-			</div>
-		</transition>
-	</div>
+  <div>
+    <button
+      :aria-expanded="!collapsed"
+      class="collapsible"
+      @click="collapsed = !collapsed"
+    >
+      {{ label }}
+    </button>
+    <transition name="fade">
+      <div v-if="!collapsed" class="content" :aria-hidden="collapsed">
+        <slot />
+      </div>
+    </transition>
+  </div>
 </template>
 <script>
 export default {
-	props: {
-		label: {
-			type: String,
-			required: true,
-		},
-	},
-	data() {
-		return {
-			collapsed: true,
-		};
-	},
-};
+  props: {
+    label: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      collapsed: true
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

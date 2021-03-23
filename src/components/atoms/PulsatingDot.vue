@@ -1,23 +1,23 @@
 <template>
-	<div class="ring-container">
-		<div class="ringring" :style="{ 'border-color': color }"></div>
-		<div class="circle" :style="{ 'background-color': color }"></div>
-	</div>
+  <div class="ring-container">
+    <div class="ringring" :style="{ 'border-color': color }" />
+    <div class="circle" :style="{ 'background-color': color }" />
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		color: {
-			type: String,
-			default: "var(--color-danger)",
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    color: {
+      type: String,
+      default: 'var(--color-danger)'
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

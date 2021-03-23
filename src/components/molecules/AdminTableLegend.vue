@@ -1,67 +1,67 @@
 <template>
-	<div class="section">
-		<strong v-if="icons">{{
-			$t("components.molecules.adminfooterlegend.title")
-		}}</strong>
-		<div class="consent-icon">
-			<li v-for="icon in icons" :key="icon.icon" class="mb--xs">
-				<span v-if="icon.style">
-					<base-icon
-						source="custom"
-						:icon="icon.icon"
-						:color="icon.color"
-						:style="icon.style"
-					/>
-					{{ icon.label }}
-				</span>
+  <div class="section">
+    <strong v-if="icons">{{
+      $t("components.molecules.adminfooterlegend.title")
+    }}</strong>
+    <div class="consent-icon">
+      <li v-for="icon in icons" :key="icon.icon" class="mb--xs">
+        <span v-if="icon.style">
+          <base-icon
+            source="custom"
+            :icon="icon.icon"
+            :color="icon.color"
+            :style="icon.style"
+          />
+          {{ icon.label }}
+        </span>
 
-				<span v-else>
-					<base-icon source="material" :icon="icon.icon" :color="icon.color" />
-					{{ icon.label }}
-				</span>
-			</li>
-		</div>
-		<span v-if="showExternalSyncHint" class="container">
-			<strong class="external-sync-hint">
-				{{
-					$t("components.molecules.admintablelegend.externalSync", {
-						shortName: this.$theme.short_name,
-					})
-				}}
-				<base-link
-					class="link-style"
-					to="/"
-					href="https://docs.schul-cloud.org/x/PgBVAw"
-					target="_blank"
-					:no-styles="true"
-					traget="_blank"
-				>
-					{{ $t("components.molecules.admintablelegend.help") }}.
-				</base-link>
-			</strong>
-		</span>
-		<p class="hint">
-			{{ $t("components.molecules.admintablelegend.hint") }}
-		</p>
-	</div>
+        <span v-else>
+          <base-icon source="material" :icon="icon.icon" :color="icon.color" />
+          {{ icon.label }}
+        </span>
+      </li>
+    </div>
+    <span v-if="showExternalSyncHint" class="container">
+      <strong class="external-sync-hint">
+        {{
+          $t("components.molecules.admintablelegend.externalSync", {
+            shortName: this.$theme.short_name,
+          })
+        }}
+        <base-link
+          class="link-style"
+          to="/"
+          href="https://docs.schul-cloud.org/x/PgBVAw"
+          target="_blank"
+          :no-styles="true"
+          traget="_blank"
+        >
+          {{ $t("components.molecules.admintablelegend.help") }}.
+        </base-link>
+      </strong>
+    </span>
+    <p class="hint">
+      {{ $t("components.molecules.admintablelegend.hint") }}
+    </p>
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		icons: {
-			type: Array,
-			required: true,
-		},
-		showExternalSyncHint: {
-			type: Boolean,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    icons: {
+      type: Array,
+      required: true
+    },
+    showExternalSyncHint: {
+      type: Boolean
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

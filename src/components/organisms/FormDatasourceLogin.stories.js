@@ -1,10 +1,10 @@
-import { storiesOf } from "@storybook/vue";
+import { storiesOf } from '@storybook/vue'
 
-import FormDatasourceLogin from "./FormDatasourceLogin";
+import FormDatasourceLogin from './FormDatasourceLogin'
 
-storiesOf("6 Organisms", module).add("FormDatasourceLogin", () => ({
-	components: { FormDatasourceLogin },
-	template: `<FormDatasourceLogin>
+storiesOf('6 Organisms', module).add('FormDatasourceLogin', () => ({
+  components: { FormDatasourceLogin },
+  template: `<FormDatasourceLogin>
 		<template v-slot:inputs="{ config }">
 			<base-input
 				v-model="config.username"
@@ -38,12 +38,12 @@ storiesOf("6 Organisms", module).add("FormDatasourceLogin", () => ({
 
 		</template>
 	/>`,
-	data: () => ({
-		config: {
-			target: "webuntis",
-			username: "Anna",
-			password: "12367",
-			url: "www.webunits.de",
-		},
-	}),
-}));
+  data: () => ({
+    config: {
+      target: 'webuntis',
+      username: 'Anna',
+      password: '12367',
+      url: 'www.webunits.de'
+    }
+  })
+}))

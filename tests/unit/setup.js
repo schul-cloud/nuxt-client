@@ -1,131 +1,24 @@
-import Vue from "vue";
-import VueI18n from "vue-i18n";
-import Vuelidate from "vuelidate";
-import Vuex from "vuex";
-import fs from "fs";
-import path from "path";
-import commonTest from "./commonTests.js";
-import { RouterLinkStub } from "@vue/test-utils";
+import fs from 'fs'
+import path from 'path'
+import Vuelidate from 'vuelidate'
+import Vuex from 'vuex'
+import VueI18n from 'vue-i18n'
+import Vue from 'vue'
+import { RouterLinkStub } from '@vue/test-utils'
 
 // ===
 // Utility functions
 // ===
 
 // https://vue-test-utils.vuejs.org/
-import * as vueTestUtils from "@vue/test-utils";
-
-// ===
-// Configure Vue
-// ===
-
-// Don't warn about not using the production build of Vue, as
-// we care more about the quality of errors than performance
-// for tests.
-Vue.config.productionTip = false;
+import * as vueTestUtils from '@vue/test-utils'
 
 // ===
 // Register global components
 // ===
 
-import "@plugins/global";
-import { mountBaseComponents } from "@basecomponents/_globals";
-
-const baseComponentDir = path.join(__dirname, "../../src/components/base/");
-Vue.use(Vuelidate);
-
-function readDirRecursiveSync(dir) {
-	const results = [];
-	const list = fs.readdirSync(dir);
-	list.forEach((file) => {
-		const filepath = path.join(dir, file);
-		const stat = fs.statSync(filepath);
-		if (stat && stat.isDirectory()) {
-			/* Recurse into a subdirectory */
-			results.push(...readDirRecursiveSync(filepath));
-		} else {
-			/* Is a file */
-			results.push(filepath);
-		}
-	});
-	return results;
-}
-
-const globalComponentFiles = readDirRecursiveSync(baseComponentDir)
-	// Only include "Base" prefixed .vue files
-	.filter((fileName) => /Base[A-Z][\w]+\.vue$/.test(fileName))
-	.map(
-		(fileName) =>
-			"./" + path.relative(baseComponentDir, fileName).replace(/\\/g, "/")
-	);
-
-mountBaseComponents(globalComponentFiles, (fileName) =>
-	require(path.join(baseComponentDir, fileName))
-);
-
-// ===
-// Mock window properties not handled by jsdom
-// ===
-
-Object.defineProperty(window, "localStorage", {
-	value: (function () {
-		let store = {};
-		return {
-			getItem: function (key) {
-				return store[key] || null;
-			},
-			setItem: function (key, value) {
-				store[key] = value.toString();
-			},
-			removeItem: function (key) {
-				delete store[key];
-			},
-			clear: function () {
-				store = {};
-			},
-		};
-	})(),
-});
-
-Object.defineProperty(window, "matchMedia", {
-	value: () => {
-		return {
-			matches: false,
-			addListener: () => {},
-			removeListener: () => {},
-		};
-	},
-});
-
-const location = {
-	href: "",
-};
-Object.defineProperty(window, "location", {
-	set: function (val) {
-		location.host = "domain.io";
-		location.hostname = "domain.io";
-		location.origin = "http://domain.io";
-		location.href = "http://domain.io" + val;
-		location.pathname = val;
-	},
-	get: function () {
-		return location;
-	},
-});
-
-// ===
-// Global helpers
-// ===
-
-// https://vue-test-utils.vuejs.org/api/#mount
-global.mount = vueTestUtils.mount;
-
-// https://vue-test-utils.vuejs.org/api/#shallowmount
-global.shallowMount = vueTestUtils.shallowMount;
-
-global.wait = (duration) =>
-	new Promise((resolve) => {
-		setTimeout(resolve, duration);
-	});
+import '@plugins/global'
+import { mountBaseComponents } from '@basecomponents/_globals'
 
 /*
 // A special version of `shallowMount` for view components
@@ -145,133 +38,240 @@ global.shallowMountView = (Component, options = {}) => {
 };
 */
 
-import { i18n as i18nConfig } from "@plugins/i18n.js";
-import authStoreModule from "@store/auth";
-import { mixin as userMixin } from "@plugins/user.js";
-import globalStubs from "./stubs.js";
+import { i18n as i18nConfig } from '@plugins/i18n.js'
+import authStoreModule from '@store/auth'
+import { mixin as userMixin } from '@plugins/user.js'
+import commonTest from './commonTests.js'
+import globalStubs from './stubs.js'
+
+// ===
+// Configure Vue
+// ===
+
+// Don't warn about not using the production build of Vue, as
+// we care more about the quality of errors than performance
+// for tests.
+Vue.config.productionTip = false
+
+const baseComponentDir = path.join(__dirname, '../../src/components/base/')
+Vue.use(Vuelidate)
+
+function readDirRecursiveSync (dir) {
+  const results = []
+  const list = fs.readdirSync(dir)
+  list.forEach((file) => {
+    const filepath = path.join(dir, file)
+    const stat = fs.statSync(filepath)
+    if (stat && stat.isDirectory()) {
+      /* Recurse into a subdirectory */
+      results.push(...readDirRecursiveSync(filepath))
+    } else {
+      /* Is a file */
+      results.push(filepath)
+    }
+  })
+  return results
+}
+
+const globalComponentFiles = readDirRecursiveSync(baseComponentDir)
+// Only include "Base" prefixed .vue files
+  .filter(fileName => /Base[A-Z][\w]+\.vue$/.test(fileName))
+  .map(
+    fileName =>
+      './' + path.relative(baseComponentDir, fileName).replace(/\\/g, '/')
+  )
+
+mountBaseComponents(globalComponentFiles, fileName =>
+  require(path.join(baseComponentDir, fileName))
+)
+
+// ===
+// Mock window properties not handled by jsdom
+// ===
+
+Object.defineProperty(window, 'localStorage', {
+  value: (function () {
+    let store = {}
+    return {
+      getItem (key) {
+        return store[key] || null
+      },
+      setItem (key, value) {
+        store[key] = value.toString()
+      },
+      removeItem (key) {
+        delete store[key]
+      },
+      clear () {
+        store = {}
+      }
+    }
+  })()
+})
+
+Object.defineProperty(window, 'matchMedia', {
+  value: () => {
+    return {
+      matches: false,
+      addListener: () => {},
+      removeListener: () => {}
+    }
+  }
+})
+
+const location = {
+  href: ''
+}
+Object.defineProperty(window, 'location', {
+  set (val) {
+    location.host = 'domain.io'
+    location.hostname = 'domain.io'
+    location.origin = 'http://domain.io'
+    location.href = 'http://domain.io' + val
+    location.pathname = val
+  },
+  get () {
+    return location
+  }
+})
+
+// ===
+// Global helpers
+// ===
+
+// https://vue-test-utils.vuejs.org/api/#mount
+global.mount = vueTestUtils.mount
+
+// https://vue-test-utils.vuejs.org/api/#shallowmount
+global.shallowMount = vueTestUtils.shallowMount
+
+global.wait = duration =>
+  new Promise((resolve) => {
+    setTimeout(resolve, duration)
+  })
 
 // A helper for creating Vue component mocks
 global.createComponentMocks = ({
-	i18n,
-	user,
-	store,
-	$route,
-	$router,
-	router,
-	uiState,
-	dialog,
-	/*style,*/ mocks,
-	stubs,
+  i18n,
+  user,
+  store,
+  $route,
+  $router,
+  router,
+  uiState,
+  dialog,
+  /* style, */ mocks,
+  stubs
 }) => {
-	// Use a local version of Vue, to avoid polluting the global
-	// Vue and thereby affecting other tests.
-	// https://vue-test-utils.vuejs.org/api/#createlocalvue
-	const localVue = vueTestUtils.createLocalVue();
-	const returnOptions = { localVue };
+  // Use a local version of Vue, to avoid polluting the global
+  // Vue and thereby affecting other tests.
+  // https://vue-test-utils.vuejs.org/api/#createlocalvue
+  const localVue = vueTestUtils.createLocalVue()
+  const returnOptions = { localVue }
 
-	// https://vue-test-utils.vuejs.org/api/options.html#stubs
-	returnOptions.stubs = stubs || {};
+  // https://vue-test-utils.vuejs.org/api/options.html#stubs
+  returnOptions.stubs = stubs || {}
 
-	// https://vue-test-utils.vuejs.org/api/options.html#mocks
-	returnOptions.mocks = mocks || {};
+  // https://vue-test-utils.vuejs.org/api/options.html#mocks
+  returnOptions.mocks = mocks || {}
 
-	Object.entries(stubs || {}).forEach(([name, value]) => {
-		if (value === true && globalStubs[name]) {
-			stubs[name] = globalStubs[name]();
-		}
-	});
-	returnOptions.stubs.NuxtLink = RouterLinkStub;
+  Object.entries(stubs || {}).forEach(([name, value]) => {
+    if (value === true && globalStubs[name]) {
+      stubs[name] = globalStubs[name]()
+    }
+  })
+  returnOptions.stubs.NuxtLink = RouterLinkStub
 
-	// Converts a `store` option shaped like:
-	//
-	// store: {
-	//   someModuleName: {
-	//     state: { ... },
-	//     getters: { ... },
-	//     mutations: { ... },
-	//     actions: { ... },
-	//   },
-	//   anotherModuleName: {
-	//     getters: { ... },
-	//   },
-	// },
-	//
-	// to a store instance, with each module namespaced by
-	// default, just like in our app.
-	if (store || i18n || user) {
-		localVue.use(Vuex);
-		const storeModules = store || {};
-		if (user) {
-			storeModules.auth = authStoreModule;
-		}
-		returnOptions.store = new Vuex.Store({
-			modules: Object.entries(storeModules)
-				.map(([moduleName, storeModule]) => {
-					return {
-						[moduleName]: {
-							state: storeModule.state || {},
-							getters: storeModule.getters || {},
-							mutations: storeModule.mutations || {},
-							actions: storeModule.actions || {},
-							namespaced: true,
-						},
-					};
-				})
-				.reduce((moduleA, moduleB) => Object.assign({}, moduleA, moduleB), {}),
-		});
-	}
+  // Converts a `store` option shaped like:
+  //
+  // store: {
+  //   someModuleName: {
+  //     state: { ... },
+  //     getters: { ... },
+  //     mutations: { ... },
+  //     actions: { ... },
+  //   },
+  //   anotherModuleName: {
+  //     getters: { ... },
+  //   },
+  // },
+  //
+  // to a store instance, with each module namespaced by
+  // default, just like in our app.
+  if (store || i18n || user) {
+    localVue.use(Vuex)
+    const storeModules = store || {}
+    if (user) {
+      storeModules.auth = authStoreModule
+    }
+    returnOptions.store = new Vuex.Store({
+      modules: Object.entries(storeModules)
+        .map(([moduleName, storeModule]) => {
+          return {
+            [moduleName]: {
+              state: storeModule.state || {},
+              getters: storeModule.getters || {},
+              mutations: storeModule.mutations || {},
+              actions: storeModule.actions || {},
+              namespaced: true
+            }
+          }
+        })
+        .reduce((moduleA, moduleB) => Object.assign({}, moduleA, moduleB), {})
+    })
+  }
 
-	//Set `i18n: true` to enable localization and make `this.$i18n` available
-	if (i18n) {
-		localVue.use(VueI18n);
-		returnOptions.i18n = i18nConfig(returnOptions.store);
-	}
+  // Set `i18n: true` to enable localization and make `this.$i18n` available
+  if (i18n) {
+    localVue.use(VueI18n)
+    returnOptions.i18n = i18nConfig(returnOptions.store)
+  }
 
-	if (user) {
-		localVue.mixin(userMixin);
-	}
-	localVue.use(Vuelidate);
+  if (user) {
+    localVue.mixin(userMixin)
+  }
+  localVue.use(Vuelidate)
 
-	// Set uiState like:
-	// {
-	// 		get: (key, identifier) => {},
-	// 		set: (key, identifier) => {},
-	// }
-	if (uiState) {
-		localVue.use({
-			install: (Vue) => {
-				Vue.prototype.$uiState = uiState;
-			},
-		});
-	}
+  // Set uiState like:
+  // {
+  // 		get: (key, identifier) => {},
+  // 		set: (key, identifier) => {},
+  // }
+  if (uiState) {
+    localVue.use({
+      install: (Vue) => {
+        Vue.prototype.$uiState = uiState
+      }
+    })
+  }
 
-	// Set (confirmation) dialog like:
-	// {
-	//		confirm: (params) => {}
-	// }
-	if (dialog) {
-		localVue.use({
-			install: (Vue) => {
-				Vue.prototype.$dialog = dialog;
-			},
-		});
-	}
+  // Set (confirmation) dialog like:
+  // {
+  //		confirm: (params) => {}
+  // }
+  if (dialog) {
+    localVue.use({
+      install: (Vue) => {
+        Vue.prototype.$dialog = dialog
+      }
+    })
+  }
 
-	// If using `router: true`, we'll automatically stub out
-	// components from Vue Router.
-	if (router) {
-		returnOptions.stubs["NuxtLink"] = true;
-		returnOptions.stubs["Nuxt"] = true;
-	}
+  // If using `router: true`, we'll automatically stub out
+  // components from Vue Router.
+  if (router) {
+    returnOptions.stubs.NuxtLink = true
+    returnOptions.stubs.Nuxt = true
+  }
 
-	if ($route) {
-		returnOptions.mocks.$route = $route;
-	}
-	if ($router) {
-		returnOptions.mocks.$router = $router;
-	}
-	return returnOptions;
-};
+  if ($route) {
+    returnOptions.mocks.$route = $route
+  }
+  if ($router) {
+    returnOptions.mocks.$router = $router
+  }
+  return returnOptions
+}
 
 /*
 global.createModuleStore = (vuexModule, options = {}) => {
@@ -301,12 +301,12 @@ global.createModuleStore = (vuexModule, options = {}) => {
 // Let tests fail on console.error
 // ===
 console.error = jest.fn((message) => {
-	throw message instanceof Error ? `${message}` : new Error(`${message}`);
-});
+  throw message instanceof Error ? `${message}` : new Error(`${message}`)
+})
 
 // ===
 // Common tests
 // ===
 for (name in commonTest) {
-	global[name] = commonTest[name];
+  global[name] = commonTest[name]
 }

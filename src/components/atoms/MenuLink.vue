@@ -1,16 +1,16 @@
 <template>
-	<base-link class="link" v-bind="$attrs">
-		<slot />
-	</base-link>
+  <base-link class="link" v-bind="$attrs">
+    <slot />
+  </base-link>
 </template>
 
 <script>
 export default {
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

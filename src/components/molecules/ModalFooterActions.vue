@@ -1,27 +1,27 @@
 <template>
-	<default-modal-footer class="actions">
-		<template v-slot:left>
-			<div class="slot-container">
-				<slot name="left"></slot>
-			</div>
-		</template>
-		<template v-slot:right>
-			<slot name="right"></slot>
-		</template>
-	</default-modal-footer>
+  <default-modal-footer class="actions">
+    <template v-slot:left>
+      <div class="slot-container">
+        <slot name="left" />
+      </div>
+    </template>
+    <template v-slot:right>
+      <slot name="right" />
+    </template>
+  </default-modal-footer>
 </template>
 
 <script>
-import DefaultModalFooter from "@components/molecules/ModalFooter";
+import DefaultModalFooter from '@components/molecules/ModalFooter'
 export default {
-	components: {
-		DefaultModalFooter,
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  components: {
+    DefaultModalFooter
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

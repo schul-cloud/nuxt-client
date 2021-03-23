@@ -1,22 +1,24 @@
 <template>
-	<div class="tab" :style="backgroundStyle">
-		<div class="tab-label truncate"><slot /></div>
-	</div>
+  <div class="tab" :style="backgroundStyle">
+    <div class="tab-label truncate">
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		backgroundStyle: {
-			type: String,
-			default: "background-color: #fff",
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    backgroundStyle: {
+      type: String,
+      default: 'background-color: #fff'
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 <style lang="scss" scoped>
 @import "@styles";

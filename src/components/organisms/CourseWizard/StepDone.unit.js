@@ -1,5 +1,5 @@
-import StepDone from "./StepDone";
+import StepDone from './StepDone'
 
-describe("@components/organisms/CourseWizard/StepDone", () => {
-	it(...isValidComponent(StepDone));
-});
+describe('@components/organisms/CourseWizard/StepDone', () => {
+  it(...isValidComponent(StepDone))
+})

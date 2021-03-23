@@ -1,60 +1,60 @@
 <template>
-	<div class="container">
-		<ul class="progressbar">
-			<li
-				v-for="(s, index) in steps"
-				:key="index"
-				:style="{ width: stepWidth }"
-				:class="[
-					index === currentStep ? 'active' : '',
-					index < currentStep ? 'done' : '',
-				]"
-			>
-				<span class="description">{{ s.name }} </span>
-				<span v-show="index < currentStep">
-					<base-icon source="material" icon="check" />
-				</span>
-			</li>
-		</ul>
-	</div>
+  <div class="container">
+    <ul class="progressbar">
+      <li
+        v-for="(s, index) in steps"
+        :key="index"
+        :style="{ width: stepWidth }"
+        :class="[
+          index === currentStep ? 'active' : '',
+          index < currentStep ? 'done' : '',
+        ]"
+      >
+        <span class="description">{{ s.name }} </span>
+        <span v-show="index < currentStep">
+          <base-icon source="material" icon="check" />
+        </span>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-	components: {},
-	props: {
-		steps: {
-			type: Array,
-			default: () => [
-				{ name: "One" },
-				{ name: "Two" },
-				{ name: "Three" },
-				{ name: "Four" },
-				{ name: "Five" },
-			],
-			validator: function (value) {
-				const isValid = value.length <= 7;
-				if (!isValid) {
-					console.error("You shoudn't use more than 7 steps.");
-				}
-				return isValid;
-			},
-		},
-		currentStep: {
-			type: Number,
-			default: 0,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	computed: {
-		stepWidth: function () {
-			return 100 / this.steps.length + "%";
-		},
-	},
-};
+  components: {},
+  props: {
+    steps: {
+      type: Array,
+      default: () => [
+        { name: 'One' },
+        { name: 'Two' },
+        { name: 'Three' },
+        { name: 'Four' },
+        { name: 'Five' }
+      ],
+      validator (value) {
+        const isValid = value.length <= 7
+        if (!isValid) {
+          console.error("You shoudn't use more than 7 steps.")
+        }
+        return isValid
+      }
+    },
+    currentStep: {
+      type: Number,
+      default: 0
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  computed: {
+    stepWidth () {
+      return 100 / this.steps.length + '%'
+    }
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

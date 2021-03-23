@@ -1,23 +1,23 @@
 <template>
-	<div class="footer">
-		<div class="footer-container">
-			<div class="left-container">
-				<slot name="left"></slot>
-			</div>
-			<div class="right-container">
-				<slot name="right"></slot>
-			</div>
-		</div>
-	</div>
+  <div class="footer">
+    <div class="footer-container">
+      <div class="left-container">
+        <slot name="left" />
+      </div>
+      <div class="right-container">
+        <slot name="right" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

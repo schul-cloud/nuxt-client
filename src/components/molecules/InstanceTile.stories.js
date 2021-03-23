@@ -1,19 +1,19 @@
-import { storiesOf } from "@storybook/vue";
+import { storiesOf } from '@storybook/vue'
 
-import InstanceTile from "@components/molecules/InstanceTile";
+import InstanceTile from '@components/molecules/InstanceTile'
 
-storiesOf("5 Molecules UI Components/Molecules UI/InstanceTile", module).add(
-	"InstanceTile",
-	() => ({
-		components: { InstanceTile },
-		template: `
+storiesOf('5 Molecules UI Components/Molecules UI/InstanceTile', module).add(
+  'InstanceTile',
+  () => ({
+    components: { InstanceTile },
+    template: `
 			<instance-tile :tile="tile"></instance-tile>
 		`,
-		data: () => ({
-			tile: {
-				icon: "hpi",
-				url: "https://open.schul-cloud.org/login",
-			},
-		}),
-	})
-);
+    data: () => ({
+      tile: {
+        icon: 'hpi',
+        url: 'https://open.schul-cloud.org/login'
+      }
+    })
+  })
+)

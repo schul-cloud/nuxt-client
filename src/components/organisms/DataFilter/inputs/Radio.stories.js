@@ -1,16 +1,16 @@
-import { storiesOf } from "@storybook/vue";
-import { text } from "@storybook/addon-knobs";
-import { action } from "@storybook/addon-actions";
+import { storiesOf } from '@storybook/vue'
+import { text } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
 
-import InputRadio from "./Radio";
-import notes from "./Inputs.md";
+import InputRadio from './Radio'
+import notes from './Inputs.md'
 
-storiesOf("6 Organisms/DataFilter/Inputs", module)
-	.addParameters({ notes })
-	.add("Radio", () => {
-		return {
-			components: { InputRadio },
-			template: `
+storiesOf('6 Organisms/DataFilter/Inputs', module)
+  .addParameters({ notes })
+  .add('Radio', () => {
+    return {
+      components: { InputRadio },
+      template: `
 			<div>
 				<InputRadio
 					v-model="value"
@@ -25,12 +25,12 @@ storiesOf("6 Organisms/DataFilter/Inputs", module)
 				value: {{ value }}
 			</div>
 			`,
-			data: () => ({
-				value: text("value", "A"),
-			}),
-			methods: {
-				onInput: action("@input"),
-				onRemove: action("@remove"),
-			},
-		};
-	});
+      data: () => ({
+        value: text('value', 'A')
+      }),
+      methods: {
+        onInput: action('@input'),
+        onRemove: action('@remove')
+      }
+    }
+  })

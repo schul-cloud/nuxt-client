@@ -1,54 +1,56 @@
 <template>
-	<div
-		class="dropdown"
-		tabindex="0"
-		:aria-expanded="open"
-		:aria-controls="`dropdown-content-${$uid}`"
-		@mouseenter="open = true"
-		@mouseleave="open = false"
-		@focus="open = true"
-		@blur="open = false"
-	>
-		<div class="button">
-			<slot name="header">
-				<base-button size="small">{{ title }}</base-button>
-			</slot>
-		</div>
-		<div :id="`dropdown-content-${$uid}`" class="content" :class="{ open }">
-			<ul>
-				<li
-					v-for="(item, index) of items"
-					:key="index"
-					@click="$emit('input', item)"
-				>
-					{{ item.label }}
-				</li>
-			</ul>
-		</div>
-	</div>
+  <div
+    class="dropdown"
+    tabindex="0"
+    :aria-expanded="open"
+    :aria-controls="`dropdown-content-${$uid}`"
+    @mouseenter="open = true"
+    @mouseleave="open = false"
+    @focus="open = true"
+    @blur="open = false"
+  >
+    <div class="button">
+      <slot name="header">
+        <base-button size="small">
+          {{ title }}
+        </base-button>
+      </slot>
+    </div>
+    <div :id="`dropdown-content-${$uid}`" class="content" :class="{ open }">
+      <ul>
+        <li
+          v-for="(item, index) of items"
+          :key="index"
+          @click="$emit('input', item)"
+        >
+          {{ item.label }}
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
-import uidMixin from "@mixins/uid";
+import uidMixin from '@mixins/uid'
 
 export default {
-	mixins: [uidMixin],
-	props: {
-		title: {
-			type: String,
-			required: true,
-		},
-		items: {
-			type: Array,
-			default: () => [],
-		},
-	},
-	data() {
-		return {
-			open: false,
-		};
-	},
-};
+  mixins: [uidMixin],
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    items: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data () {
+    return {
+      open: false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

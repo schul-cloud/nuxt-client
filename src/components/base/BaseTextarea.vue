@@ -1,137 +1,136 @@
 <template>
-	<base-input-default
-		v-bind="$attrs"
-		type="textarea"
-		vmodel=""
-		:disabled="disabled"
-	>
-		<template v-slot:icon>
-			<base-icon
-				source="custom"
-				icon="create"
-				class="icon"
-				:class="{
-					disabled: disabled,
-				}"
-			/>
-		</template>
-		<textarea
-			ref="textarea"
-			v-bind="$attrs"
-			:value="vmodel"
-			:rows="rows"
-			:maxlength="maxLength"
-			:class="{
-				'with-lines': withLines,
-				disabled: disabled,
-			}"
-			:disabled="disabled"
-			v-on="$listeners"
-			@input="inputHandler"
-			@keydown="limitRowNumberOnKeydown"
-			@paste="limitRowNumberOnPaste"
-		>
+  <base-input-default
+    v-bind="$attrs"
+    type="textarea"
+    vmodel=""
+    :disabled="disabled"
+  >
+    <template v-slot:icon>
+      <base-icon
+        source="custom"
+        icon="create"
+        class="icon"
+        :class="{
+          disabled: disabled,
+        }"
+      />
+    </template>
+    <textarea
+      ref="textarea"
+      v-bind="$attrs"
+      :value="vmodel"
+      :rows="rows"
+      :maxlength="maxLength"
+      :class="{
+        'with-lines': withLines,
+        disabled: disabled,
+      }"
+      :disabled="disabled"
+      v-on="$listeners"
+      @input="inputHandler"
+      @keydown="limitRowNumberOnKeydown"
+      @paste="limitRowNumberOnPaste"
+    >
 			<slot/>
-		</textarea
-		>
-	</base-input-default>
+		</textarea>
+  </base-input-default>
 </template>
 
 <script>
-import BaseInputDefault from "@basecomponents/BaseInput/BaseInputDefault";
+import BaseInputDefault from '@basecomponents/BaseInput/BaseInputDefault'
 
 export default {
-	components: {
-		BaseInputDefault,
-	},
-	model: {
-		prop: "vmodel",
-		event: "updatemodel",
-	},
-	props: {
-		vmodel: {
-			type: String,
-			required: true,
-		},
-		rows: {
-			type: Number,
-			default: 1,
-			validator: (rows) => rows > 0,
-		},
-		maxRows: {
-			type: Number,
-			default: undefined,
-			validator: (maxRows) => maxRows > 0,
-		},
-		maxLength: {
-			type: Number,
-			default: undefined,
-			validator: (maxLength) => maxLength > 0,
-		},
-		withLines: {
-			type: Boolean,
-		},
-		disabled: {
-			type: Boolean,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	computed: {
-		numberOfLines: function () {
-			return (this.vmodel.match(/\n/g) || []).length + 1;
-		},
-	},
-	mounted: function () {
-		this.resize();
-	},
-	methods: {
-		inputHandler($event) {
-			this.resize();
-			this.$emit("updatemodel", $event.target.value);
-		},
-		resize() {
-			this.$refs.textarea.style.height = "1px";
-			const { scrollHeight } = this.$refs.textarea;
-			const lineHeight = parseInt(
-				getComputedStyle(this.$refs.textarea).getPropertyValue("--line-height"),
-				10
-			);
-			const height = Math.max(scrollHeight, lineHeight * this.rows);
-			this.$refs.textarea.style.height = height + "px";
-		},
-		limitRowNumberOnKeydown($event) {
-			if (
-				this.maxRows &&
-				$event.keyCode.toString() === "13" &&
+  components: {
+    BaseInputDefault
+  },
+  model: {
+    prop: 'vmodel',
+    event: 'updatemodel'
+  },
+  props: {
+    vmodel: {
+      type: String,
+      required: true
+    },
+    rows: {
+      type: Number,
+      default: 1,
+      validator: rows => rows > 0
+    },
+    maxRows: {
+      type: Number,
+      default: undefined,
+      validator: maxRows => maxRows > 0
+    },
+    maxLength: {
+      type: Number,
+      default: undefined,
+      validator: maxLength => maxLength > 0
+    },
+    withLines: {
+      type: Boolean
+    },
+    disabled: {
+      type: Boolean
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  computed: {
+    numberOfLines () {
+      return (this.vmodel.match(/\n/g) || []).length + 1
+    }
+  },
+  mounted () {
+    this.resize()
+  },
+  methods: {
+    inputHandler ($event) {
+      this.resize()
+      this.$emit('updatemodel', $event.target.value)
+    },
+    resize () {
+      this.$refs.textarea.style.height = '1px'
+      const { scrollHeight } = this.$refs.textarea
+      const lineHeight = parseInt(
+        getComputedStyle(this.$refs.textarea).getPropertyValue('--line-height'),
+        10
+      )
+      const height = Math.max(scrollHeight, lineHeight * this.rows)
+      this.$refs.textarea.style.height = height + 'px'
+    },
+    limitRowNumberOnKeydown ($event) {
+      if (
+        this.maxRows &&
+				$event.keyCode.toString() === '13' &&
 				this.numberOfLines === this.maxRows
-			) {
-				$event.preventDefault();
-			}
-		},
-		limitRowNumberOnPaste($event) {
-			if (this.maxRows) {
-				const pastedText = (
-					$event.clipboardData || window.clipboardData
-				).getData("Text");
-				const numberOfLines =
-					this.numberOfLines + (pastedText.match(/\n/g) || []).length + 1;
-				if (numberOfLines > this.maxRows) {
-					const truncatedText = (this.vmodel + pastedText)
-						.split(/\r\n|\r|\n/)
-						.slice(0, this.maxRows)
-						.join("\n");
-					this.$refs.textarea.value = truncatedText;
-					this.$refs.textarea.dispatchEvent(new Event("input"));
-					this.resize();
-					$event.preventDefault();
-				}
-			}
-		},
-	},
-};
+      ) {
+        $event.preventDefault()
+      }
+    },
+    limitRowNumberOnPaste ($event) {
+      if (this.maxRows) {
+        const pastedText = (
+          $event.clipboardData || window.clipboardData
+        ).getData('Text')
+        const numberOfLines =
+					this.numberOfLines + (pastedText.match(/\n/g) || []).length + 1
+        if (numberOfLines > this.maxRows) {
+          const truncatedText = (this.vmodel + pastedText)
+            .split(/\r\n|\r|\n/)
+            .slice(0, this.maxRows)
+            .join('\n')
+          this.$refs.textarea.value = truncatedText
+          this.$refs.textarea.dispatchEvent(new Event('input'))
+          this.resize()
+          $event.preventDefault()
+        }
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

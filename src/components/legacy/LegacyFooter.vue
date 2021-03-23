@@ -1,81 +1,84 @@
 <template>
-	<div class="section">
-		<div class="footer-container">
-			<base-grid :column-width="colWidth" :style="{ justifyItems: `left` }">
-				<div class="link-container">
-					<h2 class="h4">
-						{{ $t("components.organisms.LegacyFooter.contact") }}
-					</h2>
-					<base-link
-						v-for="route in contacts"
-						:key="route.title"
-						class="link-style"
-						:to="route.to"
-						:href="route.href"
-						:no-styles="true"
-					>
-						{{ route.title }}
-					</base-link>
-				</div>
-				<div class="link-container">
-					<h2 class="h4">Links</h2>
-					<base-link
-						v-for="route in links"
-						:key="route.title"
-						class="link-style"
-						:to="route.to"
-						:href="route.href"
-						:no-styles="true"
-					>
-						{{ route.title }}
-					</base-link>
-				</div>
-				<div class="link-container">
-					<h2 class="h4">
-						{{ $t("components.organisms.LegacyFooter.job-offer") }}
-					</h2>
-					<p class="footer-text">
-						Du möchtest gerne Mitglied in unserem HPI
-						<br />HPI Schul-Cloud Team werden? Wir suchen:
-					</p>
-					<base-link
-						class="link-style"
-						href="https://hpi.de/das-hpi/organisation/jobs/aktuelle-jobs/internettechnologien/system-engineer-dev-ops-mw.html"
-						>DevOps</base-link
-					>
-				</div>
-			</base-grid>
-		</div>
-	</div>
+  <div class="section">
+    <div class="footer-container">
+      <base-grid :column-width="colWidth" :style="{ justifyItems: `left` }">
+        <div class="link-container">
+          <h2 class="h4">
+            {{ $t("components.organisms.LegacyFooter.contact") }}
+          </h2>
+          <base-link
+            v-for="route in contacts"
+            :key="route.title"
+            class="link-style"
+            :to="route.to"
+            :href="route.href"
+            :no-styles="true"
+          >
+            {{ route.title }}
+          </base-link>
+        </div>
+        <div class="link-container">
+          <h2 class="h4">
+            Links
+          </h2>
+          <base-link
+            v-for="route in links"
+            :key="route.title"
+            class="link-style"
+            :to="route.to"
+            :href="route.href"
+            :no-styles="true"
+          >
+            {{ route.title }}
+          </base-link>
+        </div>
+        <div class="link-container">
+          <h2 class="h4">
+            {{ $t("components.organisms.LegacyFooter.job-offer") }}
+          </h2>
+          <p class="footer-text">
+            Du möchtest gerne Mitglied in unserem HPI
+            <br>HPI Schul-Cloud Team werden? Wir suchen:
+          </p>
+          <base-link
+            class="link-style"
+            href="https://hpi.de/das-hpi/organisation/jobs/aktuelle-jobs/internettechnologien/system-engineer-dev-ops-mw.html"
+          >
+            DevOps
+          </base-link>
+        </div>
+      </base-grid>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-	props: {
-		links: {
-			type: Array,
-			reqired: true,
-			default: () => {},
-		},
+  props: {
+    links: {
+      type: Array,
+      reqired: true,
+      default: () => {}
+    },
 
-		contacts: {
-			type: Array,
-			reqired: true,
-			default: () => {},
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	computed: {
-		colWidth() {
-			if (window.innerWidth <= 750) {
-				return "20rem";
-			}
-			return "33rem";
-		},
-	},
-};
+    contacts: {
+      type: Array,
+      reqired: true,
+      default: () => {}
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  computed: {
+    colWidth () {
+      if (window.innerWidth <= 750) {
+        return '20rem'
+      }
+      return '33rem'
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

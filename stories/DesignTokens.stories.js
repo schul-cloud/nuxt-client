@@ -1,22 +1,22 @@
-import { storiesOf } from "@storybook/vue";
-import Color from "@storyComponents/Color";
-import Gradient from "@storyComponents/Gradient";
-import Elevation from "@storyComponents/Elevation";
-import ColorOnText from "@storyComponents/ColorOnText";
+import { storiesOf } from '@storybook/vue'
+import Color from '@storyComponents/Color'
+import Gradient from '@storyComponents/Gradient'
+import Elevation from '@storyComponents/Elevation'
+import ColorOnText from '@storyComponents/ColorOnText'
 
-storiesOf("1 Design Tokens", module).add("1 Design Tokens", () => ({
-	template: `
+storiesOf('1 Design Tokens', module).add('1 Design Tokens', () => ({
+  template: `
 	<div>
 	<h1>Design Tokens</h1>
 	<p>Design Tokens include Colors, Gradients, Elevation, Spacings and Typography of our Design System</p>
 	</div>
-	`,
-}));
+	`
+}))
 
-storiesOf("1 Design Tokens/Colors", module)
-	.add("Main", () => ({
-		components: { Color, Gradient },
-		template: `<div>
+storiesOf('1 Design Tokens/Colors', module)
+  .add('Main', () => ({
+    components: { Color, Gradient },
+    template: `<div>
 		<Color title="Primary" color="#E98404" variable="--color-primary"/>
 		<Color title="Primary Light" color="#EC962A" variable="--color-primary-light"/>
 		<Color title="Primary Dark" color="#AF6303" variable="--color-primary-dark"/>
@@ -27,11 +27,11 @@ storiesOf("1 Design Tokens/Colors", module)
 		<Color title="Tertiary" color="#455b6a" variable="--color-tertiary"/>
 		<Color title="Tertiary Light" color="#617480" variable="--color-tertiary-light"/>
 		<Color title="Tertiary Dark" color="#344450" variable="--color-tertiary-dark"/>
-	</div>`,
-	}))
-	.add("Shades", () => ({
-		components: { Color, Gradient },
-		template: `<div>
+	</div>`
+  }))
+  .add('Shades', () => ({
+    components: { Color, Gradient },
+    template: `<div>
 		<h3>Shades</h3>
 		<Color color="#000000" variable="--color-black"/>
 		<Color color="#aaaaaa" variable="--color-gray"/>
@@ -39,23 +39,23 @@ storiesOf("1 Design Tokens/Colors", module)
 		<Color color="#444444" variable="--color-gray-dark"/>
 		<Color color="#ffffff" variable="--color-white"/>
 	</div>
-	`,
-	}))
-	.add("Feedback", () => ({
-		components: { Color, Gradient },
-		template: `<div>
+	`
+  }))
+  .add('Feedback', () => ({
+    components: { Color, Gradient },
+    template: `<div>
 		<Color color="#13ba98"variable="--color-sucess"/>
 		<Color color="#ffd611" variable="--color-warning"/>
 		<Color color="#ff1134" variable="--color-danger"/>
 		<Color color="#0A7AC9" variable="--color-info"/>
 	</div>
-	`,
-	}));
+	`
+  }))
 
-storiesOf("1 Design Tokens/Colors", module)
-	.add("Main Text on Colors", () => ({
-		components: { ColorOnText },
-		template: `<div>
+storiesOf('1 Design Tokens/Colors', module)
+  .add('Main Text on Colors', () => ({
+    components: { ColorOnText },
+    template: `<div>
 		<ColorOnText title="Primary" color="#E98404" variable="--color-primary" textColor="--color-on-primary"/>
 		<ColorOnText title="Primary Light" color="#EC962A" variable="--color-primary-light" textColor="--color-on-primary-light"/>
 		<ColorOnText title="Primary Dark" color="#AF6303" variable="--color-primary-dark" textColor="--color-on-primary-dark"/>
@@ -66,22 +66,22 @@ storiesOf("1 Design Tokens/Colors", module)
 		<ColorOnText title="Tertiary Light" color="#617480" variable="--color-tertiary-light" textColor="--color-on-tertiary-light"/>
 		<ColorOnText title="Tertiary Dark" color="#344450" variable="--color-tertiary-dark" textColor="--color-on-tertiary-dark"/>
 	</div>
-	`,
-	}))
-	.add("Feedback Text on Color", () => ({
-		components: { ColorOnText },
-		template: `<div>
+	`
+  }))
+  .add('Feedback Text on Color', () => ({
+    components: { ColorOnText },
+    template: `<div>
 		<ColorOnText color="#13ba98" variable="--color-sucess" textColor="--color-on-success"/>
 		<ColorOnText color="#ffd611" variable="--color-warning" textColor="--color-on-warning"/>
 		<ColorOnText color="#ff1134" variable="--color-danger" textColor="--color-on-danger"/>
 		<ColorOnText color="#0A7AC9" variable="--color-info" textColor="--color-on-info"/>
 	</div>
-	`,
-	}));
+	`
+  }))
 
-storiesOf("1 Design Tokens/Colors", module).add("CourseColors", () => ({
-	components: { Gradient },
-	template: `<div>
+storiesOf('1 Design Tokens/Colors', module).add('CourseColors', () => ({
+  components: { Gradient },
+  template: `<div>
 			<Gradient colorStart="#f22a19" colorEnd="#f96464" title="Deutsch"/>
 			<Gradient colorStart="#075DBE" colorEnd="#02dafd" title="Mathe"/>
 			<Gradient colorStart="#029b95" colorEnd="#03b2d6" title="Biologie, Chemie, Physik"/>
@@ -92,12 +92,12 @@ storiesOf("1 Design Tokens/Colors", module).add("CourseColors", () => ({
 			<Gradient colorStart="#2c3e50" colorEnd="#fd746c" title="Philisophie, Ethik"/>
 			<Gradient colorStart="#16a085" colorEnd="#f4d03f" title="Sport"/>
 			<Gradient colorStart="#0d2a36" colorEnd="#a6a6a6" title="Sonstiges"/>
-		</div>`,
-}));
+		</div>`
+}))
 
-storiesOf("1 Design Tokens", module).add("Elevation", () => ({
-	components: { Elevation },
-	template: `<div>
+storiesOf('1 Design Tokens', module).add('Elevation', () => ({
+  components: { Elevation },
+  template: `<div>
 			<Elevation variable="--shadow-xxxs" title="01dp" styling="(0 1px 1px 0)(0 2px 1px -1px)(0 1px 3px 0)"/>
 			<Elevation variable="--shadow-xxs" title="02dp" styling="(0 2px 2px 0)(0 3px 1px -2px)(0 1px 5px 0)"/>
 			<Elevation variable="--shadow-xs" title="03dp" styling="(0 3px 4px 0)(0 3px 3px -2px)(0 1px 8px 0)"/>
@@ -107,12 +107,12 @@ storiesOf("1 Design Tokens", module).add("Elevation", () => ({
 			<Elevation variable="--shadow-xl" title="09dp" styling="(0 9px 12px 1px)(0 3px 16px 2px)(0 5px 6px -3px)"/>
 			<Elevation variable="--shadow-xxl" title="12dp" styling="(0 12px 17px 2px)(0 5px 22px 4px)(0 7px 8px -4px)"/>
 		</div>`,
-	methods: {},
-}));
+  methods: {}
+}))
 
-storiesOf("1 Design Tokens", module).add("Spacings", () => ({
-	components: { Elevation },
-	template: `<div>
+storiesOf('1 Design Tokens', module).add('Spacings', () => ({
+  components: { Elevation },
+  template: `<div>
 			<div style="width: var(--space-xs-4); height: var(--space-xs-4); background: turquoise; margin-top: 1em;"></div>
 			<div style="width: var(--space-xs-3); height: var(--space-xs-3); background: turquoise; margin-top: 1em;"></div>
 			<div style="width: var(--space-xs-2); height: var(--space-xs-2); background: turquoise; margin-top: 1em;"></div>
@@ -126,5 +126,5 @@ storiesOf("1 Design Tokens", module).add("Spacings", () => ({
 			<div style="width: var(--space-xl-4); height: var(--space-xl-4); background: turquoise; margin-top: 1em;"></div>
 			<div style="width: var(--space-xl-5); height: var(--space-xl-5); background: turquoise; margin-top: 1em;"></div>
 		</div>`,
-	methods: {},
-}));
+  methods: {}
+}))

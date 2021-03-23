@@ -1,307 +1,308 @@
 <!-- eslint-disable max-lines -->
 
 <template>
-	<div class="resource">
-		<div ref="icons" class="icons">
-			<base-button
-				:class="[
-					closeButtonStyleSelector ? 'close-transparent' : 'close-icon',
-					'icon',
-				]"
-				design="icon"
-				aria-label="btnLabel"
-				@click="goBack"
-			>
-				<base-icon source="material" icon="close" />
-			</base-button>
-		</div>
-		<div class="content">
-			<div class="preview">
-				<div class="preview-background-color" />
-				<div
-					class="preview-background"
-					:style="{
-						backgroundImage: `url(${backgroundImage})`,
-					}"
-				/>
-				<img
-					:src="backgroundImage"
-					class="preview-img"
-					:alt="$t('pages.content.preview_img.alt')"
-					role="img"
-				/>
-			</div>
-		</div>
-		<div ref="sidebar" class="sidebar">
-			<div class="content-container">
-				<div class="actions"></div>
-				<div class="title">
-					<span>
-						{{ resource.title || resource.name }}
-					</span>
-				</div>
-				<div class="author-provider">
-					<span v-if="hasAuthor">
-						<base-link :href="'/content/?q=' + author" class="content-link">{{
-							author
-						}}</base-link>
-						({{ $t("pages.content._id.metadata.author") }})
-					</span>
-					<span v-if="provider">
-						<span v-if="hasAuthor">,</span>
-						<base-link :href="'/content/?q=' + provider" class="content-link">{{
-							provider
-						}}</base-link>
-						({{ $t("pages.content._id.metadata.provider") }})
-					</span>
-				</div>
-				<div>
-					<base-button
-						v-if="isMerlin"
-						design="outline"
-						class="content-button"
-						@click="
-							() => {
-								goToMerlinContent(merlinTokenReference);
-							}
-						"
-					>
-						<base-icon source="custom" icon="open_new_window" />
-						{{ $t("pages.content.material.toMaterial") }}
-					</base-button>
-					<base-button
-						v-else
-						design="outline"
-						:href="downloadUrl"
-						class="content-button"
-						target="_blank"
-					>
-						<base-icon source="custom" icon="open_new_window" />
-						{{ $t("pages.content.material.toMaterial") }}
-					</base-button>
-					<!-- This will be replaced with Modal -->
-					<div v-if="isBrandenburg" class="external-content-warning">
-						<p class="text-s external-content-title">
-							{{ $t("pages.content.material.leavePageWarningMain") }}
-						</p>
-						<p class="text-xs">
-							{{ $t("pages.content.material.leavePageWarningFooter") }}
-						</p>
-					</div>
-				</div>
-				<!-- eslint-disable vue/no-v-html -->
-				<div class="description text-wrap" v-html="description"></div>
-				<div class="metadata">
-					<div v-if="createdAt || updatedAt" class="meta-container">
-						<div class="meta-icon">
-							<base-icon source="material" icon="event" />
-						</div>
+  <div class="resource">
+    <div ref="icons" class="icons">
+      <base-button
+        :class="[
+          closeButtonStyleSelector ? 'close-transparent' : 'close-icon',
+          'icon',
+        ]"
+        design="icon"
+        aria-label="btnLabel"
+        @click="goBack"
+      >
+        <base-icon source="material" icon="close" />
+      </base-button>
+    </div>
+    <div class="content">
+      <div class="preview">
+        <div class="preview-background-color" />
+        <div
+          class="preview-background"
+          :style="{
+            backgroundImage: `url(${backgroundImage})`,
+          }"
+        />
+        <img
+          :src="backgroundImage"
+          class="preview-img"
+          :alt="$t('pages.content.preview_img.alt')"
+          role="img"
+        >
+      </div>
+    </div>
+    <div ref="sidebar" class="sidebar">
+      <div class="content-container">
+        <div class="actions" />
+        <div class="title">
+          <span>
+            {{ resource.title || resource.name }}
+          </span>
+        </div>
+        <div class="author-provider">
+          <span v-if="hasAuthor">
+            <base-link :href="'/content/?q=' + author" class="content-link">{{
+              author
+            }}</base-link>
+            ({{ $t("pages.content._id.metadata.author") }})
+          </span>
+          <span v-if="provider">
+            <span v-if="hasAuthor">,</span>
+            <base-link :href="'/content/?q=' + provider" class="content-link">{{
+              provider
+            }}</base-link>
+            ({{ $t("pages.content._id.metadata.provider") }})
+          </span>
+        </div>
+        <div>
+          <base-button
+            v-if="isMerlin"
+            design="outline"
+            class="content-button"
+            @click="
+              () => {
+                goToMerlinContent(merlinTokenReference);
+              }
+            "
+          >
+            <base-icon source="custom" icon="open_new_window" />
+            {{ $t("pages.content.material.toMaterial") }}
+          </base-button>
+          <base-button
+            v-else
+            design="outline"
+            :href="downloadUrl"
+            class="content-button"
+            target="_blank"
+          >
+            <base-icon source="custom" icon="open_new_window" />
+            {{ $t("pages.content.material.toMaterial") }}
+          </base-button>
+          <!-- This will be replaced with Modal -->
+          <div v-if="isBrandenburg" class="external-content-warning">
+            <p class="text-s external-content-title">
+              {{ $t("pages.content.material.leavePageWarningMain") }}
+            </p>
+            <p class="text-xs">
+              {{ $t("pages.content.material.leavePageWarningFooter") }}
+            </p>
+          </div>
+        </div>
+        <!-- eslint-disable vue/no-v-html -->
+        <div class="description text-wrap" v-html="description" />
+        <div class="metadata">
+          <div v-if="createdAt || updatedAt" class="meta-container">
+            <div class="meta-icon">
+              <base-icon source="material" icon="event" />
+            </div>
 
-						<div class="meta-text">
-							<div v-if="createdAt">
-								{{ $t("pages.content._id.metadata.createdAt") }}
-								{{ createdAt }}
-							</div>
-							<div v-if="updatedAt">
-								{{ $t("pages.content._id.metadata.updatedAt") }}
-								{{ updatedAt }}
-							</div>
-						</div>
-					</div>
-					<div class="meta-container">
-						<div>
-							<base-icon class="meta-icon" source="custom" icon="hashtag" />
-						</div>
-						<template v-if="tags.length > 0">
-							<div class="text-wrap">
-								<span
-									v-for="(tag, index) in tags"
-									:key="index"
-									class="meta-text"
-								>
-									<base-link :href="'/content/?q=' + tag" class="tag link"
-										>#{{ tag }}</base-link
-									>
-								</span>
-							</div>
-						</template>
-						<template v-if="tags.length === 0">
-							<span class="meta-text link">{{
-								$t("pages.content._id.metadata.noTags")
-							}}</span>
-						</template>
-					</div>
-					<div v-show="collectionLink !== ''" class="meta-container">
-						<div class="meta-icon">
-							<base-icon source="material" icon="ic_collection" />
-						</div>
-						<base-link
-							design="none"
-							type="button"
-							class="meta-text link"
-							:to="collectionLink"
-						>
-							<span>{{ $t("pages.content.card.collection") }}</span>
-						</base-link>
-					</div>
-				</div>
-			</div>
-			<user-has-role class="floating-buttons" :role="isNotStudent">
-				<add-content-button
-					:resource="resource"
-					btn-design="hero-cta"
-					btn-class="floating-button"
-					btn-size="large"
-					btn-icon-class="footer__content-icon"
-					btn-icon="add_circle_outline"
-					:btn-label="$t('pages.content._id.addToTopic')"
-					:multiple="false"
-				/>
-			</user-has-role>
-		</div>
-	</div>
+            <div class="meta-text">
+              <div v-if="createdAt">
+                {{ $t("pages.content._id.metadata.createdAt") }}
+                {{ createdAt }}
+              </div>
+              <div v-if="updatedAt">
+                {{ $t("pages.content._id.metadata.updatedAt") }}
+                {{ updatedAt }}
+              </div>
+            </div>
+          </div>
+          <div class="meta-container">
+            <div>
+              <base-icon class="meta-icon" source="custom" icon="hashtag" />
+            </div>
+            <template v-if="tags.length > 0">
+              <div class="text-wrap">
+                <span
+                  v-for="(tag, index) in tags"
+                  :key="index"
+                  class="meta-text"
+                >
+                  <base-link
+                    :href="'/content/?q=' + tag"
+                    class="tag link"
+                  >#{{ tag }}</base-link>
+                </span>
+              </div>
+            </template>
+            <template v-if="tags.length === 0">
+              <span class="meta-text link">{{
+                $t("pages.content._id.metadata.noTags")
+              }}</span>
+            </template>
+          </div>
+          <div v-show="collectionLink !== ''" class="meta-container">
+            <div class="meta-icon">
+              <base-icon source="material" icon="ic_collection" />
+            </div>
+            <base-link
+              design="none"
+              type="button"
+              class="meta-text link"
+              :to="collectionLink"
+            >
+              <span>{{ $t("pages.content.card.collection") }}</span>
+            </base-link>
+          </div>
+        </div>
+      </div>
+      <user-has-role class="floating-buttons" :role="isNotStudent">
+        <add-content-button
+          :resource="resource"
+          btn-design="hero-cta"
+          btn-class="floating-button"
+          btn-size="large"
+          btn-icon-class="footer__content-icon"
+          btn-icon="add_circle_outline"
+          :btn-label="$t('pages.content._id.addToTopic')"
+          :multiple="false"
+        />
+      </user-has-role>
+    </div>
+  </div>
 </template>
 
 <script>
-import AddContentButton from "@components/organisms/AddContentButton";
-import UserHasRole from "@components/helpers/UserHasRole";
+import AddContentButton from '@components/organisms/AddContentButton'
+import UserHasRole from '@components/helpers/UserHasRole'
 
-import contentMeta from "@mixins/contentMeta";
-import BaseLink from "../base/BaseLink";
+import contentMeta from '@mixins/contentMeta'
 
 import {
-	getMetadataAttribute,
-	getProvider,
-	getDescription,
-	getTags,
-	getAuthor,
-	getMerlinReference,
-	isMerlinContent,
-} from "@utils/helpers";
-import { printDateFromTimestamp } from "@plugins/datetime";
+  getMetadataAttribute,
+  getProvider,
+  getDescription,
+  getTags,
+  getAuthor,
+  getMerlinReference,
+  isMerlinContent
+} from '@utils/helpers'
+import { printDateFromTimestamp } from '@plugins/datetime'
+import BaseLink from '../base/BaseLink'
 
-const DEFAULT_AUTHOR = "admin";
+const DEFAULT_AUTHOR = 'admin'
 
 export default {
-	components: {
-		BaseLink,
-		AddContentButton,
-		UserHasRole,
-	},
-	layout: "loggedInFull",
-	mixins: [contentMeta],
-	props: {
-		resource: {
-			type: Object,
-			default: () => {},
-		},
-		client: { type: String, default: "Schul-Cloud" },
-		role: { type: String, default: "" },
-	},
-	computed: {
-		provider() {
-			const provider = getProvider(this.resource.properties);
-			return provider ? provider.replace(/ {2,}/g, "") : undefined;
-		},
-		author() {
-			return getAuthor(this.resource.properties);
-		},
-		createdAt() {
-			return printDateFromTimestamp(this.resource.properties["cm:created"][0]);
-		},
-		updatedAt() {
-			return printDateFromTimestamp(this.resource.properties["cm:modified"][0]);
-		},
-		type() {
-			return this.getTypeI18nName(this.resource.mimetype);
-		},
-		hasAuthor() {
-			return this.author && this.author !== DEFAULT_AUTHOR;
-		},
-		isMerlin() {
-			return isMerlinContent(this.resource);
-		},
-		merlinTokenReference() {
-			return getMerlinReference(this.resource);
-		},
-		description() {
-			return getDescription(
-				this.resource.description,
-				this.resource.properties
-			);
-		},
-		backgroundImage() {
-			return this.resource.preview.url;
-		},
-		isBrandenburg() {
-			return process.env.SC_THEME === "brb";
-		},
-		downloadUrl() {
-			return getMetadataAttribute(this.resource.properties, "ccm:wwwurl");
-		},
-		tags() {
-			return getTags(this.resource.properties);
-		},
-		filename() {
-			return this.resource.filename;
-		},
-		closeButtonStyleSelector() {
-			return this.$mq === "tabletPortrait" || this.$mq === "mobile";
-		},
-		isInline() {
-			return !!this.$route.query.inline;
-		},
-		collectionLink() {
-			let relation = getMetadataAttribute(
-				this.resource.properties,
-				"ccm:hpi_lom_relation"
-			);
-			if (relation) {
-				relation = JSON.parse(relation.replace(/\'/g, '"'));
-				if (relation.kind === "ispartof") {
-					return {
-						name: "content-id",
-						params: { id: relation.resource.identifier[0] },
-						query: {
-							isCollection: true,
-							q: this.$route.query.q,
-						},
-					};
-				}
-			}
-			return "";
-		},
-	},
-	methods: {
-		async goToMerlinContent(merlinReference) {
-			const url = await this.$axios.$get(
+  components: {
+    BaseLink,
+    AddContentButton,
+    UserHasRole
+  },
+  layout: 'loggedInFull',
+  mixins: [contentMeta],
+  props: {
+    resource: {
+      type: Object,
+      default: () => {}
+    },
+    client: { type: String, default: 'Schul-Cloud' },
+    role: { type: String, default: '' }
+  },
+  computed: {
+    provider () {
+      const provider = getProvider(this.resource.properties)
+      return provider ? provider.replace(/ {2,}/g, '') : undefined
+    },
+    author () {
+      return getAuthor(this.resource.properties)
+    },
+    createdAt () {
+      return printDateFromTimestamp(this.resource.properties['cm:created'][0])
+    },
+    updatedAt () {
+      return printDateFromTimestamp(this.resource.properties['cm:modified'][0])
+    },
+    type () {
+      return this.getTypeI18nName(this.resource.mimetype)
+    },
+    hasAuthor () {
+      return this.author && this.author !== DEFAULT_AUTHOR
+    },
+    isMerlin () {
+      return isMerlinContent(this.resource)
+    },
+    merlinTokenReference () {
+      return getMerlinReference(this.resource)
+    },
+    description () {
+      return getDescription(
+        this.resource.description,
+        this.resource.properties
+      )
+    },
+    backgroundImage () {
+      return this.resource.preview.url
+    },
+    isBrandenburg () {
+      return process.env.SC_THEME === 'brb'
+    },
+    downloadUrl () {
+      return getMetadataAttribute(this.resource.properties, 'ccm:wwwurl')
+    },
+    tags () {
+      return getTags(this.resource.properties)
+    },
+    filename () {
+      return this.resource.filename
+    },
+    closeButtonStyleSelector () {
+      return this.$mq === 'tabletPortrait' || this.$mq === 'mobile'
+    },
+    isInline () {
+      return !!this.$route.query.inline
+    },
+    collectionLink () {
+      let relation = getMetadataAttribute(
+        this.resource.properties,
+        'ccm:hpi_lom_relation'
+      )
+      if (relation) {
+        relation = JSON.parse(relation.replace(/\'/g, '"'))
+        if (relation.kind === 'ispartof') {
+          return {
+            name: 'content-id',
+            params: { id: relation.resource.identifier[0] },
+            query: {
+              isCollection: true,
+              q: this.$route.query.q
+            }
+          }
+        }
+      }
+      return ''
+    }
+  },
+  methods: {
+    async goToMerlinContent (merlinReference) {
+      const url = await this.$axios.$get(
 				`/edu-sharing/merlinToken/?merlinReference=${merlinReference}`
-			);
-			window.open(url, "_blank");
-		},
-		isNotStudent(roles) {
-			return this.role === ""
-				? roles.some((role) => !role.startsWith("student"))
-				: this.role;
-		},
-		goBack() {
-			if (window.history.length > 1) {
-				this.$router && this.$router.back();
-			} else {
-				window.close();
-			}
-		},
-	},
-	head() {
-		return this.isInline
-			? {
-					title: this.$t("pages.content.page.window.title", {
-						instance: this.$theme.name,
-					}),
+      )
+      window.open(url, '_blank')
+    },
+    isNotStudent (roles) {
+      return this.role === ''
+        ? roles.some(role => !role.startsWith('student'))
+        : this.role
+    },
+    goBack () {
+      if (window.history.length > 1) {
+        this.$router && this.$router.back()
+      } else {
+        window.close()
+      }
+    }
+  },
+  head () {
+    return this.isInline
+      ? {
+          title: this.$t('pages.content.page.window.title', {
+            instance: this.$theme.name
+          })
 			  }
-			: { title: this.$t("global.sidebar.lernstore") };
-	},
-};
+      : { title: this.$t('global.sidebar.lernstore') }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

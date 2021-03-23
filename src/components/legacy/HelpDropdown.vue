@@ -1,37 +1,37 @@
 <template>
-	<ul class="dropdown-menu">
-		<li v-for="menuItem in menuItems" :key="menuItem.label" class="menu-item">
-			<span class="core">
-				<base-icon
-					:source="menuItem.source"
-					:icon="menuItem.icon"
-					fill="var(--color-tertiary-dark)"
-				/>
-				<base-link
-					:href="menuItem.action"
-					:target="menuItem.target"
-					class="link"
-				>
-					{{ menuItem.label }}
-				</base-link>
-			</span>
-		</li>
-	</ul>
+  <ul class="dropdown-menu">
+    <li v-for="menuItem in menuItems" :key="menuItem.label" class="menu-item">
+      <span class="core">
+        <base-icon
+          :source="menuItem.source"
+          :icon="menuItem.icon"
+          fill="var(--color-tertiary-dark)"
+        />
+        <base-link
+          :href="menuItem.action"
+          :target="menuItem.target"
+          class="link"
+        >
+          {{ menuItem.label }}
+        </base-link>
+      </span>
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
-	props: {
-		menuItems: {
-			type: Array,
-			required: true,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    menuItems: {
+      type: Array,
+      required: true
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

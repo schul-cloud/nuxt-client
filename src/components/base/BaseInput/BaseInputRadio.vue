@@ -1,62 +1,62 @@
 <template>
-	<label>
-		<input
-			ref="hiddenInput"
-			:aria-label="labelHidden ? label : undefined"
-			v-bind="$attrs"
-			:checked="vmodel === value"
-			:value="value"
-			type="radio"
-			class="visually-hidden"
-			@change="$emit('input', $event.target.value)"
-			@blur="$emit('blur', $event)"
-			@focus="$emit('focus', $event)"
-		/>
-		<span class="radio" :class="{ 'user-is-tabbing': $userIsTabbing }" />
-		<span v-if="!labelHidden" class="label">
-			{{ label }}
-		</span>
-	</label>
+  <label>
+    <input
+      ref="hiddenInput"
+      :aria-label="labelHidden ? label : undefined"
+      v-bind="$attrs"
+      :checked="vmodel === value"
+      :value="value"
+      type="radio"
+      class="visually-hidden"
+      @change="$emit('input', $event.target.value)"
+      @blur="$emit('blur', $event)"
+      @focus="$emit('focus', $event)"
+    >
+    <span class="radio" :class="{ 'user-is-tabbing': $userIsTabbing }" />
+    <span v-if="!labelHidden" class="label">
+      {{ label }}
+    </span>
+  </label>
 </template>
 <script>
-import userIsTabbingMixin from "@mixins/userIsTabbing";
-export const supportedTypes = ["radio"];
+import userIsTabbingMixin from '@mixins/userIsTabbing'
+export const supportedTypes = ['radio']
 
 export default {
-	mixins: [userIsTabbingMixin],
-	model: {
-		prop: "vmodel",
-		event: "input",
-	},
-	props: {
-		vmodel: {
-			type: String,
-			required: true,
-		},
-		value: {
-			type: String,
-			required: true,
-		},
-		label: {
-			type: String,
-			required: true,
-		},
-		labelHidden: {
-			type: Boolean,
-		},
-		type: {
-			type: String,
-			required: true,
-			validator: (type) => {
-				return supportedTypes.includes(type);
-			},
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  mixins: [userIsTabbingMixin],
+  model: {
+    prop: 'vmodel',
+    event: 'input'
+  },
+  props: {
+    vmodel: {
+      type: String,
+      required: true
+    },
+    value: {
+      type: String,
+      required: true
+    },
+    label: {
+      type: String,
+      required: true
+    },
+    labelHidden: {
+      type: Boolean
+    },
+    type: {
+      type: String,
+      required: true,
+      validator: (type) => {
+        return supportedTypes.includes(type)
+      }
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,46 +1,46 @@
 <template>
-	<div class="chips">
-		<div
-			v-for="chip in chips"
-			:key="chip.id"
-			role="button"
-			tabindex="0"
-			:class="{
-				chip: true,
-				'is-deletable': chip.deletable,
-			}"
-			@click="$emit('open', chip.id)"
-			@keyup.self.enter.space="$emit('open', chip.id)"
-		>
-			<span class="label">
-				{{ chip.label }}
-			</span>
-			<base-button
-				v-if="chip.deletable"
-				design="none"
-				type="button"
-				class="btn-delete"
-				@click.stop="$emit('remove', chip.id)"
-			>
-				<base-icon
-					icon="close"
-					source="material"
-					style="font-size: var(--text-sm)"
-				/>
-			</base-button>
-		</div>
-	</div>
+  <div class="chips">
+    <div
+      v-for="chip in chips"
+      :key="chip.id"
+      role="button"
+      tabindex="0"
+      :class="{
+        chip: true,
+        'is-deletable': chip.deletable,
+      }"
+      @click="$emit('open', chip.id)"
+      @keyup.self.enter.space="$emit('open', chip.id)"
+    >
+      <span class="label">
+        {{ chip.label }}
+      </span>
+      <base-button
+        v-if="chip.deletable"
+        design="none"
+        type="button"
+        class="btn-delete"
+        @click.stop="$emit('remove', chip.id)"
+      >
+        <base-icon
+          icon="close"
+          source="material"
+          style="font-size: var(--text-sm)"
+        />
+      </base-button>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		chips: {
-			type: Array,
-			required: true,
-		},
-	},
-};
+  props: {
+    chips: {
+      type: Array,
+      required: true
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

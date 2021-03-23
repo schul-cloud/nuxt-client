@@ -1,60 +1,62 @@
 <template>
-	<div
-		v-click-outside="removePopup"
-		class="popup"
-		data-testid="initials"
-		@click="popup"
-	>
-		<div class="icon">{{ initials }}</div>
-		<div class="popuptext" :class="{ visible }">
-			<div class="username">
-				<span> {{ firstname }} {{ lastname }} <user-role /> </span>
-			</div>
-			<slot />
-		</div>
-	</div>
+  <div
+    v-click-outside="removePopup"
+    class="popup"
+    data-testid="initials"
+    @click="popup"
+  >
+    <div class="icon">
+      {{ initials }}
+    </div>
+    <div class="popuptext" :class="{ visible }">
+      <div class="username">
+        <span> {{ firstname }} {{ lastname }} <user-role /> </span>
+      </div>
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script>
-import UserRole from "@components/legacy/UserRole";
+import UserRole from '@components/legacy/UserRole'
 
 export default {
-	components: {
-		UserRole,
-	},
-	props: {
-		firstname: {
-			type: String,
-			default: "",
-		},
-		lastname: {
-			type: String,
-			default: "",
-		},
-		role: {
-			type: String,
-			default: "",
-		},
-	},
-	data() {
-		return {
-			visible: false,
-		};
-	},
-	computed: {
-		initials() {
-			return this.firstname.slice(0, 1) + this.lastname.slice(0, 1);
-		},
-	},
-	methods: {
-		popup() {
-			this.visible = !this.visible;
-		},
-		removePopup() {
-			this.visible = false;
-		},
-	},
-};
+  components: {
+    UserRole
+  },
+  props: {
+    firstname: {
+      type: String,
+      default: ''
+    },
+    lastname: {
+      type: String,
+      default: ''
+    },
+    role: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      visible: false
+    }
+  },
+  computed: {
+    initials () {
+      return this.firstname.slice(0, 1) + this.lastname.slice(0, 1)
+    }
+  },
+  methods: {
+    popup () {
+      this.visible = !this.visible
+    },
+    removePopup () {
+      this.visible = false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

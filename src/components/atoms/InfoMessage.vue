@@ -1,35 +1,37 @@
 <template>
-	<div class="info-message" :class="type">
-		<base-icon source="custom" :icon="icon" class="icon"></base-icon>
-		<div class="message">{{ message }}</div>
-	</div>
+  <div class="info-message" :class="type">
+    <base-icon source="custom" :icon="icon" class="icon" />
+    <div class="message">
+      {{ message }}
+    </div>
+  </div>
 </template>
 <script>
-import BaseIcon from "@components/base/BaseIcon";
+import BaseIcon from '@components/base/BaseIcon'
 export default {
-	components: { BaseIcon },
-	props: {
-		message: {
-			type: String,
-			required: true,
-		},
-		type: {
-			type: String,
-			required: false,
-			default: "info",
-			validator: (type) =>
-				["info", "success", "warning", "error"].includes(type),
-		},
-	},
-	computed: {
-		icon() {
-			if (this.type === "error") {
-				return "warning";
-			}
-			return this.type;
-		},
-	},
-};
+  components: { BaseIcon },
+  props: {
+    message: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      required: false,
+      default: 'info',
+      validator: type =>
+        ['info', 'success', 'warning', 'error'].includes(type)
+    }
+  },
+  computed: {
+    icon () {
+      if (this.type === 'error') {
+        return 'warning'
+      }
+      return this.type
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 @import "@styles";

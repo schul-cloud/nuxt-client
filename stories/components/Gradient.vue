@@ -1,48 +1,50 @@
 <template>
-	<div>
-		<div>
-			<h5 v-if="title">{{ title }}</h5>
-			<span>Gradient: {{ colorStart }} => {{ colorEnd }}</span>
-			<div
-				:style="{ ...handleGradient }"
-				:class="{ 'color-value': handleGradient }"
-			></div>
-		</div>
-	</div>
+  <div>
+    <div>
+      <h5 v-if="title">
+        {{ title }}
+      </h5>
+      <span>Gradient: {{ colorStart }} => {{ colorEnd }}</span>
+      <div
+        :style="{ ...handleGradient }"
+        :class="{ 'color-value': handleGradient }"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		colorStart: {
-			type: String,
-			default: "",
-		},
-		colorEnd: {
-			type: String,
-			default: "",
-		},
-		title: {
-			type: String,
-			default: "",
-		},
-	},
+  props: {
+    colorStart: {
+      type: String,
+      default: ''
+    },
+    colorEnd: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    }
+  },
 
-	computed: {
-		handleGradient() {
-			return !this.colorStart || !this.colorEnd
-				? { "background-color": this.color }
-				: {
-						"background-image":
-							"linear-gradient(45deg, " +
+  computed: {
+    handleGradient () {
+      return !this.colorStart || !this.colorEnd
+        ? { 'background-color': this.color }
+        : {
+            'background-image':
+							'linear-gradient(45deg, ' +
 							this.colorStart +
-							" 0%, " +
+							' 0%, ' +
 							this.colorEnd +
-							" 100%)",
-				  };
-		},
-	},
-};
+							' 100%)'
+				  }
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

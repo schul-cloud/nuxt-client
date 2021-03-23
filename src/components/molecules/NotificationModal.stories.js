@@ -1,16 +1,16 @@
-import { storiesOf } from "@storybook/vue";
-import { boolean } from "@storybook/addon-knobs";
+import { storiesOf } from '@storybook/vue'
+import { boolean } from '@storybook/addon-knobs'
 
-import NotificationModal from "@components/molecules/NotificationModal";
+import NotificationModal from '@components/molecules/NotificationModal'
 
-storiesOf("5 Molecules/Modals", module).add("NotificationModal", () => ({
-	components: { NotificationModal },
-	data: () => ({
-		showNotificationModal: boolean("showNotificationModal", true),
-		isError: boolean("Error", false),
-	}),
+storiesOf('5 Molecules/Modals', module).add('NotificationModal', () => ({
+  components: { NotificationModal },
+  data: () => ({
+    showNotificationModal: boolean('showNotificationModal', true),
+    isError: boolean('Error', false)
+  }),
 
-	template: `
+  template: `
         <div>
             <base-button @click="showNotificationModal = true">
                     Open Modal
@@ -22,5 +22,5 @@ storiesOf("5 Molecules/Modals", module).add("NotificationModal", () => ({
             :error-msg="$t('pages.content.notification.errorMsg')"
             @click="showNotificationModal = false"
             />
-        </div>`,
-}));
+        </div>`
+}))

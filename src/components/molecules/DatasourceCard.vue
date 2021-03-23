@@ -1,46 +1,46 @@
 <template>
-	<div class="card">
-		<div class="card-body">
-			<img :src="image" class="image" role="presentation" />
-			<div class="card-heading">
-				<div class="h6">
-					<slot name="title">
-						{{ title }}
-					</slot>
-				</div>
-				<div class="subtitle">
-					<slot name="subtitle">
-						{{ subtitle }}
-					</slot>
-				</div>
-			</div>
-		</div>
-		<div class="card-action">
-			<slot name="actions" />
-		</div>
-	</div>
+  <div class="card">
+    <div class="card-body">
+      <img :src="image" class="image" role="presentation">
+      <div class="card-heading">
+        <div class="h6">
+          <slot name="title">
+            {{ title }}
+          </slot>
+        </div>
+        <div class="subtitle">
+          <slot name="subtitle">
+            {{ subtitle }}
+          </slot>
+        </div>
+      </div>
+    </div>
+    <div class="card-action">
+      <slot name="actions" />
+    </div>
+  </div>
 </template>
 <script>
 export default {
-	props: {
-		image: {
-			type: String,
-			required: true,
-		},
-		title: {
-			type: String,
-			default: "",
-		},
-		subtitle: {
-			type: String,
-			default: "",
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    image: {
+      type: String,
+      required: true
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    subtitle: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

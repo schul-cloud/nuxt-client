@@ -1,7 +1,7 @@
-import { upperCaseFirstChar, toKebabCase } from "@utils/formatting";
+import { upperCaseFirstChar, toKebabCase } from '@utils/formatting'
 
 // can not start with $ or _ because of Vue restrictions
-export const localDataPrefix = "#component";
+export const localDataPrefix = '#component'
 
 /**
  * defines a computed property `$_controllableData${upperCaseFirstChar(prop)}` for each given prop-name.
@@ -16,38 +16,38 @@ export const localDataPrefix = "#component";
  * Note: You must also set the props in the component itself. Mixins can not define props. :(
  */
 export default (props) => {
-	if (
-		!props ||
+  if (
+    !props ||
 		!Array.isArray(props) ||
-		props.some((v) => typeof v !== "string")
-	) {
-		throw new Error("props must be an array of string");
-	}
+		props.some(v => typeof v !== 'string')
+  ) {
+    throw new Error('props must be an array of string')
+  }
 
-	return {
-		data() {
-			return props.reduce((data, prop) => {
-				data[`${localDataPrefix}${upperCaseFirstChar(prop)}`] = this[prop];
-				return data;
-			}, {});
-		},
-		computed: props.reduce((computed, prop) => {
-			computed[`$_controllableData${upperCaseFirstChar(prop)}`] = {
-				get() {
-					return this[`${localDataPrefix}${upperCaseFirstChar(prop)}`];
-				},
-				set(to) {
-					this.$set(this, `${localDataPrefix}${upperCaseFirstChar(prop)}`, to);
-					this.$emit(`update:${toKebabCase(prop)}`, to);
-				},
-			};
-			return computed;
-		}, {}),
-		watch: props.reduce((watcher, prop) => {
-			watcher[prop] = function (to) {
-				this[`${localDataPrefix}${upperCaseFirstChar(prop)}`] = to;
-			};
-			return watcher;
-		}, {}),
-	};
-};
+  return {
+    data () {
+      return props.reduce((data, prop) => {
+        data[`${localDataPrefix}${upperCaseFirstChar(prop)}`] = this[prop]
+        return data
+      }, {})
+    },
+    computed: props.reduce((computed, prop) => {
+      computed[`$_controllableData${upperCaseFirstChar(prop)}`] = {
+        get () {
+          return this[`${localDataPrefix}${upperCaseFirstChar(prop)}`]
+        },
+        set (to) {
+          this.$set(this, `${localDataPrefix}${upperCaseFirstChar(prop)}`, to)
+          this.$emit(`update:${toKebabCase(prop)}`, to)
+        }
+      }
+      return computed
+    }, {}),
+    watch: props.reduce((watcher, prop) => {
+      watcher[prop] = function (to) {
+        this[`${localDataPrefix}${upperCaseFirstChar(prop)}`] = to
+      }
+      return watcher
+    }, {})
+  }
+}

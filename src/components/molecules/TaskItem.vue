@@ -1,129 +1,129 @@
 <template>
-	<li :class="{ card: 'card', focus: hasFocus }">
-		<base-link
-			ref="taskItemLink"
-			:href="url"
-			:no-styles="true"
-			class="card-body"
-			@keyup="hasFocus = true"
-			@blur="hasFocus = false"
-		>
-			<base-image
-				v-if="$attrs.imgSrc"
-				v-bind="$attrs"
-				class="image"
-				role="presentation"
-			/>
-			<!-- TODO: this progress ring needs to be replaced with a different progress ring that uses fractions (e.g. 9/12)-->
-			<progress-ring
-				v-else-if="progress"
-				id="progress-ring"
-				:percent="progress"
-			/>
-			<div class="card-heading">
-				<p class="subtitle">
-					{{ subtitle }}
-				</p>
-				<h2 class="title">
-					{{ title }}
-				</h2>
-			</div>
-		</base-link>
-		<div class="card-action">
-			<span class="status">{{ status }}</span>
-			<pulsating-dot
-				v-if="actionNeeded"
-				id="pulsating-dot"
-				color="var(--color-secondary)"
-			/>
-			<span style="position: relative">
-				<base-button
-					design="text icon"
-					aria-label="menu"
-					:aria-expanded="contextOpen"
-					@click="contextOpen = true"
-				>
-					<base-icon
-						class="footer__content-icon"
-						fill="#455B6A"
-						source="material"
-						icon="more_vert"
-					/>
-				</base-button>
-				<context-menu
-					:show.sync="contextOpen"
-					anchor="top-right"
-					:actions="actions"
-					v-on="$listeners"
-				/>
-			</span>
-		</div>
-	</li>
+  <li :class="{ card: 'card', focus: hasFocus }">
+    <base-link
+      ref="taskItemLink"
+      :href="url"
+      :no-styles="true"
+      class="card-body"
+      @keyup="hasFocus = true"
+      @blur="hasFocus = false"
+    >
+      <base-image
+        v-if="$attrs.imgSrc"
+        v-bind="$attrs"
+        class="image"
+        role="presentation"
+      />
+      <!-- TODO: this progress ring needs to be replaced with a different progress ring that uses fractions (e.g. 9/12)-->
+      <progress-ring
+        v-else-if="progress"
+        id="progress-ring"
+        :percent="progress"
+      />
+      <div class="card-heading">
+        <p class="subtitle">
+          {{ subtitle }}
+        </p>
+        <h2 class="title">
+          {{ title }}
+        </h2>
+      </div>
+    </base-link>
+    <div class="card-action">
+      <span class="status">{{ status }}</span>
+      <pulsating-dot
+        v-if="actionNeeded"
+        id="pulsating-dot"
+        color="var(--color-secondary)"
+      />
+      <span style="position: relative">
+        <base-button
+          design="text icon"
+          aria-label="menu"
+          :aria-expanded="contextOpen"
+          @click="contextOpen = true"
+        >
+          <base-icon
+            class="footer__content-icon"
+            fill="#455B6A"
+            source="material"
+            icon="more_vert"
+          />
+        </base-button>
+        <context-menu
+          :show.sync="contextOpen"
+          anchor="top-right"
+          :actions="actions"
+          v-on="$listeners"
+        />
+      </span>
+    </div>
+  </li>
 </template>
 
 <script>
-import ProgressRing from "@components/atoms/ProgressRing";
-import PulsatingDot from "@components/atoms/PulsatingDot";
-import BaseButton from "@basecomponents/BaseButton";
-import BaseIcon from "@basecomponents/BaseIcon";
-import ContextMenu from "@components/molecules/ContextMenu";
-import BaseImage from "@basecomponents/BaseImage";
-import BaseLink from "@basecomponents/BaseLink";
+import ProgressRing from '@components/atoms/ProgressRing'
+import PulsatingDot from '@components/atoms/PulsatingDot'
+import BaseButton from '@basecomponents/BaseButton'
+import BaseIcon from '@basecomponents/BaseIcon'
+import ContextMenu from '@components/molecules/ContextMenu'
+import BaseImage from '@basecomponents/BaseImage'
+import BaseLink from '@basecomponents/BaseLink'
 
 export default {
-	components: {
-		BaseLink,
-		ProgressRing,
-		PulsatingDot,
-		BaseImage,
-		BaseButton,
-		BaseIcon,
-		ContextMenu,
-	},
-	props: {
-		id: {
-			type: String,
-			required: true,
-		},
-		url: {
-			type: String,
-			required: true,
-			default: "/",
-		},
-		title: {
-			type: String,
-			required: true,
-			default: "",
-		},
-		subtitle: {
-			type: String,
-			default: "",
-		},
-		status: {
-			type: String,
-			default: "",
-		},
-		progress: {
-			type: Number,
-			default: 0,
-		},
-		actionNeeded: {
-			type: Boolean,
-		},
-		actions: {
-			type: Array,
-			default: function () {
-				return [];
-			},
-		},
-	},
-	data: function () {
-		return {
-			contextOpen: false,
-			hasFocus: false,
-		};
-	},
-};
+  components: {
+    BaseLink,
+    ProgressRing,
+    PulsatingDot,
+    BaseImage,
+    BaseButton,
+    BaseIcon,
+    ContextMenu
+  },
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+    url: {
+      type: String,
+      required: true,
+      default: '/'
+    },
+    title: {
+      type: String,
+      required: true,
+      default: ''
+    },
+    subtitle: {
+      type: String,
+      default: ''
+    },
+    status: {
+      type: String,
+      default: ''
+    },
+    progress: {
+      type: Number,
+      default: 0
+    },
+    actionNeeded: {
+      type: Boolean
+    },
+    actions: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
+  data () {
+    return {
+      contextOpen: false,
+      hasFocus: false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

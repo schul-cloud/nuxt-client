@@ -1,33 +1,33 @@
 <script>
 export default {
-	props: {
-		/**
+  props: {
+    /**
 		 * Defines the wrapping html element
 		 */
-		tag: {
-			type: [Object, String],
-			default: "main",
-		},
-		size: {
-			type: String,
-			default: "medium",
-			validator: (size) => ["small", "medium", "large"].includes(size),
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	render(create_element) {
-		return create_element(
-			this.tag,
-			{
-				class: `container ${this.size}`,
-			},
-			[this.$slots.default]
-		);
-	},
-};
+    tag: {
+      type: [Object, String],
+      default: 'main'
+    },
+    size: {
+      type: String,
+      default: 'medium',
+      validator: size => ['small', 'medium', 'large'].includes(size)
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  render (create_element) {
+    return create_element(
+      this.tag,
+      {
+        class: `container ${this.size}`
+      },
+      [this.$slots.default]
+    )
+  }
+}
 </script>
 
 <style lang="scss" scoped>

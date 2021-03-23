@@ -1,111 +1,116 @@
 <template>
-	<base-card class="course-card">
-		<div v-if="notification" class="notification-dot">
-			{{ notification }}
-		</div>
-		<div class="header">
-			<card-tab :background-style="background_style">{{ cardLabel }}</card-tab>
-			<div v-if="newAssignments" class="assignments-label">
-				{{ newAssignments }}
-				<base-icon source="custom" icon="tasks" />
-			</div>
-		</div>
-		<div class="card-info" :style="background_style">
-			<h2 class="abrivation-label">{{ courseAbbreviation }}</h2>
-			<h3 class="course-name-label">{{ name }}</h3>
-		</div>
-		<course-card-footer v-bind="$attrs" />
-	</base-card>
+  <base-card class="course-card">
+    <div v-if="notification" class="notification-dot">
+      {{ notification }}
+    </div>
+    <div class="header">
+      <card-tab :background-style="background_style">
+        {{ cardLabel }}
+      </card-tab>
+      <div v-if="newAssignments" class="assignments-label">
+        {{ newAssignments }}
+        <base-icon source="custom" icon="tasks" />
+      </div>
+    </div>
+    <div class="card-info" :style="background_style">
+      <h2 class="abrivation-label">
+        {{ courseAbbreviation }}
+      </h2>
+      <h3 class="course-name-label">
+        {{ name }}
+      </h3>
+    </div>
+    <course-card-footer v-bind="$attrs" />
+  </base-card>
 </template>
 
 <script>
-import CourseCardFooter from "./CourseCardFooter";
-import CardTab from "@components/atoms/CardTab";
+import CardTab from '@components/atoms/CardTab'
+import CourseCardFooter from './CourseCardFooter'
 
 export default {
-	components: {
-		CourseCardFooter,
-		CardTab,
-	},
-	props: {
-		color: {
-			type: String,
-			default: "var(--color-tertiary)",
-		},
-		colorGradient: {
-			type: String,
-			required: false,
-			default: "",
-		},
-		teacherIds: {
-			type: Array,
-			required: false,
-			default: () => [],
-		},
-		abbreviation: {
-			type: String,
-			required: false,
-			default: "",
-		},
-		name: {
-			type: String,
-			required: true,
-		},
-		notification: {
-			type: Number,
-			default: 0,
-			required: false,
-		},
-		newAssignments: {
-			type: Number,
-			default: 0,
-			required: false,
-		},
-		teacherName: {
-			type: String,
-			required: false,
-			default: "",
-		},
-	},
-	data() {
-		return {
-			cardLabel: "",
-		};
-	},
-	computed: {
-		background_style() {
-			if (this.colorGradient) {
-				return (
-					"background-image: linear-gradient(-225deg, " +
+  components: {
+    CourseCardFooter,
+    CardTab
+  },
+  props: {
+    color: {
+      type: String,
+      default: 'var(--color-tertiary)'
+    },
+    colorGradient: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    teacherIds: {
+      type: Array,
+      required: false,
+      default: () => []
+    },
+    abbreviation: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    notification: {
+      type: Number,
+      default: 0,
+      required: false
+    },
+    newAssignments: {
+      type: Number,
+      default: 0,
+      required: false
+    },
+    teacherName: {
+      type: String,
+      required: false,
+      default: ''
+    }
+  },
+  data () {
+    return {
+      cardLabel: ''
+    }
+  },
+  computed: {
+    background_style () {
+      if (this.colorGradient) {
+        return (
+          'background-image: linear-gradient(-225deg, ' +
 					this.color +
-					" 0%, " +
+					' 0%, ' +
 					this.colorGradient +
-					" 100%);"
-				);
-			} else {
-				return "background-color: " + this.color + ";";
-			}
-		},
-		courseAbbreviation() {
-			if (this.abbreviation) return this.abbreviation;
-			else return this.name.substring(0, 3).toUpperCase();
-		},
-	},
-	created(ctx) {
-		this.update();
-	},
-	methods: {
-		async update() {
-			try {
-				this.teacherName
-					? (this.cardLabel = this.teacherName)
-					: (this.cardLabel = (
-							await this.$store.dispatch("users/getById", this.teacherIds[0])
-					  ).displayName);
-			} catch (err) {}
-		},
-	},
-};
+					' 100%);'
+        )
+      } else {
+        return 'background-color: ' + this.color + ';'
+      }
+    },
+    courseAbbreviation () {
+      if (this.abbreviation) { return this.abbreviation } else { return this.name.substring(0, 3).toUpperCase() }
+    }
+  },
+  created (ctx) {
+    this.update()
+  },
+  methods: {
+    async update () {
+      try {
+        this.teacherName
+          ? (this.cardLabel = this.teacherName)
+          : (this.cardLabel = (
+              await this.$store.dispatch('users/getById', this.teacherIds[0])
+					  ).displayName)
+      } catch (err) {}
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

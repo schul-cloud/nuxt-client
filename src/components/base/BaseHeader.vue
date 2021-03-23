@@ -1,61 +1,63 @@
 <template>
-	<div>
-		<div class="header-container">
-			<div class="header-top">
-				<h1 class="h2">{{ title }}</h1>
-				<span v-if="hasActions" class="ctx-menu">
-					<base-button
-						aria-label="Open up course context menu"
-						design="text icon"
-						@click="active = !active"
-					>
-						<base-icon v-bind="$attrs" />
-					</base-button>
-					<context-menu
-						:show.sync="active"
-						v-bind="$attrs"
-						:actions="actions"
-						v-on="$listeners"
-					/>
-				</span>
-			</div>
-			<slot />
-		</div>
-	</div>
+  <div>
+    <div class="header-container">
+      <div class="header-top">
+        <h1 class="h2">
+          {{ title }}
+        </h1>
+        <span v-if="hasActions" class="ctx-menu">
+          <base-button
+            aria-label="Open up course context menu"
+            design="text icon"
+            @click="active = !active"
+          >
+            <base-icon v-bind="$attrs" />
+          </base-button>
+          <context-menu
+            :show.sync="active"
+            v-bind="$attrs"
+            :actions="actions"
+            v-on="$listeners"
+          />
+        </span>
+      </div>
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script>
-import ContextMenu from "@components/molecules/ContextMenu";
-import BaseButton from "@components/base/BaseButton";
-import BaseIcon from "@components/base/BaseIcon";
+import ContextMenu from '@components/molecules/ContextMenu'
+import BaseButton from '@components/base/BaseButton'
+import BaseIcon from '@components/base/BaseIcon'
 
 export default {
-	components: {
-		ContextMenu,
-		BaseButton,
-		BaseIcon,
-	},
-	props: {
-		title: {
-			type: String,
-			required: true,
-		},
-		actions: {
-			type: Array,
-			default: () => [],
-		},
-	},
-	data() {
-		return {
-			active: false,
-		};
-	},
-	computed: {
-		hasActions() {
-			return this.actions.length !== 0;
-		},
-	},
-};
+  components: {
+    ContextMenu,
+    BaseButton,
+    BaseIcon
+  },
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    actions: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data () {
+    return {
+      active: false
+    }
+  },
+  computed: {
+    hasActions () {
+      return this.actions.length !== 0
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

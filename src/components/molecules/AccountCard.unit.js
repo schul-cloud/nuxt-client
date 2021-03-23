@@ -1,5 +1,5 @@
-import AccountCard from "./AccountCard";
+import AccountCard from './AccountCard'
 
-describe("@components/molecules/AccountCard", () => {
-	it(...isValidComponent(AccountCard));
-});
+describe('@components/molecules/AccountCard', () => {
+  it(...isValidComponent(AccountCard))
+})

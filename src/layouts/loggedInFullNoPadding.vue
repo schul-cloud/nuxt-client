@@ -1,24 +1,24 @@
 <template>
-	<legacy-logged-in>
-		<main id="main-content" class="content" :class="{ inline: isInline }">
-			<Nuxt />
-		</main>
-	</legacy-logged-in>
+  <legacy-logged-in>
+    <main id="main-content" class="content" :class="{ inline: isInline }">
+      <Nuxt />
+    </main>
+  </legacy-logged-in>
 </template>
 
 <script>
-import LegacyLoggedIn from "@layouts/legacyLoggedIn";
+import LegacyLoggedIn from '@layouts/legacyLoggedIn'
 
 export default {
-	components: {
-		LegacyLoggedIn,
-	},
-	computed: {
-		isInline() {
-			return !!this.$route.query.inline;
-		},
-	},
-};
+  components: {
+    LegacyLoggedIn
+  },
+  computed: {
+    isInline () {
+      return !!this.$route.query.inline
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

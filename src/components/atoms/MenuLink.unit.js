@@ -1,6 +1,6 @@
-import MenuLink from "./MenuLink";
+import MenuLink from './MenuLink'
 
-describe("@components/atoms/MenuLink", () => {
-	it(...isValidComponent(MenuLink));
-	it(...rendersSlotContent(MenuLink));
-});
+describe('@components/atoms/MenuLink', () => {
+  it(...isValidComponent(MenuLink))
+  it(...rendersSlotContent(MenuLink))
+})

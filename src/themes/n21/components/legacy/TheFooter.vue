@@ -1,50 +1,52 @@
 <template>
-	<footer class="footer">
-		<div class="top-line">
-			<span class="current-year">© {{ currentYear }} </span>
-		</div>
+  <footer class="footer">
+    <div class="top-line">
+      <span class="current-year">© {{ currentYear }} </span>
+    </div>
 
-		<div>
-			<template v-for="(link, index) in links">
-				<span v-if="index !== 0" :key="index"> - </span>
-				<template v-if="!link.innerlinks">
-					<base-link :key="link.text" class="footer-link" v-bind="link">{{
-						link.text
-					}}</base-link>
-				</template>
-				<template v-else>
-					<span :key="link.text">{{ link.text }} </span>
-				</template>
-			</template>
-		</div>
-	</footer>
+    <div>
+      <template v-for="(link, index) in links">
+        <span v-if="index !== 0" :key="index"> - </span>
+        <template v-if="!link.innerlinks">
+          <base-link :key="link.text" class="footer-link" v-bind="link">
+            {{
+              link.text
+            }}
+          </base-link>
+        </template>
+        <template v-else>
+          <span :key="link.text">{{ link.text }} </span>
+        </template>
+      </template>
+    </div>
+  </footer>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 
 export default {
-	computed: {
-		...mapState("auth", {
-			school: "school",
-		}),
-		currentYear() {
-			return new Date().getFullYear();
-		},
-		links() {
-			return [
-				{
-					to: "/imprint",
-					text: "Impressum",
-				},
-				{
-					to: "/termsofuse",
-					text: this.$t("components.legacy.footer.termsofuse"),
-				},
-			];
-		},
-	},
-};
+  computed: {
+    ...mapState('auth', {
+      school: 'school'
+    }),
+    currentYear () {
+      return new Date().getFullYear()
+    },
+    links () {
+      return [
+        {
+          to: '/imprint',
+          text: 'Impressum'
+        },
+        {
+          to: '/termsofuse',
+          text: this.$t('components.legacy.footer.termsofuse')
+        }
+      ]
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

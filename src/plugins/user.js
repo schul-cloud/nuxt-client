@@ -1,10 +1,10 @@
-import Vue from "vue";
-import { mapState } from "vuex";
+import Vue from 'vue'
+import { mapState } from 'vuex'
 
 export const mixin = {
-	computed: mapState("auth", {
-		$user: "user",
-	}),
-};
+  computed: mapState('auth', {
+    $user: 'user'
+  })
+}
 
-Vue.mixin(mixin);
+Vue.mixin(mixin)

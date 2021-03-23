@@ -1,5 +1,5 @@
-import InputDefault from "./Default";
+import InputDefault from './Default'
 
-describe("@components/organisms/DataFilter/inputs/Default", () => {
-	it(...isValidComponent(InputDefault));
-});
+describe('@components/organisms/DataFilter/inputs/Default', () => {
+  it(...isValidComponent(InputDefault))
+})

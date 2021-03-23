@@ -1,7 +1,7 @@
-let uid = 0;
+let uid = 0
 
 export default {
-	beforeCreate() {
-		this.$uid = ++uid;
-	},
-};
+  beforeCreate () {
+    this.$uid = ++uid
+  }
+}

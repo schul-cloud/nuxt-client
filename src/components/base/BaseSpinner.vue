@@ -1,63 +1,63 @@
 <template>
-	<svg
-		class="spinner"
-		:height="diameter"
-		:width="diameter"
-		viewBox="0 0 30 30"
-		xmlns="http://www.w3.org/2000/svg"
-	>
-		<circle
-			class="circle"
-			:stroke="color"
-			:stroke-width="strokeWidth"
-			fill="none"
-			:r="14"
-			:cx="15"
-			:cy="15"
-		/>
-	</svg>
+  <svg
+    class="spinner"
+    :height="diameter"
+    :width="diameter"
+    viewBox="0 0 30 30"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      class="circle"
+      :stroke="color"
+      :stroke-width="strokeWidth"
+      fill="none"
+      :r="14"
+      :cx="15"
+      :cy="15"
+    />
+  </svg>
 </template>
 
 <script>
 export default {
-	props: {
-		color: {
-			type: String,
-			default: "var(--color-tertiary)",
-		},
-		size: {
-			type: String,
-			default: "medium",
-			validator(value) {
-				return ["small", "medium", "large", "xlarge"].includes(value);
-			},
-		},
-	},
-	data() {
-		return {
-			sizeToDiameter: {
-				small: 15,
-				medium: 30,
-				large: 60,
-				xlarge: 120,
-			},
-			sizeToStrokeWidth: {
-				small: 2,
-				medium: 1,
-				large: 1,
-				xlarge: 1,
-			},
-		};
-	},
-	computed: {
-		diameter() {
-			return this.sizeToDiameter[this.size];
-		},
-		strokeWidth() {
-			return this.sizeToStrokeWidth[this.size];
-		},
-	},
-};
+  props: {
+    color: {
+      type: String,
+      default: 'var(--color-tertiary)'
+    },
+    size: {
+      type: String,
+      default: 'medium',
+      validator (value) {
+        return ['small', 'medium', 'large', 'xlarge'].includes(value)
+      }
+    }
+  },
+  data () {
+    return {
+      sizeToDiameter: {
+        small: 15,
+        medium: 30,
+        large: 60,
+        xlarge: 120
+      },
+      sizeToStrokeWidth: {
+        small: 2,
+        medium: 1,
+        large: 1,
+        xlarge: 1
+      }
+    }
+  },
+  computed: {
+    diameter () {
+      return this.sizeToDiameter[this.size]
+    },
+    strokeWidth () {
+      return this.sizeToStrokeWidth[this.size]
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

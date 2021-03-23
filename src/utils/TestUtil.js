@@ -1,4 +1,4 @@
-//TODO utility function for translation contructor mount
+// TODO utility function for translation contructor mount
 /* import Vue from "vue";
 import VueI18n from "vue-i18n";
 

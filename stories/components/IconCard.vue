@@ -1,43 +1,43 @@
 <template>
-	<div @click="copyToClipboard(iconName)">
-		<base-card class="icon-card" @click="copyToClipboard">
-			<div class="icon">
-				<base-icon source="custom" :icon="iconName" />
-			</div>
-			<div class="name">
-				{{ iconName }}
-			</div>
-		</base-card>
-	</div>
+  <div @click="copyToClipboard(iconName)">
+    <base-card class="icon-card" @click="copyToClipboard">
+      <div class="icon">
+        <base-icon source="custom" :icon="iconName" />
+      </div>
+      <div class="name">
+        {{ iconName }}
+      </div>
+    </base-card>
+  </div>
 </template>
 
 <script>
-import BaseCard from "@components/base/BaseCard";
+import BaseCard from '@components/base/BaseCard'
 export default {
-	components: { BaseCard },
-	props: {
-		iconName: {
-			type: String,
-			default: "",
-		},
-	},
-	methods: {
-		copyToClipboard(element) {
-			const tempInput = document.createElement("input");
-			tempInput.value = element;
-			document.body.appendChild(tempInput);
-			tempInput.select();
-			document.execCommand("copy");
-			const successful = document.execCommand("copy");
-			if (successful) {
-				this.$toast.success("Copied to clipboard!");
-			} else {
-				this.$toast.error(element);
-			}
-			document.body.removeChild(tempInput);
-		},
-	},
-};
+  components: { BaseCard },
+  props: {
+    iconName: {
+      type: String,
+      default: ''
+    }
+  },
+  methods: {
+    copyToClipboard (element) {
+      const tempInput = document.createElement('input')
+      tempInput.value = element
+      document.body.appendChild(tempInput)
+      tempInput.select()
+      document.execCommand('copy')
+      const successful = document.execCommand('copy')
+      if (successful) {
+        this.$toast.success('Copied to clipboard!')
+      } else {
+        this.$toast.error(element)
+      }
+      document.body.removeChild(tempInput)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

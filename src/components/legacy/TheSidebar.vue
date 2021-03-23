@@ -1,98 +1,98 @@
 <template>
-	<aside class="sidebar" :class="{ expanded: expandedMenu }">
-		<div class="top-sidebar" @click="$emit('input')">
-			<img
-				class="logo logo-full"
-				src="@assets/img/logo/logo-image-mono.svg"
-				alt="Schulcloud Logo"
-			/>
-			<img
-				class="logo logo-small"
-				src="@assets/img/logo/logo-transparent-mono-48-48.svg"
-				alt="Schulcloud Logo"
-			/>
-		</div>
-		<nav class="contents">
-			<ul data-testid="routesListTest" class="list">
-				<div
-					v-for="route in routes"
-					:key="JSON.stringify(route.to) || route.href"
-				>
-					<li class="list-item" :class="{ active: route.active }">
-						<base-link
-							class="list-content"
-							:to="route.to"
-							:href="route.href"
-							:no-styles="true"
-						>
-							<base-icon
-								v-if="route.icon"
-								:icon="route.icon"
-								:source="route.source || 'fa'"
-								:fill="
-									route.active ? 'var(--color-sidebar-menu-item-active)' : ''
-								"
-								class="icon"
-							/>
-							<span class="title">{{ $t(route.title) }}</span>
-						</base-link>
-					</li>
-					<ul v-if="route.active || route.childActive">
-						<li
-							v-for="child in route.children"
-							:key="JSON.stringify(child.to) || child.href"
-							:class="{ active: $route.path.includes(child.href) }"
-							class="list-item list-sub-item"
-							:data-testId="child.title"
-						>
-							<base-link
-								class="list-content"
-								:to="child.to"
-								:href="child.href"
-								:no-styles="true"
-							>
-								<base-icon
-									v-if="child.icon"
-									:icon="child.icon"
-									:source="child.source || 'fa'"
-									:fill="
-										$route.path.includes(child.href)
-											? 'var(--color-sidebar-menu-item-active)'
-											: ''
-									"
-									class="icon"
-								/>
-								<span class="title">{{ $t(child.title) }}</span>
-							</base-link>
-						</li>
-					</ul>
-				</div>
-			</ul>
-		</nav>
-	</aside>
+  <aside class="sidebar" :class="{ expanded: expandedMenu }">
+    <div class="top-sidebar" @click="$emit('input')">
+      <img
+        class="logo logo-full"
+        src="@assets/img/logo/logo-image-mono.svg"
+        alt="Schulcloud Logo"
+      >
+      <img
+        class="logo logo-small"
+        src="@assets/img/logo/logo-transparent-mono-48-48.svg"
+        alt="Schulcloud Logo"
+      >
+    </div>
+    <nav class="contents">
+      <ul data-testid="routesListTest" class="list">
+        <div
+          v-for="route in routes"
+          :key="JSON.stringify(route.to) || route.href"
+        >
+          <li class="list-item" :class="{ active: route.active }">
+            <base-link
+              class="list-content"
+              :to="route.to"
+              :href="route.href"
+              :no-styles="true"
+            >
+              <base-icon
+                v-if="route.icon"
+                :icon="route.icon"
+                :source="route.source || 'fa'"
+                :fill="
+                  route.active ? 'var(--color-sidebar-menu-item-active)' : ''
+                "
+                class="icon"
+              />
+              <span class="title">{{ $t(route.title) }}</span>
+            </base-link>
+          </li>
+          <ul v-if="route.active || route.childActive">
+            <li
+              v-for="child in route.children"
+              :key="JSON.stringify(child.to) || child.href"
+              :class="{ active: $route.path.includes(child.href) }"
+              class="list-item list-sub-item"
+              :data-testId="child.title"
+            >
+              <base-link
+                class="list-content"
+                :to="child.to"
+                :href="child.href"
+                :no-styles="true"
+              >
+                <base-icon
+                  v-if="child.icon"
+                  :icon="child.icon"
+                  :source="child.source || 'fa'"
+                  :fill="
+                    $route.path.includes(child.href)
+                      ? 'var(--color-sidebar-menu-item-active)'
+                      : ''
+                  "
+                  class="icon"
+                />
+                <span class="title">{{ $t(child.title) }}</span>
+              </base-link>
+            </li>
+          </ul>
+        </div>
+      </ul>
+    </nav>
+  </aside>
 </template>
 
 <script>
 export default {
-	props: {
-		routes: {
-			type: Array,
-			default: () => [],
-			validator: (value) => {
-				return value.every(
-					(route) => route.title && route.icon && (route.to || route.href)
-				);
-			},
-		},
-		expandedMenu: {
-			type: Boolean,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    routes: {
+      type: Array,
+      default: () => [],
+      validator: (value) => {
+        return value.every(
+          route => route.title && route.icon && (route.to || route.href)
+        )
+      }
+    },
+    expandedMenu: {
+      type: Boolean
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

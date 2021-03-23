@@ -1,58 +1,58 @@
 <template>
-	<base-card :class="data ? 'insights-card' : 'insights-card chart-card'">
-		<template v-slot:header>
-			<div class="insights-card__header">
-				{{ title }}
-			</div>
-			<div class="insights-card__separator" />
-		</template>
-		<template v-slot:content>
-			<div class="insights-card__content">
-				<slot name="content">
-					<template v-if="data && data.current">
-						<div class="insights-card__content-total">
-							{{ data.current }}
-						</div>
-						<div class="insights-card__content-diff">
-							<div
-								:class="data.current < data.last ? 'arrow-down' : 'arrow-up'"
-							></div>
-							{{ data.current - data.last }}
-						</div>
-					</template>
-					<template v-else-if="data">
-						<div class="insights-card__content-total">
-							{{ Math.round(Number(data)) }}%
-						</div>
-					</template>
-				</slot>
-			</div>
-		</template>
-		<template v-slot:footer>
-			<div class="insights-card__footer">
-				<slot name="footer" />
-			</div>
-		</template>
-	</base-card>
+  <base-card :class="data ? 'insights-card' : 'insights-card chart-card'">
+    <template v-slot:header>
+      <div class="insights-card__header">
+        {{ title }}
+      </div>
+      <div class="insights-card__separator" />
+    </template>
+    <template v-slot:content>
+      <div class="insights-card__content">
+        <slot name="content">
+          <template v-if="data && data.current">
+            <div class="insights-card__content-total">
+              {{ data.current }}
+            </div>
+            <div class="insights-card__content-diff">
+              <div
+                :class="data.current < data.last ? 'arrow-down' : 'arrow-up'"
+              />
+              {{ data.current - data.last }}
+            </div>
+          </template>
+          <template v-else-if="data">
+            <div class="insights-card__content-total">
+              {{ Math.round(Number(data)) }}%
+            </div>
+          </template>
+        </slot>
+      </div>
+    </template>
+    <template v-slot:footer>
+      <div class="insights-card__footer">
+        <slot name="footer" />
+      </div>
+    </template>
+  </base-card>
 </template>
 
 <script>
 export default {
-	props: {
-		title: {
-			type: String,
-			default: "",
-		},
-		data: {
-			type: [Object, String, Number],
-			default: () => {},
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    data: {
+      type: [Object, String, Number],
+      default: () => {}
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

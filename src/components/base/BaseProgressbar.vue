@@ -1,23 +1,23 @@
 <template>
-	<progress :value="value" :max="max"></progress>
+  <progress :value="value" :max="max" />
 </template>
 <script>
 export default {
-	props: {
-		value: {
-			type: Number,
-			default: 0,
-		},
-		max: {
-			type: Number,
-			default: 100,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  props: {
+    value: {
+      type: Number,
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 100
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

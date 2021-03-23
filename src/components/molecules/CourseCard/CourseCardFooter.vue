@@ -1,50 +1,52 @@
 <template>
-	<div class="footer">
-		<div v-if="alert" class="alert">
-			<pulsating-dot class="alert-dot"></pulsating-dot>
+  <div class="footer">
+    <div v-if="alert" class="alert">
+      <pulsating-dot class="alert-dot" />
 
-			<div class="alert-label">{{ alert }}</div>
-		</div>
-		<div v-else class="next-course">
-			<template v-if="nextCourseTime">
-				<div class="next-course-icon">
-					<base-icon source="custom" icon="clock" />
-				</div>
-				<span class="truncate">
-					{{ nextCourseTime }} | {{ nextCourseRoom }}
-				</span>
-			</template>
-		</div>
-	</div>
+      <div class="alert-label">
+        {{ alert }}
+      </div>
+    </div>
+    <div v-else class="next-course">
+      <template v-if="nextCourseTime">
+        <div class="next-course-icon">
+          <base-icon source="custom" icon="clock" />
+        </div>
+        <span class="truncate">
+          {{ nextCourseTime }} | {{ nextCourseRoom }}
+        </span>
+      </template>
+    </div>
+  </div>
 </template>
 
 <script>
-import PulsatingDot from "@components/atoms/PulsatingDot";
+import PulsatingDot from '@components/atoms/PulsatingDot'
 
 export default {
-	components: { PulsatingDot },
-	props: {
-		alert: {
-			type: String,
-			required: false,
-			default: "",
-		},
-		nextCourseTime: {
-			type: String,
-			required: false,
-			default: "",
-		},
-		nextCourseRoom: {
-			type: String,
-			required: false,
-			default: "",
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-};
+  components: { PulsatingDot },
+  props: {
+    alert: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    nextCourseTime: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    nextCourseRoom: {
+      type: String,
+      required: false,
+      default: ''
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  }
+}
 </script>
 
 <style lang="scss" scoped>

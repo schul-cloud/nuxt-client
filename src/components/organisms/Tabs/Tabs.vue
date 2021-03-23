@@ -1,71 +1,71 @@
 <template>
-	<div>
-		<ul class="tabs">
-			<li
-				v-for="tab in tabs"
-				:key="tab.name"
-				:class="{ 'is-active': tab.isActive }"
-				@click="selectTab(tab)"
-				@keyup="addFocusRing($event)"
-				@focusout="removeFocusRing($event)"
-			>
-				<div v-if="tab.hasPermission" class="li-content">
-					<base-button
-						id="tab-button"
-						class="tab-button"
-						data-testid="tabButtonTest"
-					>
-						<base-icon
-							v-if="tab.iconName"
-							class="tab-icon"
-							source="custom"
-							:icon="tab.iconName"
-						/>
-						<span>{{ tab.name }}</span>
-					</base-button>
-				</div>
-			</li>
-		</ul>
-		<div class="tabs-details">
-			<slot></slot>
-		</div>
-	</div>
+  <div>
+    <ul class="tabs">
+      <li
+        v-for="tab in tabs"
+        :key="tab.name"
+        :class="{ 'is-active': tab.isActive }"
+        @click="selectTab(tab)"
+        @keyup="addFocusRing($event)"
+        @focusout="removeFocusRing($event)"
+      >
+        <div v-if="tab.hasPermission" class="li-content">
+          <base-button
+            id="tab-button"
+            class="tab-button"
+            data-testid="tabButtonTest"
+          >
+            <base-icon
+              v-if="tab.iconName"
+              class="tab-icon"
+              source="custom"
+              :icon="tab.iconName"
+            />
+            <span>{{ tab.name }}</span>
+          </base-button>
+        </div>
+      </li>
+    </ul>
+    <div class="tabs-details">
+      <slot />
+    </div>
+  </div>
 </template>
 
 <script>
-import BaseButton from "@basecomponents/BaseButton";
+import BaseButton from '@basecomponents/BaseButton'
 export default {
-	components: { BaseButton },
-	data() {
-		return {
-			tabs: [],
-		};
-	},
-	mounted() {
-		this.tabs = this.$children.filter((child) => child.hasPermission);
-		const hasSelection = this.tabs.some(
-			(tab) => tab && tab.props && tab.props.selected
-		);
-		if (!hasSelection) {
-			this.selectTab(this.tabs[0]);
-		}
-	},
-	methods: {
-		selectTab(selectedTab) {
-			this.tabs.forEach((tab) => {
-				tab.isActive = tab.name === selectedTab.name;
-			});
-		},
-		addFocusRing(e) {
-			const tab = e.currentTarget;
-			tab.classList.add("focus");
-		},
-		removeFocusRing(e) {
-			const tab = e.currentTarget;
-			tab.classList.remove("focus");
-		},
-	},
-};
+  components: { BaseButton },
+  data () {
+    return {
+      tabs: []
+    }
+  },
+  mounted () {
+    this.tabs = this.$children.filter(child => child.hasPermission)
+    const hasSelection = this.tabs.some(
+      tab => tab && tab.props && tab.props.selected
+    )
+    if (!hasSelection) {
+      this.selectTab(this.tabs[0])
+    }
+  },
+  methods: {
+    selectTab (selectedTab) {
+      this.tabs.forEach((tab) => {
+        tab.isActive = tab.name === selectedTab.name
+      })
+    },
+    addFocusRing (e) {
+      const tab = e.currentTarget
+      tab.classList.add('focus')
+    },
+    removeFocusRing (e) {
+      const tab = e.currentTarget
+      tab.classList.remove('focus')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

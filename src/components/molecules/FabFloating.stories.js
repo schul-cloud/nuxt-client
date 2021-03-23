@@ -1,29 +1,29 @@
-import { storiesOf } from "@storybook/vue";
+import { storiesOf } from '@storybook/vue'
 
-import FabFloating from "./FabFloating";
-import { boolean, select } from "@storybook/addon-knobs";
+import { boolean, select } from '@storybook/addon-knobs'
+import FabFloating from './FabFloating'
 
-storiesOf("5 Molecules/FabFloating", module)
-	.addParameters({
-		notes: `# FabFloating
-This is basically an FabIcon that get's positioned. So read the FabIcon documentation for more information.`,
-	})
-	.add("default", () => ({
-		components: { FabFloating },
-		data: () => ({
-			position: select(
-				"Position",
-				{
-					"top-left": "top-left",
-					"top-right": "top-right",
-					"bottom-right": "bottom-right",
-					"bottom-left": "bottom-left",
-				},
-				"bottom-right"
-			),
-			showLabel: boolean("showLabel", true),
-		}),
-		template: `<FabFloating
+storiesOf('5 Molecules/FabFloating', module)
+  .addParameters({
+    notes: `# FabFloating
+This is basically an FabIcon that get's positioned. So read the FabIcon documentation for more information.`
+  })
+  .add('default', () => ({
+    components: { FabFloating },
+    data: () => ({
+      position: select(
+        'Position',
+        {
+          'top-left': 'top-left',
+          'top-right': 'top-right',
+          'bottom-right': 'bottom-right',
+          'bottom-left': 'bottom-left'
+        },
+        'bottom-right'
+      ),
+      showLabel: boolean('showLabel', true)
+    }),
+    template: `<FabFloating
 			:position="position"
 			:showLabel="showLabel"
 			:actions="[
@@ -43,5 +43,5 @@ This is basically an FabIcon that get's positioned. So read the FabIcon document
 				},
 			]"
 		/>`,
-		methods: {},
-	}));
+    methods: {}
+  }))

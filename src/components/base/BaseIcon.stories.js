@@ -1,21 +1,21 @@
-import { storiesOf } from "@storybook/vue";
-import { text, select, color } from "@storybook/addon-knobs";
+import { storiesOf } from '@storybook/vue'
+import { text, select, color } from '@storybook/addon-knobs'
 
-import BaseIcon from "@basecomponents/BaseIcon";
+import BaseIcon from '@basecomponents/BaseIcon'
 
-storiesOf("4 Base UI Components/Base UI", module).add("Base Icon", () => ({
-	components: { BaseIcon },
-	data: () => ({
-		icon: text("icon", "home"),
-		source: select(
-			"source",
-			{ material: "material", fa: "fa", custom: "custom" },
-			"material"
-		),
-		size: text("size", "1em"),
-		color: color("color", "#f8a41b"),
-	}),
-	template: `<div>
+storiesOf('4 Base UI Components/Base UI', module).add('Base Icon', () => ({
+  components: { BaseIcon },
+  data: () => ({
+    icon: text('icon', 'home'),
+    source: select(
+      'source',
+      { material: 'material', fa: 'fa', custom: 'custom' },
+      'material'
+    ),
+    size: text('size', '1em'),
+    color: color('color', '#f8a41b')
+  }),
+  template: `<div>
 			<p>
 				Icon usage is simple: <base-icon :source="source" :icon="icon" :style="{'font-size': size, fill: color}"/>
 			</p>
@@ -30,5 +30,5 @@ storiesOf("4 Base UI Components/Base UI", module).add("Base Icon", () => ({
 				Scaling works, by setting the font-size attribute:
 				<base-icon source="custom" icon="tasks" style="font-size: 2em" />
 			</p>
-		</div>`,
-}));
+		</div>`
+}))

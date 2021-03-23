@@ -1,8 +1,8 @@
-import serviceTemplate from "@utils/service-template";
-const base = serviceTemplate("homework");
+import serviceTemplate from '@utils/service-template'
+const base = serviceTemplate('homework')
 
 const module = {
-	...base,
-};
+  ...base
+}
 
-export default module;
+export default module

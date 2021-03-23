@@ -1,54 +1,58 @@
 <template>
-	<div class="wrapper">
-		<div class="hero-image" :style="compressed">
-			<div
-				class="container"
-				:style="{
-					width: `100%`,
-					float: `right`,
-					'z-index': `var(--layer-dropdown)`,
-				}"
-			>
-				<base-content-container :style="{ float: `left` }">
-					<h3 class="custom-heading-style">{{ heading }}</h3>
-					<p class="teaser">{{ teaser }}</p>
-				</base-content-container>
-			</div>
-		</div>
-		<div class="overlay"></div>
-	</div>
+  <div class="wrapper">
+    <div class="hero-image" :style="compressed">
+      <div
+        class="container"
+        :style="{
+          width: `100%`,
+          float: `right`,
+          'z-index': `var(--layer-dropdown)`,
+        }"
+      >
+        <base-content-container :style="{ float: `left` }">
+          <h3 class="custom-heading-style">
+            {{ heading }}
+          </h3>
+          <p class="teaser">
+            {{ teaser }}
+          </p>
+        </base-content-container>
+      </div>
+    </div>
+    <div class="overlay" />
+  </div>
 </template>
 
 <script>
 export default {
-	props: {
-		image: {
-			type: String,
-			default: "",
-		},
-		heading: {
-			type: String,
-			required: true,
-		},
-		teaser: {
-			type: String,
-			default: "",
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	computed: {
-		compressed() {
-			return (
-				"background-image: url(" +
-				this.image.replace("/images/", "/images/size/w2000/") +
-				");"
-			);
-		},
-	},
-};
+  props: {
+    image: {
+      type: String,
+      default: ''
+    },
+    heading: {
+      type: String,
+      required: true
+    },
+    teaser: {
+      type: String,
+      default: ''
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  computed: {
+    compressed () {
+      return (
+        'background-image: url(' +
+				this.image.replace('/images/', '/images/size/w2000/') +
+				');'
+      )
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

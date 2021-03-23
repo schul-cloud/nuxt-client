@@ -1,26 +1,26 @@
-import { storiesOf } from "@storybook/vue";
-import { text, boolean } from "@storybook/addon-knobs";
-import InfoBox from "./InfoBox";
-import BaseButton from "@basecomponents/BaseButton";
-import BaseInput from "@basecomponents/BaseInput/BaseInputCheckbox";
-import faker from "faker/locale/en";
+import { storiesOf } from '@storybook/vue'
+import { text, boolean } from '@storybook/addon-knobs'
+import BaseButton from '@basecomponents/BaseButton'
+import BaseInput from '@basecomponents/BaseInput/BaseInputCheckbox'
+import faker from 'faker/locale/en'
+import InfoBox from './InfoBox'
 // set a seed to have a consistent fake for the screenshot tests
-faker.seed(512); // any static number will do the job
-const content = faker.lorem.paragraph();
+faker.seed(512) // any static number will do the job
+const content = faker.lorem.paragraph()
 
-storiesOf("5 Molecules/InfoBox", module)
-	.addParameters({})
-	.add("InfoBox", () => ({
-		components: { InfoBox, BaseButton, BaseInput },
-		data: () => ({
-			active: true,
-			header: text("header", "Einverständniserklärung"),
-			body: content,
-			checked: true,
-			unchecked: false,
-			labelHidden: boolean("labelHidden", false),
-		}),
-		template: `	<info-box :active.sync="active">
+storiesOf('5 Molecules/InfoBox', module)
+  .addParameters({})
+  .add('InfoBox', () => ({
+    components: { InfoBox, BaseButton, BaseInput },
+    data: () => ({
+      active: true,
+      header: text('header', 'Einverständniserklärung'),
+      body: content,
+      checked: true,
+      unchecked: false,
+      labelHidden: boolean('labelHidden', false)
+    }),
+    template: `	<info-box :active.sync="active">
 								<template v-slot:header>{{header}}</template>
 								<template v-slot:body>{{body}}</template>
 								<template v-slot:actions>
@@ -34,5 +34,5 @@ storiesOf("5 Molecules/InfoBox", module)
 
 									<base-button design="info outline">Unvollständige auswählen</base-button>
 								</template>
-							</info-box>`,
-	}));
+							</info-box>`
+  }))

@@ -1,25 +1,25 @@
 <template>
-	<div class="grid" :style="col">
-		<slot />
-	</div>
+  <div class="grid" :style="col">
+    <slot />
+  </div>
 </template>
 <script>
 export default {
-	props: {
-		columnWidth: {
-			type: String,
-			default: "15rem",
-		},
-	},
-	data() {
-		return {};
-	},
-	computed: {
-		col() {
-			return `grid-template-columns: repeat(auto-fill, minmax(${this.columnWidth}, 1fr));`;
-		},
-	},
-};
+  props: {
+    columnWidth: {
+      type: String,
+      default: '15rem'
+    }
+  },
+  data () {
+    return {}
+  },
+  computed: {
+    col () {
+      return `grid-template-columns: repeat(auto-fill, minmax(${this.columnWidth}, 1fr));`
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

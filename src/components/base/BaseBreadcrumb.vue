@@ -1,53 +1,53 @@
 <template>
-	<nav>
-		<ul class="breadcrumb">
-			<li v-for="(input, index) in inputs" :key="input.text" class="link">
-				<component :is="getComponent(input)" v-bind="removeText(input)">
-					<base-icon
-						v-if="input.icon"
-						v-bind="input.icon"
-						class="breadcrumb-icon"
-					/>
-					{{ input.text }}
-					<base-icon
-						v-if="index !== inputs.length - 1"
-						source="material"
-						icon="keyboard_arrow_right"
-						class="arrow"
-					/>
-				</component>
-			</li>
-		</ul>
-	</nav>
+  <nav>
+    <ul class="breadcrumb">
+      <li v-for="(input, index) in inputs" :key="input.text" class="link">
+        <component :is="getComponent(input)" v-bind="removeText(input)">
+          <base-icon
+            v-if="input.icon"
+            v-bind="input.icon"
+            class="breadcrumb-icon"
+          />
+          {{ input.text }}
+          <base-icon
+            v-if="index !== inputs.length - 1"
+            source="material"
+            icon="keyboard_arrow_right"
+            class="arrow"
+          />
+        </component>
+      </li>
+    </ul>
+  </nav>
 </template>
 <script>
-import BaseLink from "@basecomponents/BaseLink";
+import BaseLink from '@basecomponents/BaseLink'
 
 export default {
-	props: {
-		inputs: {
-			type: Array,
-			required: true,
-		},
-	},
-	data() {
-		// This solely exists to appear in the coverage report
-		return {};
-	},
-	created: function () {
-		const lastObject = this.inputs[this.inputs.length - 1];
-		delete lastObject.href && delete lastObject.to;
-	},
-	methods: {
-		// eslint-disable-next-line no-unused-vars
-		removeText({ text, icon, ...input }) {
-			return input;
-		},
-		getComponent(input) {
-			return input.to || input.href ? BaseLink : "span";
-		},
-	},
-};
+  props: {
+    inputs: {
+      type: Array,
+      required: true
+    }
+  },
+  data () {
+    // This solely exists to appear in the coverage report
+    return {}
+  },
+  created () {
+    const lastObject = this.inputs[this.inputs.length - 1]
+    delete lastObject.href && delete lastObject.to
+  },
+  methods: {
+    // eslint-disable-next-line no-unused-vars
+    removeText ({ text, icon, ...input }) {
+      return input
+    },
+    getComponent (input) {
+      return input.to || input.href ? BaseLink : 'span'
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

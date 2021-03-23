@@ -1,45 +1,44 @@
 <template>
-	<div
-		class="dropdown"
-		tabindex="0"
-		:aria-expanded="open"
-		:aria-controls="`dropdown-content-${$uid}`"
-		@mouseenter="open = true"
-		@mouseleave="open = false"
-		@focus="open = true"
-		@blur="open = false"
-	>
-		<div class="button">
-			<div class="container">
-				<slot name="header"></slot>
-				<base-icon
-					source="fa"
-					icon="chevron-up"
-					:style="{
-						'font-size': `var(--space-md)`,
-						color: `var(--color-white)`,
-					}"
-				>
-				</base-icon>
-			</div>
-		</div>
-		<div :id="`dropdown-content-${$uid}`" class="content" :class="{ open }">
-			<slot class="link" />
-		</div>
-	</div>
+  <div
+    class="dropdown"
+    tabindex="0"
+    :aria-expanded="open"
+    :aria-controls="`dropdown-content-${$uid}`"
+    @mouseenter="open = true"
+    @mouseleave="open = false"
+    @focus="open = true"
+    @blur="open = false"
+  >
+    <div class="button">
+      <div class="container">
+        <slot name="header" />
+        <base-icon
+          source="fa"
+          icon="chevron-up"
+          :style="{
+            'font-size': `var(--space-md)`,
+            color: `var(--color-white)`,
+          }"
+        />
+      </div>
+    </div>
+    <div :id="`dropdown-content-${$uid}`" class="content" :class="{ open }">
+      <slot class="link" />
+    </div>
+  </div>
 </template>
 
 <script>
-import uidMixin from "@mixins/uid";
+import uidMixin from '@mixins/uid'
 
 export default {
-	mixins: [uidMixin],
-	data() {
-		return {
-			open: false,
-		};
-	},
-};
+  mixins: [uidMixin],
+  data () {
+    return {
+      open: false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
