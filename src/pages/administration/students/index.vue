@@ -575,6 +575,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@styles";
+@import "@variables";
 
 a.action-button {
 	&.row-highlighted:hover {
