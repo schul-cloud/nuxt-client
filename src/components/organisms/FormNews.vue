@@ -179,14 +179,16 @@ export default Vue.extend({
 				return this.$toast.error(errors[0]);
 			}
 			try {
+				const { target, targetmodel } = this.$route.query;
+				const { context, contextId } = this.$route.query;
+				const { schoolId } = this.$user;
 				const news = await this.$store.dispatch("news/create", {
 					title: this.data.title,
 					content: this.data.content,
 					displayAt: this.publishDate,
-					schoolId: this.$user.schoolId,
-					target: this.$route.query.target || this.$route.query.contextId,
-					targetModel:
-						this.$route.query.targetmodel || this.$route.query.context,
+					schoolId: schoolId,
+					target: target || contextId || schoolId,
+					targetModel: targetmodel || context || "schools",
 				});
 				this.$toast.success(
 					this.$ts("components.organisms.FormNews.success.create")
