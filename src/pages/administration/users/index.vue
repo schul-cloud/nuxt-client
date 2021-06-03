@@ -64,7 +64,11 @@
 
 				<v-row align="center">
 					<v-col class="d-flex" cols="6" sm="6" data-app>
-						<v-select :items="tableData.perPageOptions"></v-select>
+						<v-select
+							item-text="label"
+							item-value="value"
+							:items="tableData.perPageOptions"
+						></v-select>
 					</v-col>
 					<v-col class="d-flex flex-row-reverse" cols="6" sm="6">
 						41 to 50 from 1003
@@ -84,7 +88,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 import {
 	mdiMagnify,
 	mdiCheck,
@@ -200,7 +204,7 @@ export default {
 	},
 
 	computed: {
-		...mapGetters("users", {
+		...mapState("users", {
 			users: "list",
 		}),
 		tableSelection() {
