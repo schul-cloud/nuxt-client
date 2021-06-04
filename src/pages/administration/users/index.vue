@@ -203,6 +203,8 @@ export default {
 		};
 	},
 
+	layout: "loggedInFull",
+
 	computed: {
 		...mapState("users", {
 			users: "list",
@@ -213,7 +215,7 @@ export default {
 	},
 	watch: {
 		searchQuery() {
-			// console.log(this.searchQuery);
+			console.log(this.searchQuery);
 		},
 	},
 
