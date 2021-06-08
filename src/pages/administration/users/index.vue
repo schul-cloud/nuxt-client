@@ -10,6 +10,7 @@
 					v-model="searchQuery"
 					label=""
 					:prepend-inner-icon="mdiIcons.mdiMagnify"
+					data-testid="searchbar"
 				/>
 
 				<!-- #region Row selection section-->
@@ -105,7 +106,12 @@ import { printDate } from "@plugins/datetime";
 export default {
 	data() {
 		return {
+			// ids,
 			userType: "students",
+			currentFilterQuery: this.$uiState.get(
+				"filter",
+				"pages.administration.users.index"
+			),
 			breadcrumbs: [
 				{
 					text: this.$t("pages.administration.index.title"),
@@ -159,7 +165,9 @@ export default {
 				},
 			],
 			selected: [],
-			searchQuery: "",
+			searchQuery:
+				this.$uiState.get("filter", "pages.administration.users.index")
+					.searchQuery || "",
 			mdiIcons: {
 				mdiMagnify,
 				mdiCheck,
@@ -214,13 +222,53 @@ export default {
 		},
 	},
 	watch: {
-		searchQuery() {
-			console.log(this.searchQuery);
+		currentFilterQuery(query) {
+			const uiState = this.$uiState.get(
+				"filter",
+				"pages.administration.users.index"
+			);
+
+			if (uiState && uiState.searchQuery)
+				query.searchQuery = uiState.searchQuery;
+
+			this.currentFilterQuery = query;
+			if (
+				JSON.stringify(query) !==
+				JSON.stringify(
+					this.$uiState.get("filter", "pages.administration.users.index")
+				)
+			) {
+				this.onUpdateCurrentPage(1);
+			}
+			this.$uiState.set("filter", "pages.administration.users.index", {
+				query,
+			});
+		},
+		searchQuery(to) {
+			let interval = 500;
+
+			if (this.$options.debounce) {
+				clearInterval(this.$options.debounce);
+			}
+			// if (to !== from) clearInterval(this.$options.debounce);
+			if (to === "") interval = 0;
+
+			this.$options.debounce = setInterval(() => {
+				this.currentFilterQuery.searchQuery = to.trim();
+
+				const query = this.currentFilterQuery;
+
+				this.$uiState.set("filter", "pages.administration.users.index", {
+					query,
+				});
+
+				this.find();
+				clearInterval(this.$options.debounce);
+			}, interval);
 		},
 	},
 
 	created() {
-		// console.log("filter", "pages.administration.students.index");
 		this.find();
 	},
 	methods: {
@@ -233,6 +281,7 @@ export default {
 				},
 				...this.currentFilterQuery,
 			};
+
 			this.$store.dispatch("users/handleUsers", {
 				query,
 				action: "find",
