@@ -22,16 +22,8 @@
 					:prepend-inner-icon="mdiIcons.mdiMagnify"
 				/>
 
-				<!-- #region Row selection section-->
-				<!-- <div class="blank-section">
-					<div v-if="tableSelection.length" class="row-selection-info">
-						<div class="d-flex align-items-center content-wrapper"></div>
-						<base-button design="icon" class="close" @click="find">
-							<base-icon icon="close" source="material" />
-						</base-button>
-					</div>
-				</div> -->
-
+				// TODO: v-menu not closing on outside click
+				// TODO: v-icon not loading dynamically
 				<v-toolbar
 					:style="{ visibility: tableSelection.length ? 'visible' : 'hidden' }"
 					class="row-selection-info"
@@ -47,11 +39,10 @@
 							<v-list-item
 								v-for="(item, index) in filteredActions"
 								:key="index"
-								v-click-outside="onClickOutsideStandard"
 								@click="item.action"
 							>
 								<v-list-item-icon>
-									<v-icon v-text="mdiIcons.mdiCheck"></v-icon>
+									<v-icon v-text="mdiIcon"></v-icon>
 								</v-list-item-icon>
 								<v-list-item-content>
 									<v-list-item-title v-text="item.label"></v-list-item-title>
@@ -59,6 +50,14 @@
 							</v-list-item>
 						</v-list>
 					</v-menu>
+					<v-btn
+						elevation="2"
+						class="mx-2 close-btn"
+						fab
+						small
+						@click="selected = []"
+						><v-icon>{{ mdiIcons.mdiClose }}</v-icon></v-btn
+					>
 				</v-toolbar>
 				<!-- #endregion -->
 
@@ -130,6 +129,7 @@
 import { mapState } from "vuex";
 import UserHasPermission from "@/mixins/UserHasPermission";
 import ProgressModal from "@components/molecules/ProgressModal";
+import print from "@mixins/print";
 
 import {
 	mdiMagnify,
@@ -145,8 +145,8 @@ import { printDate } from "@plugins/datetime";
 // TODO: consent icons
 
 export default {
-	components: ProgressModal,
-	mixins: [UserHasPermission],
+	components: { ProgressModal },
+	mixins: [print, UserHasPermission],
 	data() {
 		return {
 			models: {
@@ -177,14 +177,14 @@ export default {
 					label: this.$t(
 						"pages.administration.students.index.tableActions.consent"
 					),
-					icon: "this.mdiIcons.mdiCheck",
+					icon: "mdi-chevron-right",
 					action: this.handleBulkConsent,
 				},
 				{
 					label: this.$t(
 						"pages.administration.students.index.tableActions.email"
 					),
-					icon: "mail_outline",
+					icon: "mdiClose",
 					action: this.handleBulkEMail,
 					dataTestId: "registration_link",
 				},
@@ -251,6 +251,7 @@ export default {
 			tableSelectionType: "",
 			searchQuery: "",
 			printDate,
+			active: false,
 			tableData: {
 				limit: 50,
 				page: 1,
@@ -320,6 +321,9 @@ export default {
 
 			return editedActions;
 		},
+		icons() {
+			return this.mdiIcons;
+		},
 	},
 	watch: {
 		searchQuery() {
@@ -347,10 +351,6 @@ export default {
 				userType: this.userType,
 			});
 		},
-		onClickOutsideStandard() {
-			this.models.base = false;
-			console.log("clicked");
-		},
 		handleBulkConsent(rowIds, selectionType) {
 			this.$store.commit("bulkConsent/setSelectedStudents", {
 				students: this.tableSelection,
@@ -361,20 +361,22 @@ export default {
 				path: "/administration/students/consent",
 			});
 		},
-		async handleBulkEMail(rowIds, selectionType) {
+		async handleBulkEMail() {
+			const userIds = this.tableSelection;
+
 			try {
 				// TODO wrong use of store (not so bad)
 				await this.$store.dispatch("users/sendRegistrationLink", {
-					userIds: rowIds,
-					selectionType,
+					userIds: userIds,
+					selectionType: "inclusive",
 				});
 				this.$toast.success(
-					this.$tc("pages.administration.sendMail.success", rowIds.length)
+					this.$tc("pages.administration.sendMail.success", userIds.length)
 				);
 			} catch (error) {
 				console.error(error);
 				this.$toast.error(
-					this.$tc("pages.administration.sendMail.error", rowIds.length)
+					this.$tc("pages.administration.sendMail.error", userIds.length)
 				);
 			}
 		},
@@ -447,6 +449,12 @@ export default {
 <style lang="scss" scoped>
 @import "@styles";
 
+.close-btn {
+	margin-right: var(--space-lg);
+	// color: var(--color-white);
+	background-color: var(--color-tertiary);
+}
+
 .icon-success {
 	color: var(--color-success);
 }
@@ -460,12 +468,16 @@ export default {
 	// display: flex;
 	// flex-wrap: wrap;
 	// align-items: center;
-	// justify-content: space-between;
 	width: 100%;
 	// padding: var(--space-xs) var(--space-md);
 	margin-bottom: var(--space-xs);
 	color: var(--color-on-tertiary-light);
 	background-color: var(--color-tertiary-light);
+
+	:first-child {
+		flex: 0 0 auto;
+		justify-content: space-between;
+	}
 }
 .blank-section {
 	min-height: 58px;
