@@ -22,8 +22,8 @@
 					:prepend-inner-icon="mdiIcons.mdiMagnify"
 				/>
 
-				// TODO: v-menu not closing on outside click
-				// TODO: v-icon not loading dynamically
+				// TODO: v-menu not closing on outside click // TODO: v-icon not loading
+				dynamically
 				<v-toolbar
 					:style="{ visibility: tableSelection.length ? 'visible' : 'hidden' }"
 					class="row-selection-info"
